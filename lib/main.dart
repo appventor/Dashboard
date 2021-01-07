@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'services/services.dart';
+
+final _appRouter = AppRouter();
 
 void main() {
   runApp(RootApp());
@@ -7,12 +10,9 @@ void main() {
 class RootApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Container(
-        alignment: Alignment.center,
-        child: Text(
-            "Hello World! \nWe are going to build a beautiful Dashboard in Flutter."),
-      ),
+    return MaterialApp.router(
+      routerDelegate: _appRouter.delegate(),
+      routeInformationParser: _appRouter.defaultRouteParser(),
     );
   }
 }
