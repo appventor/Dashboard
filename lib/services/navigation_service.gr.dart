@@ -5,51 +5,60 @@
 // **************************************************************************
 
 import 'package:auto_route/auto_route.dart' as _i1;
-import '../pages.dart' as _i2;
-import 'package:flutter/material.dart' as _i3;
+import 'package:flutter/material.dart' as _i2;
+import 'auth_guard.dart' as _i3;
+import '../pages.dart' as _i4;
 
 class AppRouter extends _i1.RootStackRouter {
-  AppRouter();
+  AppRouter({@_i2.required this.authGuard}) : assert(authGuard != null);
+
+  final _i3.AuthGuard authGuard;
 
   @override
   final Map<String, _i1.PageFactory> pagesMap = {
-    Home.name: (entry) {
-      return _i1.MaterialPageX(entry: entry, child: _i2.Home());
+    HomeRoute.name: (entry) {
+      return _i1.CustomPage(entry: entry, child: _i4.Home());
     },
     UnknownRoute.name: (entry) {
-      return _i1.MaterialPageX(entry: entry, child: _i2.UnknownPage());
+      return _i1.CustomPage(entry: entry, child: _i4.UnknownPage());
     },
-    Login.name: (entry) {
-      return _i1.MaterialPageX(entry: entry, child: _i2.Login());
+    LoginRoute.name: (entry) {
+      var route = entry.routeData.as<LoginRoute>();
+      return _i1.CustomPage(
+          entry: entry,
+          child: _i4.Login(key: route.key, onLoginResult: route.onLoginResult),
+          fullscreenDialog: false);
     },
     DashboardRoute.name: (entry) {
-      return _i1.MaterialPageX(entry: entry, child: _i2.DashboardPage());
+      return _i1.CustomPage(entry: entry, child: _i4.DashboardPage());
     },
     UsersRoute.name: (entry) {
-      return _i1.MaterialPageX(
-          entry: entry, child: const _i1.EmptyRouterPage());
+      return _i1.CustomPage(entry: entry, child: const _i1.EmptyRouterPage());
     },
     SettingsRoute.name: (entry) {
-      return _i1.MaterialPageX(entry: entry, child: _i2.SettingsPage());
+      return _i1.CustomPage(entry: entry, child: _i4.SettingsPage());
     },
     UsersList.name: (entry) {
       var route = entry.routeData.as<UsersList>();
-      return _i1.MaterialPageX(
-          entry: entry, child: _i2.UsersPage(key: route.key, id: route.id));
+      return _i1.CustomPage(
+          entry: entry, child: _i4.UsersPage(key: route.key, id: route.id));
     },
     UserDetails.name: (entry) {
       var route = entry.routeData.as<UserDetails>();
-      return _i1.MaterialPageX(
+      return _i1.CustomPage(
           entry: entry,
-          child: _i2.UserDetailsPage(key: route.key, id: route.id));
+          child: _i4.UserDetailsPage(key: route.key, id: route.id));
     }
   };
 
   @override
   List<_i1.RouteConfig> get routes => [
-        _i1.RouteConfig<Home>(Home.name,
+        _i1.RouteConfig<HomeRoute>(HomeRoute.name,
             path: '/',
-            routeBuilder: (match) => Home.fromMatch(match),
+            routeBuilder: (match) => HomeRoute.fromMatch(match),
+            guards: [
+              authGuard
+            ],
             children: [
               _i1.RouteConfig('#redirect',
                   path: '', redirectTo: 'dashboard', fullMatch: true),
@@ -75,18 +84,19 @@ class AppRouter extends _i1.RootStackRouter {
             ]),
         _i1.RouteConfig<UnknownRoute>(UnknownRoute.name,
             path: '*', routeBuilder: (match) => UnknownRoute.fromMatch(match)),
-        _i1.RouteConfig<Login>(Login.name,
-            path: '/login', routeBuilder: (match) => Login.fromMatch(match))
+        _i1.RouteConfig<LoginRoute>(LoginRoute.name,
+            path: '/login',
+            routeBuilder: (match) => LoginRoute.fromMatch(match))
       ];
 }
 
-class Home extends _i1.PageRouteInfo {
-  const Home({List<_i1.PageRouteInfo> children})
+class HomeRoute extends _i1.PageRouteInfo {
+  const HomeRoute({List<_i1.PageRouteInfo> children})
       : super(name, path: '/', initialChildren: children);
 
-  Home.fromMatch(_i1.RouteMatch match) : super.fromMatch(match);
+  HomeRoute.fromMatch(_i1.RouteMatch match) : super.fromMatch(match);
 
-  static const String name = 'Home';
+  static const String name = 'HomeRoute';
 }
 
 class UnknownRoute extends _i1.PageRouteInfo {
@@ -97,12 +107,19 @@ class UnknownRoute extends _i1.PageRouteInfo {
   static const String name = 'UnknownRoute';
 }
 
-class Login extends _i1.PageRouteInfo {
-  const Login() : super(name, path: '/login');
+class LoginRoute extends _i1.PageRouteInfo {
+  LoginRoute({this.key, this.onLoginResult}) : super(name, path: '/login');
 
-  Login.fromMatch(_i1.RouteMatch match) : super.fromMatch(match);
+  LoginRoute.fromMatch(_i1.RouteMatch match)
+      : key = null,
+        onLoginResult = null,
+        super.fromMatch(match);
 
-  static const String name = 'Login';
+  final _i2.Key key;
+
+  final void Function(bool) onLoginResult;
+
+  static const String name = 'LoginRoute';
 }
 
 class DashboardRoute extends _i1.PageRouteInfo {
@@ -138,7 +155,7 @@ class UsersList extends _i1.PageRouteInfo {
         id = match.pathParams.getString('id'),
         super.fromMatch(match);
 
-  final _i3.Key key;
+  final _i2.Key key;
 
   final String id;
 
@@ -154,7 +171,7 @@ class UserDetails extends _i1.PageRouteInfo {
         id = match.pathParams.getString('id'),
         super.fromMatch(match);
 
-  final _i3.Key key;
+  final _i2.Key key;
 
   final String id;
 

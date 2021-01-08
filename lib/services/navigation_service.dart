@@ -1,13 +1,15 @@
 import 'package:auto_route/auto_route.dart';
-
 import '../pages.dart';
+import 'auth_guard.dart';
 
-@MaterialAutoRouter(
+@CustomAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
     AutoRoute(
       path: '/',
+      name: 'HomeRoute',
       page: Home,
+      guards: [AuthGuard],
       children: [
         RedirectRoute(path: '', redirectTo: 'dashboard'),
         AutoRoute(path: 'dashboard', page: DashboardPage),
@@ -33,7 +35,12 @@ import '../pages.dart';
       ],
     ),
     AutoRoute(path: '*', page: UnknownPage),
-    AutoRoute(page: Login, path: "/login"),
+    AutoRoute(
+      page: Login,
+      name: 'LoginRoute',
+      path: "/login",
+      fullscreenDialog: false,
+    ),
   ],
 )
 class $AppRouter {}
