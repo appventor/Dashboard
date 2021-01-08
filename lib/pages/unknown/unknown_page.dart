@@ -14,7 +14,7 @@ class UnknownPage extends StatelessWidget {
             Text("Oops! This is a wrong page."),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushNamed("/");
+                context.router.push(HomeRoute());
               },
               child: Text("Go Home"),
             )
