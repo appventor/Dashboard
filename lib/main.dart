@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'services/services.dart';
 
-final _appRouter = AppRouter();
+// final _appRouter = AppRouter();
 
 void main() {
   runApp(RootApp());
@@ -11,8 +11,8 @@ class RootApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerDelegate: _appRouter.delegate(),
-      routeInformationParser: _appRouter.defaultRouteParser(),
+      routerDelegate: AppRouter().delegate(),
+      routeInformationParser: AppRouter().defaultRouteParser(),
     );
   }
 }
