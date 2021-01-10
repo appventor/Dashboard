@@ -1,4 +1,4 @@
-package com.appventor.auction
+package com.appventor.dashboard
 
 import io.flutter.embedding.android.FlutterActivity
 
