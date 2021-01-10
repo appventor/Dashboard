@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'services/services.dart';
 
 void main() {
+  setUrlStrategy(PathUrlStrategy());
   runApp(RootApp());
 }
 
