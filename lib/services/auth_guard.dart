@@ -7,12 +7,10 @@ class AuthGuard extends AutoRouteGuard {
   Future<bool> canNavigate(
       List<PageRouteInfo> pendingRoutes, StackRouter router) async {
     if (!isAuthenticated) {
-      // ignore: unawaited_futures
       router.root.push(LoginRoute(onLoginResult: (success) {
         if (success) {
           isAuthenticated = true;
-          router.root.pop();
-          router.pushAll(pendingRoutes);
+          router.root.replaceAll(pendingRoutes);
         }
       }));
       return false;
