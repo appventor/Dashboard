@@ -8,3 +8,4 @@ export 'pages/notifications/notifications.dart';
 export 'pages/users/users.dart';
 export 'pages/unknown/unknown_page.dart';
 export 'pages/widgets/sidemenu.dart';
+export 'pages/widgets/constants.dart';
