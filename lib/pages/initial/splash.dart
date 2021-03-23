@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 class Splash extends StatefulWidget {
   final Function loaded;
 
-  const Splash({Key key, this.loaded}) : super(key: key);
+  const Splash({Key? key, required this.loaded}) : super(key: key);
+
   @override
   _SplashState createState() => _SplashState();
 }

@@ -7,9 +7,9 @@ class SideMenuItem {
   final String label;
 
   const SideMenuItem({
-    @required this.destination,
-    @required this.iconData,
-    @required this.label,
+    required this.destination,
+    required this.iconData,
+    required this.label,
   });
 }
 

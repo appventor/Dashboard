@@ -1,25 +1,21 @@
 name: dashboard
-description: A new Flutter project.
-
+description: Flutter admin dashboard app.
 publish_to: "none"
-
-version: 0.0.1
+version: 0.0.2
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  auto_route: ^1.0.0-beta.6
+  auto_route: ^1.0.2
 
 dev_dependencies:
   change_app_package_name: ^0.1.2
-  auto_route_generator: ^1.0.0-beta.6
+  auto_route_generator: ^1.0.2
   build_runner:
   flutter_test:
-    sdk: flutter
-  integration_test:
     sdk: flutter
 
 flutter:

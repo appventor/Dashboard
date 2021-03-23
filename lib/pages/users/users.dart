@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class UsersPage extends StatelessWidget {
   final String id;
 
-  const UsersPage({Key key, @pathParam this.id}) : super(key: key);
+  const UsersPage({Key? key, required this.id}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,7 +17,8 @@ class UsersPage extends StatelessWidget {
 class UserDetailsPage extends StatelessWidget {
   final String id;
 
-  const UserDetailsPage({Key key, @pathParam this.id}) : super(key: key);
+  const UserDetailsPage({Key? key, required this.id}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
