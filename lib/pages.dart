@@ -1,7 +1,7 @@
-export 'pages/home/home.dart';
+export 'pages/home/view/home.dart';
 export 'pages/initial/splash.dart';
 export 'pages/dashboard/dashboard.dart';
-export 'pages/login/login.dart';
+export 'pages/login/view/login.dart';
 export 'pages/initial/splash.dart';
 export 'pages/settings/settings.dart';
 export 'pages/notifications/notifications.dart';

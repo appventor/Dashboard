@@ -16,8 +16,8 @@ class HomeView extends StatelessWidget {
             color: Colors.amber,
           );
         } else {
-          return Container(
-            color: Colors.red,
+          return Scaffold(
+            body: DashboardPage(),
           );
         }
       },

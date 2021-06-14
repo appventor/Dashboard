@@ -1,8 +1,8 @@
 import 'package:dashboard/services/services.dart';
 import 'package:flutter/material.dart';
 
-import '../../pages.dart';
-import 'views/homeview.dart';
+import '../../../pages.dart';
+import 'homeview.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -56,20 +56,18 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return AutoRouter(builder: (context, child) {
-      return AnimatedSwitcher(
-          duration: Duration(milliseconds: 500),
-          switchInCurve: Curves.easeIn,
-          switchOutCurve: Curves.easeIn,
-          child: _loaded
-              ? HomeView()
-              : Splash(
-                  loaded: (bool loaded) {
-                    setState(() {
-                      _loaded = loaded;
-                    });
-                  },
-                ));
-    });
+    return AnimatedSwitcher(
+        duration: Duration(milliseconds: 500),
+        switchInCurve: Curves.easeIn,
+        switchOutCurve: Curves.easeIn,
+        child: _loaded
+            ? HomeView()
+            : Splash(
+                loaded: (bool loaded) {
+                  setState(() {
+                    _loaded = loaded;
+                  });
+                },
+              ));
   }
 }
