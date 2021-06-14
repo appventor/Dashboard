@@ -1,3 +1,5 @@
+export 'package:flutter/material.dart';
+
 export 'pages/home/view/home.dart';
 export 'pages/initial/splash.dart';
 export 'pages/dashboard/dashboard.dart';
