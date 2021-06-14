@@ -4,17 +4,10 @@ bool isAuthenticated = false;
 
 class AuthGuard extends AutoRouteGuard {
   @override
-  Future<bool> canNavigate(
-      List<PageRouteInfo> pendingRoutes, StackRouter router) async {
+  void onNavigation(NavigationResolver resolver, StackRouter router) {
     if (!isAuthenticated) {
-      router.root.push(LoginRoute(onLoginResult: (success) {
-        if (success) {
-          isAuthenticated = true;
-          router.root.replaceAll(pendingRoutes);
-        }
-      }));
-      return false;
-    }
-    return true;
+      resolver.next(true);
+    } else
+      router.push(LoginRoute());
   }
 }

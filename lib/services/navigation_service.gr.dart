@@ -5,77 +5,79 @@
 // **************************************************************************
 
 import 'package:auto_route/auto_route.dart' as _i1;
-import 'package:flutter/material.dart' as _i4;
+import 'package:flutter/material.dart' as _i2;
 
-import '../pages.dart' as _i3;
-import 'auth_guard.dart' as _i2;
+import '../pages.dart' as _i4;
+import 'auth_guard.dart' as _i3;
 
 class AppRouter extends _i1.RootStackRouter {
-  AppRouter({required this.authGuard});
+  AppRouter(
+      {_i2.GlobalKey<_i2.NavigatorState>? navigatorKey,
+      required this.authGuard})
+      : super(navigatorKey);
 
-  final _i2.AuthGuard authGuard;
+  final _i3.AuthGuard authGuard;
 
   @override
   final Map<String, _i1.PageFactory> pagesMap = {
-    HomeRoute.name: (entry) {
-      return _i1.CustomPage(
-          entry: entry,
-          child: _i3.Home(),
-          opaque: true,
-          barrierDismissible: false);
-    },
-    UnknownRoute.name: (entry) {
-      return _i1.CustomPage(
-          entry: entry,
-          child: _i3.UnknownPage(),
-          opaque: true,
-          barrierDismissible: false);
-    },
-    LoginRoute.name: (entry) {
-      var args = entry.routeData.argsAs<LoginRouteArgs>();
-      return _i1.CustomPage(
-          entry: entry,
-          child: _i3.Login(key: args.key, onLoginResult: args.onLoginResult),
-          opaque: true,
-          barrierDismissible: false);
-    },
-    DashboardRoute.name: (entry) {
-      return _i1.CustomPage(
-          entry: entry,
-          child: _i3.DashboardPage(),
-          opaque: true,
-          barrierDismissible: false);
-    },
-    UsersRoute.name: (entry) {
-      return _i1.CustomPage(
-          entry: entry,
-          child: const _i1.EmptyRouterPage(),
-          opaque: true,
-          barrierDismissible: false);
-    },
-    SettingsRoute.name: (entry) {
-      return _i1.CustomPage(
-          entry: entry,
-          child: _i3.SettingsPage(),
-          opaque: true,
-          barrierDismissible: false);
-    },
-    UsersList.name: (entry) {
-      var args = entry.routeData.argsAs<UsersListArgs>();
-      return _i1.CustomPage(
-          entry: entry,
-          child: _i3.UsersPage(key: args.key, id: args.id),
-          opaque: true,
-          barrierDismissible: false);
-    },
-    UserDetails.name: (entry) {
-      var args = entry.routeData.argsAs<UserDetailsArgs>();
-      return _i1.CustomPage(
-          entry: entry,
-          child: _i3.UserDetailsPage(key: args.key, id: args.id),
-          opaque: true,
-          barrierDismissible: false);
-    }
+    HomeRoute.name: (routeData) => _i1.CustomPage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i4.Home();
+        },
+        opaque: true,
+        barrierDismissible: false),
+    UnknownRoute.name: (routeData) => _i1.CustomPage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i4.UnknownPage();
+        },
+        opaque: true,
+        barrierDismissible: false),
+    LoginRoute.name: (routeData) => _i1.CustomPage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return const _i4.Login();
+        },
+        opaque: true,
+        barrierDismissible: false),
+    DashboardRoute.name: (routeData) => _i1.CustomPage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i4.DashboardPage();
+        },
+        opaque: true,
+        barrierDismissible: false),
+    UsersRoute.name: (routeData) => _i1.CustomPage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return const _i1.EmptyRouterPage();
+        },
+        opaque: true,
+        barrierDismissible: false),
+    SettingsRoute.name: (routeData) => _i1.CustomPage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i4.SettingsPage();
+        },
+        opaque: true,
+        barrierDismissible: false),
+    UsersList.name: (routeData) => _i1.CustomPage<dynamic>(
+        routeData: routeData,
+        builder: (data) {
+          final args = data.argsAs<UsersListArgs>();
+          return _i4.UsersPage(key: args.key, id: args.id);
+        },
+        opaque: true,
+        barrierDismissible: false),
+    UserDetails.name: (routeData) => _i1.CustomPage<dynamic>(
+        routeData: routeData,
+        builder: (data) {
+          final args = data.argsAs<UserDetailsArgs>();
+          return _i4.UserDetailsPage(key: args.key, id: args.id);
+        },
+        opaque: true,
+        barrierDismissible: false)
   };
 
   @override
@@ -112,21 +114,10 @@ class UnknownRoute extends _i1.PageRouteInfo {
   static const String name = 'UnknownRoute';
 }
 
-class LoginRoute extends _i1.PageRouteInfo<LoginRouteArgs> {
-  LoginRoute({_i4.Key? key, required void Function(bool) onLoginResult})
-      : super(name,
-            path: '/login',
-            args: LoginRouteArgs(key: key, onLoginResult: onLoginResult));
+class LoginRoute extends _i1.PageRouteInfo {
+  const LoginRoute() : super(name, path: '/login');
 
   static const String name = 'LoginRoute';
-}
-
-class LoginRouteArgs {
-  const LoginRouteArgs({this.key, required this.onLoginResult});
-
-  final _i4.Key? key;
-
-  final void Function(bool) onLoginResult;
 }
 
 class DashboardRoute extends _i1.PageRouteInfo {
@@ -149,7 +140,7 @@ class SettingsRoute extends _i1.PageRouteInfo {
 }
 
 class UsersList extends _i1.PageRouteInfo<UsersListArgs> {
-  UsersList({_i4.Key? key, required String id})
+  UsersList({_i2.Key? key, required String id})
       : super(name, path: 'list', args: UsersListArgs(key: key, id: id));
 
   static const String name = 'UsersList';
@@ -158,14 +149,17 @@ class UsersList extends _i1.PageRouteInfo<UsersListArgs> {
 class UsersListArgs {
   const UsersListArgs({this.key, required this.id});
 
-  final _i4.Key? key;
+  final _i2.Key? key;
 
   final String id;
 }
 
 class UserDetails extends _i1.PageRouteInfo<UserDetailsArgs> {
-  UserDetails({_i4.Key? key, required String id})
-      : super(name, path: 'list/:id', args: UserDetailsArgs(key: key, id: id));
+  UserDetails({_i2.Key? key, required String id})
+      : super(name,
+            path: 'list/:id',
+            args: UserDetailsArgs(key: key, id: id),
+            rawPathParams: {});
 
   static const String name = 'UserDetails';
 }
@@ -173,7 +167,7 @@ class UserDetails extends _i1.PageRouteInfo<UserDetailsArgs> {
 class UserDetailsArgs {
   const UserDetailsArgs({this.key, required this.id});
 
-  final _i4.Key? key;
+  final _i2.Key? key;
 
   final String id;
 }
