@@ -1,13 +1,30 @@
 export 'package:flutter/material.dart';
 
+export './services/services.dart';
+
+export 'pages/catalog/category/view/category_page.dart';
+export 'pages/catalog/category/view/category_details.dart';
+export 'pages/catalog/collections/view/collections_page.dart';
+export 'pages/catalog/collections/view/collection_details.dart';
+export 'pages/catalog/products/view/products_page.dart';
+export 'pages/catalog/products/view/product_details.dart';
 export 'pages/home/view/home.dart';
-export 'pages/initial/splash.dart';
-export 'pages/dashboard/dashboard.dart';
+export 'pages/dashboard/view/dashboard.dart';
 export 'pages/login/view/login.dart';
+export 'pages/initial/onboarding.dart';
 export 'pages/initial/splash.dart';
+export 'pages/offers/view/offers_page.dart';
+export 'pages/offers/view/offer_details.dart';
+export 'pages/orders/view/active_orders.dart';
+export 'pages/orders/view/fulfilled_orders.dart';
+export 'pages/orders/view/orders_page.dart';
+export 'pages/orders/view/order_details.dart';
+export 'pages/orders/view/pending_orders.dart';
 export 'pages/settings/settings.dart';
 export 'pages/notifications/notifications.dart';
-export 'pages/users/users.dart';
+export 'pages/users/view/users_page.dart';
+export 'pages/users/view/userDetails_page.dart';
 export 'pages/unknown/unknown_page.dart';
-export 'pages/widgets/sidemenu.dart';
+export 'pages/widgets/sidebar.dart';
 export 'pages/widgets/constants.dart';
+export 'pages/widgets/responsive.dart';
