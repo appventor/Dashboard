@@ -1,6 +1,4 @@
-import 'package:auto_route/auto_route.dart';
 import '../pages.dart';
-import 'auth_guard.dart';
 
 @CustomAutoRouter(
   replaceInRouteName: 'Page,Route',
@@ -14,18 +12,89 @@ import 'auth_guard.dart';
         RedirectRoute(path: '', redirectTo: 'dashboard'),
         AutoRoute(path: 'dashboard', page: DashboardPage),
         AutoRoute(
+          path: 'catalog',
+          page: EmptyRouterPage,
+          name: 'CatalogRoute',
+          children: [
+            RedirectRoute(path: '', redirectTo: 'products'),
+            AutoRoute(
+              path: 'products',
+              name: "ProductsRoute",
+              page: ProductsPage,
+            ),
+            AutoRoute(
+              path: 'products/:id',
+              name: 'ProductDetailsRoute',
+              page: ProductDetails,
+            ),
+            AutoRoute(
+              path: 'category',
+              name: "CategoryRoute",
+              page: CategoryPage,
+            ),
+            AutoRoute(
+              path: 'category/:id',
+              name: 'CategoryDetailsRoute',
+              page: CategoryDetails,
+            ),
+            AutoRoute(
+              path: 'collections',
+              name: "CollectionsRoute",
+              page: CollectionsPage,
+            ),
+            AutoRoute(
+              path: 'collections/:id',
+              name: 'CollectionsDetailRoute',
+              page: CollectionDetails,
+            ),
+          ],
+        ),
+        AutoRoute(
+          path: 'orders',
+          page: EmptyRouterPage,
+          name: 'ordersRoute',
+          children: [
+            RedirectRoute(path: '', redirectTo: 'all'),
+            AutoRoute(
+              path: 'all',
+              name: "AllOrders",
+              page: OrdersPage,
+            ),
+            AutoRoute(
+              path: 'active',
+              name: "ActiveOrdersRoute",
+              page: ActiveOrders,
+            ),
+            AutoRoute(
+              path: 'pending',
+              name: "PendingOrderRoute",
+              page: PendingOrders,
+            ),
+            AutoRoute(
+              path: 'fulfilled',
+              name: "FullfilledOrdersRoute",
+              page: FulfilledOrders,
+            ),
+            AutoRoute(
+              path: 'order/:id',
+              name: 'OrderDetailsRoute',
+              page: OrderDetails,
+            ),
+          ],
+        ),
+        AutoRoute(
           path: 'users',
           page: EmptyRouterPage,
           name: 'usersRoute',
           children: [
             RedirectRoute(path: '', redirectTo: 'list'),
             AutoRoute(
-              path: 'list',
+              path: 'all',
               name: "UsersList",
               page: UsersPage,
             ),
             AutoRoute(
-              path: 'list/:id',
+              path: 'users/:id',
               name: 'UserDetails',
               page: UserDetailsPage,
             ),
