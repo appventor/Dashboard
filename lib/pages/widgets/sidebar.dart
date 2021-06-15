@@ -20,7 +20,11 @@ class SideBar extends StatelessWidget {
             ListTile(
               leading: Icon(FontAwesomeIcons.chartLine),
               title: Text("Dashboard"),
-              onTap: () => context.tabsRouter.setActiveIndex(0),
+              selected: true,
+              onTap: () {
+                if (Responsive.isMobile(context)) context.router.pop();
+                context.tabsRouter.setActiveIndex(0);
+              },
             ),
             ExpansionTile(
               leading: Icon(Icons.shopping_bag_outlined),
@@ -29,20 +33,29 @@ class SideBar extends StatelessWidget {
                 ListTile(
                   leading: Icon(FontAwesomeIcons.boxOpen),
                   title: Text('Products'),
-                  onTap: () => context
-                      .navigateTo(CatalogRoute(children: [ProductsRoute()])),
+                  onTap: () {
+                    if (Responsive.isMobile(context)) context.router.pop();
+                    context
+                        .navigateTo(CatalogRoute(children: [ProductsRoute()]));
+                  },
                 ),
                 ListTile(
                   leading: Icon(FontAwesomeIcons.boxes),
                   title: Text('Category'),
-                  onTap: () => context
-                      .navigateTo(CatalogRoute(children: [CategoryRoute()])),
+                  onTap: () {
+                    if (Responsive.isMobile(context)) context.router.pop();
+                    context
+                        .navigateTo(CatalogRoute(children: [CategoryRoute()]));
+                  },
                 ),
                 ListTile(
                   leading: Icon(FontAwesomeIcons.bookmark),
                   title: Text('Collection'),
-                  onTap: () => context
-                      .navigateTo(CatalogRoute(children: [CollectionsRoute()])),
+                  onTap: () {
+                    if (Responsive.isMobile(context)) context.router.pop();
+                    context.navigateTo(
+                        CatalogRoute(children: [CollectionsRoute()]));
+                  },
                 ),
               ],
             ),
@@ -53,34 +66,47 @@ class SideBar extends StatelessWidget {
                 ListTile(
                   leading: Icon(FontAwesomeIcons.newspaper),
                   title: Text('All Orders'),
-                  onTap: () =>
-                      context.navigateTo(OrdersRoute(children: [AllOrders()])),
+                  onTap: () {
+                    if (Responsive.isMobile(context)) context.router.pop();
+                    context.navigateTo(OrdersRoute(children: [AllOrders()]));
+                  },
                 ),
                 ListTile(
                   leading: Icon(FontAwesomeIcons.truckLoading),
                   title: Text('Active Orders'),
-                  onTap: () => context
-                      .navigateTo(OrdersRoute(children: [ActiveOrdersRoute()])),
+                  onTap: () {
+                    if (Responsive.isMobile(context)) context.router.pop();
+                    context.navigateTo(
+                        OrdersRoute(children: [ActiveOrdersRoute()]));
+                  },
                 ),
                 ListTile(
                   leading: Icon(FontAwesomeIcons.clipboardList),
                   title: Text('Pending Orders'),
-                  onTap: () => context
-                      .navigateTo(OrdersRoute(children: [PendingOrderRoute()])),
+                  onTap: () {
+                    if (Responsive.isMobile(context)) context.router.pop();
+                    context.navigateTo(
+                        OrdersRoute(children: [PendingOrderRoute()]));
+                  },
                 ),
                 ListTile(
                   leading: Icon(FontAwesomeIcons.clipboardCheck),
                   title: Text('Fulfilled Orders'),
-                  onTap: () => context.navigateTo(
-                      OrdersRoute(children: [FullfilledOrdersRoute()])),
+                  onTap: () {
+                    if (Responsive.isMobile(context)) context.router.pop();
+                    context.navigateTo(
+                        OrdersRoute(children: [FullfilledOrdersRoute()]));
+                  },
                 ),
               ],
             ),
             ListTile(
               leading: Icon(FontAwesomeIcons.users),
               title: Text("Customers"),
-              onTap: () =>
-                  context.navigateTo(UsersRoute(children: [UsersList()])),
+              onTap: () {
+                if (Responsive.isMobile(context)) context.router.pop();
+                context.navigateTo(UsersRoute(children: [UsersList()]));
+              },
             )
           ],
         ),
