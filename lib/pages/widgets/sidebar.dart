@@ -1,3 +1,4 @@
+import 'package:dashboard/pages/widgets/header_logo.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../pages.dart';
@@ -7,128 +8,202 @@ class SideBar extends StatefulWidget {
   _SideBarState createState() => _SideBarState();
 }
 
-class _SideBarState extends State<SideBar> {
+class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
   bool collapse = false;
   int currentIndex = 0;
 
+  late Animation<double> _toggleAnimation;
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 200),
+    );
+
+    _toggleAnimation =
+        CurvedAnimation(curve: Curves.linear, parent: _controller);
+  }
+
   checkIfCollapsible() {
-    collapse = !Responsive.isDesktop(context);
+    collapse = !Responsive.isDesktop(context) && !Responsive.isMobile(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    checkIfCollapsible();
-    return Drawer(
+    // checkIfCollapsible();
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      width: collapse ? 100 : 210,
+      decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+                color: Colors.blueGrey.withOpacity(0.8),
+                spreadRadius: 3,
+                blurRadius: 10,
+                offset: Offset(0, 3)),
+          ],
+          borderRadius: BorderRadius.only(
+              topRight: const Radius.circular(10),
+              bottomRight: const Radius.circular(10)),
+          color: Colors.amber),
       child: ListView(
+        // shrinkWrap: true,
         children: [
-          if (Responsive.isMobile(context))
-            ListTile(
-              title: FlutterLogo(
-                style: FlutterLogoStyle.horizontal,
-                size: 100,
-              ),
-            ),
-          ListTile(
-            leading: Icon(Icons.dashboard),
-            title: !collapse ? Text("Dashboard") : SizedBox.shrink(),
-            selected: currentIndex == 0 ? true : false,
-            onTap: () {
+          if (Responsive.isMobile(context)) HeaderLogo(),
+          IconButton(
+            onPressed: () {
               setState(() {
-                currentIndex = 0;
+                collapse = !collapse;
+                if (collapse)
+                  _controller.forward();
+                else
+                  _controller.reverse();
               });
-              if (Responsive.isMobile(context)) context.router.pop();
-              context.tabsRouter.setActiveIndex(0);
             },
+            icon: AnimatedIcon(
+              icon: AnimatedIcons.arrow_menu,
+              progress: _toggleAnimation,
+            ),
           ),
+          SideBarItem(
+              collapsed: collapse,
+              selected: currentIndex == 0 ? true : false,
+              title: 'Dashboard',
+              icon: Icons.dashboard,
+              onTap: () {
+                setState(() {
+                  currentIndex = 0;
+                });
+                if (Responsive.isMobile(context)) context.router.pop();
+                context.tabsRouter.setActiveIndex(0);
+              }),
           ExpansionTile(
-            leading: Icon(Icons.shopping_bag_outlined),
-            title: !collapse ? Text('Catalog') : SizedBox.shrink(),
+            leading: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.shopping_bag_outlined),
+                if (collapse)
+                  Text(
+                    "Catalog",
+                    style: TextStyle(fontSize: 10),
+                  )
+              ],
+            ),
+            title: !collapse
+                ? Text(
+                    'Catalog',
+                    maxLines: 1,
+                    overflow: TextOverflow.fade,
+                  )
+                : SizedBox.shrink(),
             children: [
-              ListTile(
-                leading: Icon(FontAwesomeIcons.boxOpen),
-                title: !collapse ? Text('Products') : SizedBox.shrink(),
-                selected: currentIndex == 1 ? true : false,
-                onTap: () {
-                  setState(() {
-                    currentIndex = 1;
-                  });
-                  if (Responsive.isMobile(context)) context.router.pop();
-                  context.navigateTo(CatalogRoute(children: [ProductsRoute()]));
-                },
-              ),
-              ListTile(
-                leading: Icon(FontAwesomeIcons.boxes),
-                title: !collapse ? Text('Category') : SizedBox.shrink(),
-                selected: currentIndex == 2 ? true : false,
-                onTap: () {
-                  setState(() {
-                    currentIndex = 2;
-                  });
-                  if (Responsive.isMobile(context)) context.router.pop();
-                  context.navigateTo(CatalogRoute(children: [CategoryRoute()]));
-                },
-              ),
-              ListTile(
-                leading: Icon(FontAwesomeIcons.bookmark),
-                title: !collapse ? Text('Collection') : SizedBox.shrink(),
-                selected: currentIndex == 3 ? true : false,
-                onTap: () {
-                  setState(() {
-                    currentIndex = 3;
-                  });
-                  if (Responsive.isMobile(context)) context.router.pop();
-                  context
-                      .navigateTo(CatalogRoute(children: [CollectionsRoute()]));
-                },
-              ),
+              SideBarItem(
+                  collapsed: collapse,
+                  selected: currentIndex == 1 ? true : false,
+                  title: 'Products',
+                  icon: FontAwesomeIcons.boxOpen,
+                  onTap: () {
+                    setState(() {
+                      currentIndex = 1;
+                    });
+                    if (Responsive.isMobile(context)) context.router.pop();
+                    context
+                        .navigateTo(CatalogRoute(children: [ProductsRoute()]));
+                  }),
+              SideBarItem(
+                  collapsed: collapse,
+                  selected: currentIndex == 2 ? true : false,
+                  title: 'Category',
+                  icon: FontAwesomeIcons.boxes,
+                  onTap: () {
+                    setState(() {
+                      currentIndex = 2;
+                    });
+                    if (Responsive.isMobile(context)) context.router.pop();
+                    context
+                        .navigateTo(CatalogRoute(children: [CategoryRoute()]));
+                  }),
+              SideBarItem(
+                  collapsed: collapse,
+                  selected: currentIndex == 3 ? true : false,
+                  title: 'Collection',
+                  icon: FontAwesomeIcons.bookmark,
+                  onTap: () {
+                    setState(() {
+                      currentIndex = 3;
+                    });
+                    if (Responsive.isMobile(context)) context.router.pop();
+                    context.navigateTo(
+                        CatalogRoute(children: [CollectionsRoute()]));
+                  })
             ],
           ),
           ExpansionTile(
-            leading: Icon(FontAwesomeIcons.shoppingCart),
-            title: !collapse ? Text('Orders') : SizedBox.shrink(),
+            leading: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(FontAwesomeIcons.shoppingCart),
+                if (collapse)
+                  Text(
+                    "Orders",
+                    style: TextStyle(fontSize: 10),
+                  )
+              ],
+            ),
+            title: !collapse
+                ? Text(
+                    'Orders',
+                    maxLines: 1,
+                    overflow: TextOverflow.fade,
+                  )
+                : SizedBox.shrink(),
             children: [
-              ListTile(
-                leading: Icon(FontAwesomeIcons.newspaper),
-                title: !collapse ? Text('All Orders') : SizedBox.shrink(),
-                selected: currentIndex == 4 ? true : false,
-                onTap: () {
-                  setState(() {
-                    currentIndex = 4;
-                  });
-                  if (Responsive.isMobile(context)) context.router.pop();
-                  context.navigateTo(OrdersRoute(children: [AllOrders()]));
-                },
-              ),
-              ListTile(
-                leading: Icon(FontAwesomeIcons.truckLoading),
-                title: !collapse ? Text('Active Orders') : SizedBox.shrink(),
-                selected: currentIndex == 5 ? true : false,
-                onTap: () {
-                  setState(() {
-                    currentIndex = 5;
-                  });
-                  if (Responsive.isMobile(context)) context.router.pop();
-                  context
-                      .navigateTo(OrdersRoute(children: [ActiveOrdersRoute()]));
-                },
-              ),
-              ListTile(
-                leading: Icon(FontAwesomeIcons.clipboardList),
-                title: !collapse ? Text('Pending Orders') : SizedBox.shrink(),
-                selected: currentIndex == 6 ? true : false,
-                onTap: () {
-                  setState(() {
-                    currentIndex = 6;
-                  });
-                  if (Responsive.isMobile(context)) context.router.pop();
-                  context
-                      .navigateTo(OrdersRoute(children: [PendingOrderRoute()]));
-                },
-              ),
-              ListTile(
-                leading: Icon(FontAwesomeIcons.clipboardCheck),
-                title: !collapse ? Text('Fulfilled Orders') : SizedBox.shrink(),
+              SideBarItem(
+                  collapsed: collapse,
+                  selected: currentIndex == 4 ? true : false,
+                  title: 'All Orders',
+                  icon: FontAwesomeIcons.newspaper,
+                  onTap: () {
+                    setState(() {
+                      currentIndex = 4;
+                    });
+                    if (Responsive.isMobile(context)) context.router.pop();
+                    context.navigateTo(OrdersRoute(children: [AllOrders()]));
+                  }),
+              SideBarItem(
+                  collapsed: collapse,
+                  selected: currentIndex == 5 ? true : false,
+                  title: 'Active',
+                  icon: FontAwesomeIcons.truckMoving,
+                  onTap: () {
+                    setState(() {
+                      currentIndex = 5;
+                    });
+                    if (Responsive.isMobile(context)) context.router.pop();
+                    context.navigateTo(
+                        OrdersRoute(children: [ActiveOrdersRoute()]));
+                  }),
+              SideBarItem(
+                  collapsed: collapse,
+                  selected: currentIndex == 6 ? true : false,
+                  title: 'Pending',
+                  icon: FontAwesomeIcons.clipboardList,
+                  onTap: () {
+                    setState(() {
+                      currentIndex = 6;
+                    });
+                    if (Responsive.isMobile(context)) context.router.pop();
+                    context.navigateTo(
+                        OrdersRoute(children: [PendingOrderRoute()]));
+                  }),
+              SideBarItem(
+                collapsed: collapse,
                 selected: currentIndex == 7 ? true : false,
+                title: 'Fulfilled ',
+                icon: FontAwesomeIcons.clipboardCheck,
                 onTap: () {
                   setState(() {
                     currentIndex = 7;
@@ -137,22 +212,72 @@ class _SideBarState extends State<SideBar> {
                   context.navigateTo(
                       OrdersRoute(children: [FullfilledOrdersRoute()]));
                 },
-              ),
+              )
             ],
           ),
-          ListTile(
-            leading: Icon(FontAwesomeIcons.users),
-            title: !collapse ? Text("Customers") : SizedBox.shrink(),
-            selected: currentIndex == 8 ? true : false,
-            onTap: () {
-              setState(() {
-                currentIndex = 8;
-              });
-              if (Responsive.isMobile(context)) context.router.pop();
-              context.navigateTo(UsersRoute(children: [UsersList()]));
-            },
-          )
+          SideBarItem(
+              collapsed: collapse,
+              selected: currentIndex == 8 ? true : false,
+              title: 'Customers',
+              icon: FontAwesomeIcons.users,
+              onTap: () {
+                setState(() {
+                  currentIndex = 8;
+                });
+                if (Responsive.isMobile(context)) context.router.pop();
+                context.navigateTo(UsersRoute(children: [UsersList()]));
+              })
         ],
+      ),
+    );
+  }
+}
+
+class SideBarItem extends StatelessWidget {
+  final bool collapsed, selected;
+  final String title;
+  final IconData icon;
+  final Function onTap;
+  const SideBarItem({
+    Key? key,
+    required this.collapsed,
+    required this.selected,
+    required this.title,
+    required this.icon,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: ListTile(
+        minLeadingWidth: 50,
+        leading: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+            ),
+            if (collapsed)
+              Text(
+                title,
+                style: TextStyle(fontSize: 10),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.fade,
+              )
+          ],
+        ),
+        title: !collapsed
+            ? Text(
+                title,
+                maxLines: 1,
+                overflow: TextOverflow.fade,
+              )
+            : SizedBox.shrink(),
+        selected: selected,
+        onTap: () => onTap(),
       ),
     );
   }
