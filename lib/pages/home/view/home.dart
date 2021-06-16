@@ -27,9 +27,7 @@ class Home extends StatelessWidget {
         return Responsive.isMobile(context)
             ? child
             : Row(children: [
-                Expanded(
-                  child: SideBar(),
-                ),
+                SideBar(),
                 Expanded(
                   flex: 5,
                   child: child,
