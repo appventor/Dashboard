@@ -50,23 +50,32 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
               bottomRight: const Radius.circular(10)),
           color: Colors.amber),
       child: ListView(
-        // shrinkWrap: true,
         children: [
           if (Responsive.isMobile(context)) HeaderLogo(),
-          IconButton(
-            onPressed: () {
-              setState(() {
-                collapse = !collapse;
-                if (collapse)
-                  _controller.forward();
-                else
-                  _controller.reverse();
-              });
-            },
-            icon: AnimatedIcon(
-              icon: AnimatedIcons.arrow_menu,
-              progress: _toggleAnimation,
-            ),
+          Row(
+            mainAxisAlignment:
+                collapse ? MainAxisAlignment.center : MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  icon: AnimatedIcon(
+                    icon: AnimatedIcons.arrow_menu,
+                    progress: _toggleAnimation,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      collapse = !collapse;
+                      if (collapse)
+                        _controller.forward();
+                      else
+                        _controller.reverse();
+                    });
+                  },
+                ),
+              ),
+            ],
           ),
           SideBarItem(
               collapsed: collapse,
