@@ -17,7 +17,6 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    super.initState();
     _controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 200),
@@ -25,14 +24,51 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
 
     _toggleAnimation =
         CurvedAnimation(curve: Curves.linear, parent: _controller);
+
+    super.initState();
   }
 
   checkIfCollapsible() {
     collapse = !Responsive.isDesktop(context) && !Responsive.isMobile(context);
   }
 
+  setCurrentIndex() {
+    switch (context.router.topMost.current.path) {
+      case 'dashboard':
+        currentIndex = 0;
+        break;
+      case 'products':
+        currentIndex = 1;
+        break;
+      case 'category':
+        currentIndex = 2;
+        break;
+      case 'collections':
+        currentIndex = 3;
+        break;
+      case 'orders':
+        currentIndex = 4;
+        break;
+      case 'active':
+        currentIndex = 5;
+        break;
+      case 'pending':
+        currentIndex = 6;
+        break;
+      case 'fulfilled':
+        currentIndex = 7;
+        break;
+      case 'list':
+        currentIndex = 8;
+        break;
+      default:
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(context.router.topRoute.path);
+    setCurrentIndex();
     // checkIfCollapsible();
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
@@ -40,15 +76,15 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-                color: Colors.blueGrey.withOpacity(0.8),
+                color: Colors.black.withOpacity(0.5),
                 spreadRadius: 3,
                 blurRadius: 10,
                 offset: Offset(0, 3)),
           ],
-          borderRadius: BorderRadius.only(
-              topRight: const Radius.circular(10),
-              bottomRight: const Radius.circular(10)),
-          color: Colors.amber),
+          // borderRadius: BorderRadius.only(
+          //     topRight: const Radius.circular(10),
+          //     bottomRight: const Radius.circular(10)),
+          color: secondaryColor),
       child: ListView(
         children: [
           if (Responsive.isMobile(context)) HeaderLogo(),
@@ -90,6 +126,7 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
                 context.tabsRouter.setActiveIndex(0);
               }),
           ExpansionTile(
+            initiallyExpanded: true,
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -151,6 +188,7 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
             ],
           ),
           ExpansionTile(
+            initiallyExpanded: true,
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -273,7 +311,7 @@ class SideBarItem extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(fontSize: 10),
-                textAlign: TextAlign.center,
+                // textAlign: TextAlign.center,
                 overflow: TextOverflow.fade,
               )
           ],
