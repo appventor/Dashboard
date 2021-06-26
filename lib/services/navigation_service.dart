@@ -54,9 +54,9 @@ import '../pages.dart';
           page: EmptyRouterPage,
           name: 'ordersRoute',
           children: [
-            RedirectRoute(path: '', redirectTo: 'all'),
+            RedirectRoute(path: '*', redirectTo: ''),
             AutoRoute(
-              path: 'all',
+              path: '',
               name: "AllOrders",
               page: OrdersPage,
             ),
@@ -73,10 +73,10 @@ import '../pages.dart';
             AutoRoute(
               path: 'fulfilled',
               name: "FullfilledOrdersRoute",
-              page: FulfilledOrders,
+              page: DashboardPage,
             ),
             AutoRoute(
-              path: 'order/:id',
+              path: ':id',
               name: 'OrderDetailsRoute',
               page: OrderDetails,
             ),
@@ -87,14 +87,14 @@ import '../pages.dart';
           page: EmptyRouterPage,
           name: 'usersRoute',
           children: [
-            RedirectRoute(path: '', redirectTo: 'list'),
+            RedirectRoute(path: '*', redirectTo: ''),
             AutoRoute(
-              path: 'all',
+              path: '',
               name: "UsersList",
               page: UsersPage,
             ),
             AutoRoute(
-              path: 'users/:id',
+              path: ':id',
               name: 'UserDetails',
               page: UserDetailsPage,
             ),
