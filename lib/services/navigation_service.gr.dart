@@ -153,7 +153,7 @@ class AppRouter extends _i1.RootStackRouter {
     FullfilledOrdersRoute.name: (routeData) => _i1.CustomPage<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i3.FulfilledOrders();
+          return _i3.DashboardPage();
         },
         opaque: true,
         barrierDismissible: false),
@@ -206,20 +206,23 @@ class AppRouter extends _i1.RootStackRouter {
             _i1.RouteConfig(CollectionsDetailRoute.name,
                 path: 'collections/:id')
           ]),
-          _i1.RouteConfig(OrdersRoute.name, path: 'orders', children: [
-            _i1.RouteConfig('#redirect',
-                path: '', redirectTo: 'all', fullMatch: true),
-            _i1.RouteConfig(AllOrders.name, path: 'all'),
-            _i1.RouteConfig(ActiveOrdersRoute.name, path: 'active'),
-            _i1.RouteConfig(PendingOrderRoute.name, path: 'pending'),
-            _i1.RouteConfig(FullfilledOrdersRoute.name, path: 'fulfilled'),
-            _i1.RouteConfig(OrderDetailsRoute.name, path: 'order/:id')
-          ]),
+          _i1.RouteConfig(OrdersRoute.name,
+              path: 'orders',
+              fullMatch: true,
+              children: [
+                _i1.RouteConfig('*#redirect',
+                    path: '*', redirectTo: '', fullMatch: true),
+                _i1.RouteConfig(AllOrders.name, path: ''),
+                _i1.RouteConfig(ActiveOrdersRoute.name, path: 'active'),
+                _i1.RouteConfig(PendingOrderRoute.name, path: 'pending'),
+                _i1.RouteConfig(FullfilledOrdersRoute.name, path: 'fulfilled'),
+                _i1.RouteConfig(OrderDetailsRoute.name, path: ':id')
+              ]),
           _i1.RouteConfig(UsersRoute.name, path: 'users', children: [
-            _i1.RouteConfig('#redirect',
-                path: '', redirectTo: 'list', fullMatch: true),
-            _i1.RouteConfig(UsersList.name, path: 'all'),
-            _i1.RouteConfig(UserDetails.name, path: 'users/:id')
+            _i1.RouteConfig('*#redirect',
+                path: '*', redirectTo: '', fullMatch: true),
+            _i1.RouteConfig(UsersList.name, path: ''),
+            _i1.RouteConfig(UserDetails.name, path: ':id')
           ]),
           _i1.RouteConfig(SettingsRoute.name, path: 'settings')
         ]),
@@ -354,7 +357,7 @@ class CollectionsDetailRouteArgs {
 }
 
 class AllOrders extends _i1.PageRouteInfo {
-  const AllOrders() : super(name, path: 'all');
+  const AllOrders() : super(name, path: '');
 
   static const String name = 'AllOrders';
 }
@@ -380,7 +383,7 @@ class FullfilledOrdersRoute extends _i1.PageRouteInfo {
 class OrderDetailsRoute extends _i1.PageRouteInfo<OrderDetailsRouteArgs> {
   OrderDetailsRoute({_i3.Key? key, required String id})
       : super(name,
-            path: 'order/:id',
+            path: ':id',
             args: OrderDetailsRouteArgs(key: key, id: id),
             rawPathParams: {'id': id});
 
@@ -396,7 +399,7 @@ class OrderDetailsRouteArgs {
 }
 
 class UsersList extends _i1.PageRouteInfo {
-  const UsersList() : super(name, path: 'all');
+  const UsersList() : super(name, path: '');
 
   static const String name = 'UsersList';
 }
@@ -404,7 +407,7 @@ class UsersList extends _i1.PageRouteInfo {
 class UserDetails extends _i1.PageRouteInfo<UserDetailsArgs> {
   UserDetails({_i3.Key? key, required String id})
       : super(name,
-            path: 'users/:id',
+            path: ':id',
             args: UserDetailsArgs(key: key, id: id),
             rawPathParams: {'id': id});
 
