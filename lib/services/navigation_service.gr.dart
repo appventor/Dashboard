@@ -153,7 +153,7 @@ class AppRouter extends _i1.RootStackRouter {
     FullfilledOrdersRoute.name: (routeData) => _i1.CustomPage<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i3.DashboardPage();
+          return const _i3.FulfilledOrders();
         },
         opaque: true,
         barrierDismissible: false),
@@ -206,18 +206,15 @@ class AppRouter extends _i1.RootStackRouter {
             _i1.RouteConfig(CollectionsDetailRoute.name,
                 path: 'collections/:id')
           ]),
-          _i1.RouteConfig(OrdersRoute.name,
-              path: 'orders',
-              fullMatch: true,
-              children: [
-                _i1.RouteConfig('*#redirect',
-                    path: '*', redirectTo: '', fullMatch: true),
-                _i1.RouteConfig(AllOrders.name, path: ''),
-                _i1.RouteConfig(ActiveOrdersRoute.name, path: 'active'),
-                _i1.RouteConfig(PendingOrderRoute.name, path: 'pending'),
-                _i1.RouteConfig(FullfilledOrdersRoute.name, path: 'fulfilled'),
-                _i1.RouteConfig(OrderDetailsRoute.name, path: ':id')
-              ]),
+          _i1.RouteConfig(OrdersRoute.name, path: 'orders', children: [
+            _i1.RouteConfig('*#redirect',
+                path: '*', redirectTo: '', fullMatch: true),
+            _i1.RouteConfig(AllOrders.name, path: ''),
+            _i1.RouteConfig(ActiveOrdersRoute.name, path: 'active'),
+            _i1.RouteConfig(PendingOrderRoute.name, path: 'pending'),
+            _i1.RouteConfig(FullfilledOrdersRoute.name, path: 'fulfilled'),
+            _i1.RouteConfig(OrderDetailsRoute.name, path: ':id')
+          ]),
           _i1.RouteConfig(UsersRoute.name, path: 'users', children: [
             _i1.RouteConfig('*#redirect',
                 path: '*', redirectTo: '', fullMatch: true),

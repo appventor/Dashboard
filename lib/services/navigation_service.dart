@@ -73,7 +73,7 @@ import '../pages.dart';
             AutoRoute(
               path: 'fulfilled',
               name: "FullfilledOrdersRoute",
-              page: DashboardPage,
+              page: FulfilledOrders,
             ),
             AutoRoute(
               path: ':id',
