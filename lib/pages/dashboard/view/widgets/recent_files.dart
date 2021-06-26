@@ -1,6 +1,4 @@
 import 'package:dashboard/pages/dashboard/model/RecentFile.dart';
-import 'package:flutter_svg/svg.dart';
-
 import '../../../../pages.dart';
 
 class RecentFiles extends StatelessWidget {
@@ -57,11 +55,7 @@ DataRow recentFileDataRow(RecentFile fileInfo) {
       DataCell(
         Row(
           children: [
-            SvgPicture.asset(
-              fileInfo.icon!,
-              height: 30,
-              width: 30,
-            ),
+            Icon(Icons.ac_unit, size: 30),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
               child: Text(fileInfo.title!),
