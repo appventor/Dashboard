@@ -54,7 +54,6 @@ import '../pages.dart';
           page: EmptyRouterPage,
           name: 'ordersRoute',
           children: [
-            RedirectRoute(path: '*', redirectTo: ''),
             AutoRoute(
               path: '',
               name: "AllOrders",

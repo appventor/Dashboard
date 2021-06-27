@@ -207,8 +207,6 @@ class AppRouter extends _i1.RootStackRouter {
                 path: 'collections/:id')
           ]),
           _i1.RouteConfig(OrdersRoute.name, path: 'orders', children: [
-            _i1.RouteConfig('*#redirect',
-                path: '*', redirectTo: '', fullMatch: true),
             _i1.RouteConfig(AllOrders.name, path: ''),
             _i1.RouteConfig(ActiveOrdersRoute.name, path: 'active'),
             _i1.RouteConfig(PendingOrderRoute.name, path: 'pending'),
