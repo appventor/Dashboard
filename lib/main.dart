@@ -22,6 +22,7 @@ class _RootAppState extends State<RootApp> {
     return MaterialApp.router(
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: bgColor,
+        cardColor: Colors.transparent,
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
             .apply(bodyColor: Colors.white),
         canvasColor: secondaryColor,
