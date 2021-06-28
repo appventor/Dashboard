@@ -12,7 +12,7 @@ class Variant {
 
   final String id;
   final List<String> images;
-  final int price;
+  final double price;
   final int stock;
   final String unit;
   final String value;
@@ -20,7 +20,7 @@ class Variant {
   Variant copyWith({
     String? id,
     List<String>? images,
-    int? price,
+    double? price,
     int? stock,
     String? unit,
     String? value,
