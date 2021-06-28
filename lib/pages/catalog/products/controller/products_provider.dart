@@ -2,7 +2,7 @@ import 'package:dashboard/pages/catalog/products/repository/product_repository.d
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../model/models.dart';
 
-final moviePaginationControllerProvider =
+final productsProvider =
     StateNotifierProvider<ProductPaginationController, dynamic>((ref) {
   final _productRepository = ref.read(productRepository);
   return ProductPaginationController(_productRepository);
@@ -19,7 +19,6 @@ class ProductPaginationController extends StateNotifier<ProductPagination> {
   Future<void> getProducts() async {
     try {
       final products = await _productRepository.getProducts(state.page);
-
       state = state.copyWith(
           products: [...state.products, ...products], page: state.page + 1);
     } catch (e) {
