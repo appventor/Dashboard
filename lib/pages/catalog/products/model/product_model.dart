@@ -16,11 +16,12 @@ class Product {
     required this.image,
     required this.featured,
     required this.stock,
+    required this.pricetag,
     required this.brandId,
     required this.brand,
     required this.tags,
     required this.offer,
-    required this.variant,
+    required this.variants,
   });
 
   final String id;
@@ -31,11 +32,14 @@ class Product {
   final String image;
   final bool featured;
   final int stock;
+  final String pricetag;
   final String brandId;
   final String brand;
   final List<String> tags;
   final ProductOffer offer;
-  final List<Variant> variant;
+  final List<Variant> variants;
+
+  bool selected = false;
 
   Product copyWith({
     String? id,
@@ -46,11 +50,12 @@ class Product {
     String? image,
     bool? featured,
     int? stock,
+    String? pricetag,
     String? brandId,
     String? brand,
     List<String>? tags,
     ProductOffer? offer,
-    List<Variant>? variant,
+    List<Variant>? variants,
   }) =>
       Product(
         id: id ?? this.id,
@@ -61,11 +66,12 @@ class Product {
         image: image ?? this.image,
         featured: featured ?? this.featured,
         stock: stock ?? this.stock,
+        pricetag: pricetag ?? this.pricetag,
         brandId: brandId ?? this.brandId,
         brand: brand ?? this.brand,
         tags: tags ?? this.tags,
         offer: offer ?? this.offer,
-        variant: variant ?? this.variant,
+        variants: variants ?? this.variants,
       );
 
   factory Product.fromJson(String str) => Product.fromMap(json.decode(str));
@@ -78,9 +84,10 @@ class Product {
         subCatId: json["subCatId"] ?? '',
         title: json["title"] ?? '',
         desc: json["desc"] ?? '',
-        image: json["image"] ?? "http://picsum.photos",
+        image: json["image"] ?? "https://picsum.photos/100",
         featured: json["featured"] ?? false,
         stock: json["stock"] ?? 0,
+        pricetag: json["pricetag"] ?? '',
         brandId: json["brandId"] ?? '',
         brand: json["brand"] ?? '',
         tags: json["tags"] != null
@@ -89,8 +96,9 @@ class Product {
         offer: json["offer"] != null
             ? ProductOffer.fromMap(json["offer"])
             : ProductOffer.fromMap({}),
-        variant: json["variant"] != null
-            ? List<Variant>.from(json["variant"].map((x) => Variant.fromMap(x)))
+        variants: json["variants"] != null
+            ? List<Variant>.from(
+                json["variants"].map((x) => Variant.fromMap(x)))
             : [],
       );
 
@@ -103,32 +111,39 @@ class Product {
         "image": image,
         "featured": featured,
         "stock": stock,
+        "pricetag": pricetag,
         "brandId": brandId,
         "brand": brand,
         "tags": List<dynamic>.from(tags.map((x) => x)),
         "offer": offer.toMap(),
-        "variant": List<dynamic>.from(variant.map((x) => x.toMap())),
+        "variants": List<dynamic>.from(variants.map((x) => x.toMap())),
       };
 }
 
 ///JSON PRODUCT SCHEMA
 Map<String, Object> productJsonSchema = {
-  "id": "",
-  "catId": "",
-  "subCatId": "",
-  "title": "",
-  "desc": "",
-  "image": "",
+  "id": "ABCDEFGHIJKLMNOP",
+  "catId": "ABCDEFG123456789",
+  "subCatId": "123456789KLMNOP",
+  "title": "Cucumber",
+  "desc": "Green Vegetable",
+  "image": "https://picsum.photos/101",
   "featured": true,
+  "pricetag": "12.00/Kg",
   "stock": 200,
-  "brandId": "",
-  "brand": "",
-  "tags": [""],
-  "offer": {"type": "perc/price", "value": 23.32},
-  "variant": [
+  "brandId": "BVGCFDHBJKHK",
+  "brand": "Veggies",
+  "tags": ["Veg"],
+  "offer": {"id": "ASDFGHJKLMNBVC", "type": "perc/price", "value": 23.32},
+  "variants": [
     {
-      "id": "",
-      "images": [""],
+      "id": "KKSKSKSASKSAS<",
+      "images": [
+        "https://picsum.photos/100",
+        "https://picsum.photos/101",
+        "https://picsum.photos/101",
+        "https://picsum.photos/101",
+      ],
       "price": 12.00,
       "stock": 12,
       "unit": "kg",
