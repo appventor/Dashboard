@@ -1,3 +1,5 @@
+import 'package:dashboard/pages/catalog/category/view/widgets/add_category.dart';
+
 import '../../../../../pages.dart';
 import 'choose_attribute.dart';
 
@@ -15,12 +17,12 @@ class AssignAttributes extends StatelessWidget {
         Divider(),
         ChooseAttribute(
           title: "Choose Category",
-          onAdd: () {},
+          onAdd: () => addCategoryDialog(context),
         ),
         Divider(),
         ChooseAttribute(
           title: "Choose Sub-Category",
-          onAdd: () {},
+          onAdd: () => addCategoryDialog(context),
         ),
         Divider(),
         ChooseAttribute(

@@ -1,3 +1,5 @@
+import 'package:dashboard/pages/catalog/category/view/widgets/add_category.dart';
+
 import '../../../../pages.dart';
 
 class CategoryPage extends StatelessWidget {
@@ -24,7 +26,9 @@ class CategoryPage extends StatelessWidget {
                       hintText: 'Search Categories'),
                 ),
               )),
-              ElevatedButton(onPressed: () {}, child: Text("Add Category"))
+              ElevatedButton(
+                  onPressed: () => addCategoryDialog(context),
+                  child: Text("Add Category"))
             ],
           ),
           Container(
