@@ -25,6 +25,8 @@ export 'pages/notifications/notifications.dart';
 export 'pages/users/view/users_page.dart';
 export 'pages/users/view/userDetails_page.dart';
 export 'pages/unknown/unknown_page.dart';
+export 'pages/warehouse/view/warehouse_page.dart';
+export 'pages/warehouse/view/widgets/select_warehouse.dart';
 export 'pages/widgets/sidebar.dart';
 export 'pages/widgets/constants.dart';
 export 'pages/widgets/responsive.dart';

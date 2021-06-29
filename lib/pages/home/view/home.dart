@@ -17,7 +17,9 @@ class Home extends StatelessWidget {
             ? Scaffold(
                 // drawer: SideBar(),
                 appBar: AppBar(
-                  actions: [],
+                  actions: [
+                    SelectWarehouse(),
+                  ],
                 ),
                 body: child,
               )
@@ -34,7 +36,9 @@ class Home extends StatelessWidget {
                             )
                           : null,
                       centerTitle: false,
-                      actions: [],
+                      actions: [
+                        SelectWarehouse(),
+                      ],
                     ),
                     body: child,
                   ),
