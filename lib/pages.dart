@@ -1,5 +1,5 @@
 export 'package:flutter/material.dart';
-
+export 'package:flutter_riverpod/flutter_riverpod.dart';
 export './services/services.dart';
 
 export 'pages/catalog/category/view/category_page.dart';
