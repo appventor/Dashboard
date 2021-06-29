@@ -9,7 +9,22 @@ class ProductsTable extends StatelessWidget {
     return SingleChildScrollView(
       child: PaginatedDataTable(
         source: ProductsDataSource(context),
-        header: Text('Products'),
+        headingRowHeight: 60,
+        header: Row(
+          children: [
+            Text('Products', style: Theme.of(context).textTheme.headline5),
+            Expanded(
+                child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: TextField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    hintText: 'Search Products'),
+              ),
+            )),
+          ],
+        ),
         actions: [
           IconButton(
               onPressed: () {},
