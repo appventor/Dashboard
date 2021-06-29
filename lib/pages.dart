@@ -20,6 +20,8 @@ export 'pages/orders/view/fulfilled_orders.dart';
 export 'pages/orders/view/orders_page.dart';
 export 'pages/orders/view/order_details.dart';
 export 'pages/orders/view/pending_orders.dart';
+export 'pages/profile/view/profile_page.dart';
+export 'pages/profile/view/widgets/profile_avatar.dart';
 export 'pages/settings/settings.dart';
 export 'pages/notifications/notifications.dart';
 export 'pages/users/view/users_page.dart';
