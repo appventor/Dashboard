@@ -15,4 +15,9 @@ class CategoryRepository {
         await _firestore.collection("category").get();
     return categories.docs.map((category) => category.data()).toList();
   }
+
+  Future<void> addCategory(
+      {required String id, required Map<String, dynamic> data}) async {
+    return await _firestore.collection("category").doc(id).set(data);
+  }
 }
