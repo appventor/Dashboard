@@ -1,22 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'pages.dart';
 import 'services/services.dart';
 
-void main() {
-  // setUrlStrategy(PathUrlStrategy());
-  runApp(RootApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(ProviderScope(child: RootApp()));
 }
 
-class RootApp extends StatefulWidget {
-  @override
-  _RootAppState createState() => _RootAppState();
-}
-
-class _RootAppState extends State<RootApp> {
+class RootApp extends StatelessWidget {
   final appRouter = AppRouter(authGuard: AuthGuard());
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
