@@ -17,7 +17,8 @@ class ProductsTable extends StatelessWidget {
                 Icons.delete,
               )),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => context.navigateTo(
+                ProductDetailsRoute(id: context.read(firestoreIdProvider))),
             child: Text("Add Product"),
           ),
           IconButton(
