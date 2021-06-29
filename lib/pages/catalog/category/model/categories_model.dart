@@ -4,8 +4,8 @@
 
 import 'dart:convert';
 
-class Categories {
-  Categories({
+class Category {
+  Category({
     required this.id,
     required this.title,
     required this.desc,
@@ -25,7 +25,7 @@ class Categories {
   final List<String> subcategories;
   final List<String> products;
 
-  Categories copyWith({
+  Category copyWith({
     String? id,
     String? title,
     String? desc,
@@ -35,7 +35,7 @@ class Categories {
     List<String>? subcategories,
     List<String>? products,
   }) =>
-      Categories(
+      Category(
         id: id ?? this.id,
         title: title ?? this.title,
         desc: desc ?? this.desc,
@@ -46,12 +46,11 @@ class Categories {
         products: products ?? this.products,
       );
 
-  factory Categories.fromJson(String str) =>
-      Categories.fromMap(json.decode(str));
+  factory Category.fromJson(String str) => Category.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Categories.fromMap(Map<String, dynamic> json) => Categories(
+  factory Category.fromMap(Map<String, dynamic> json) => Category(
         id: json["id"],
         title: json["title"] ?? '',
         desc: json["desc"] ?? '',
