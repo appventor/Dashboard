@@ -1,3 +1,5 @@
+import 'package:multi_select_flutter/multi_select_flutter.dart';
+
 import '../../../../pages.dart';
 
 class CategoryDetails extends StatelessWidget {
@@ -73,9 +75,21 @@ class CategoryDetails extends StatelessWidget {
               )
             ],
           ),
+          MultiSelectChipField(
+            headerColor: Colors.transparent,
+            searchable: true,
+            title: Text('Select Categories'),
+            items: [
+              MultiSelectItem('id1', 'category 1'),
+              MultiSelectItem('id2', 'category 2'),
+              MultiSelectItem('id3', 'category 3'),
+              MultiSelectItem('id4', 'category 4'),
+              MultiSelectItem('id5', 'category 5'),
+              MultiSelectItem('id6', 'category 6'),
+            ],
+          ),
           Spacer(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+          ButtonBar(
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
