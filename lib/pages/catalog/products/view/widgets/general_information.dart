@@ -19,29 +19,25 @@ class GeneralInformation extends StatelessWidget {
           Text('General Information'),
           Divider(),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                   flex: 2,
-                  child: Column(
-                    children: [
-                      Container(
-                        width: 300,
-                        height: 300,
-                        margin: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image:
-                                    NetworkImage('https://picsum.photos/500'))),
-                      ),
-                      OutlinedButton(onPressed: () {}, child: Text('UPLOAD'))
-                    ],
+                  child: Container(
+                    width: 300,
+                    height: 300,
+                    margin: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage('https://picsum.photos/500'))),
                   )),
               Expanded(
                 flex: 3,
                 child: Form(
                     child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
