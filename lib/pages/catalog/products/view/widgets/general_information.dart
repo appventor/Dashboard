@@ -21,18 +21,7 @@ class GeneralInformation extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                  flex: 2,
-                  child: Container(
-                    width: 300,
-                    height: 300,
-                    margin: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage('https://picsum.photos/500'))),
-                  )),
+              Expanded(flex: 2, child: ChooseImage()),
               Expanded(
                 flex: 3,
                 child: Form(
