@@ -1,6 +1,7 @@
-import 'package:dashboard/pages/catalog/category/view/widgets/add_category.dart';
-
 import '../../../../pages.dart';
+import '../controller/categories_provider.dart';
+import 'widgets/add_category.dart';
+import 'widgets/categories_datatable.dart';
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({Key? key}) : super(key: key);
@@ -26,44 +27,19 @@ class CategoryPage extends StatelessWidget {
                       hintText: 'Search Categories'),
                 ),
               )),
+              Padding(
+                padding: EdgeInsets.only(right: 16),
+                child: IconButton(
+                  onPressed: () => context.refresh(categoriesProvider),
+                  icon: Icon(Icons.refresh),
+                ),
+              ),
               ElevatedButton(
                   onPressed: () => addCategoryDialog(context),
                   child: Text("Add Category"))
             ],
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 16),
-            padding: const EdgeInsets.all(defaultPadding),
-            decoration: BoxDecoration(
-              color: secondaryColor,
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: DataTable(
-                    showCheckboxColumn: true,
-                    onSelectAll: (value) {},
-                    showBottomBorder: true,
-                    columns: [
-                      DataColumn(label: Text("Image")),
-                      DataColumn(label: Text("Title")),
-                      DataColumn(label: Text("Sub-Category")),
-                      DataColumn(label: Text("No of Products")),
-                    ],
-                    rows: [
-                      DataRow(onSelectChanged: (value) {}, cells: [
-                        DataCell(Image.network("https://picsum.photos/106")),
-                        DataCell(Text('Dairy')),
-                        DataCell(Text('3')),
-                        DataCell(Text('16')),
-                      ])
-                    ],
-                  ),
-                )
-              ],
-            ),
-          )
+          CategoriesDataTable()
         ],
       ),
     ));
