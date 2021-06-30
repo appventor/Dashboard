@@ -1,6 +1,7 @@
 import 'package:multi_select_flutter/multi_select_flutter.dart';
-
 import '../../../../pages.dart';
+import '../model/models.dart';
+import '../controller/categories_provider.dart';
 
 class CategoryDetails extends StatelessWidget {
   final String id;
@@ -22,16 +23,7 @@ class CategoryDetails extends StatelessWidget {
           Text('General Information'),
           Row(
             children: [
-              Container(
-                margin: EdgeInsets.all(8),
-                height: 200,
-                width: 200,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage('https://picsum.photos/204'))),
-              ),
+              ChooseImage(),
               Expanded(
                 child: Column(
                   children: [
@@ -75,19 +67,25 @@ class CategoryDetails extends StatelessWidget {
               )
             ],
           ),
-          MultiSelectChipField(
-            headerColor: Colors.transparent,
-            searchable: true,
-            title: Text('Select Categories'),
-            items: [
-              MultiSelectItem('id1', 'category 1'),
-              MultiSelectItem('id2', 'category 2'),
-              MultiSelectItem('id3', 'category 3'),
-              MultiSelectItem('id4', 'category 4'),
-              MultiSelectItem('id5', 'category 5'),
-              MultiSelectItem('id6', 'category 6'),
-            ],
-          ),
+          Consumer(builder: (context, watch, child) {
+            List<Category>? categories = watch(categoriesProvider).data?.value;
+            return MultiSelectChipField(
+              headerColor: Colors.transparent,
+              searchable: true,
+              title: Text('Select Categories'),
+              onTap: (value) {
+                print(value);
+              },
+              items: categories != null
+                  ? categories
+                      .map(
+                        (category) =>
+                            MultiSelectItem(category.id, category.title),
+                      )
+                      .toList()
+                  : [],
+            );
+          }),
           Spacer(),
           ButtonBar(
             children: [
