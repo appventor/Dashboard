@@ -25,8 +25,8 @@ class _ChooseImageState extends State<ChooseImage> {
       },
       child: Container(
           margin: EdgeInsets.all(8),
-          height: 200,
-          width: 200,
+          height: 250,
+          width: 250,
           alignment: Alignment.center,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
