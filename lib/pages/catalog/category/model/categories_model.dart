@@ -54,7 +54,7 @@ class Category {
         id: json["id"],
         title: json["title"] ?? '',
         desc: json["desc"] ?? '',
-        image: json["image"] ?? 'http://picsum.photos',
+        image: json["image"] ?? 'https://picsum.photos/100',
         featured: json["featured"] ?? false,
         tags: json["tags"] != null
             ? List<String>.from(json["tags"].map((x) => x))
