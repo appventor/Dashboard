@@ -16,14 +16,14 @@ class Category {
     required this.products,
   });
 
-  final String id;
-  final String title;
-  final String desc;
-  final String image;
-  final bool featured;
-  final List<String> tags;
-  final List<String> subcategories;
-  final List<String> products;
+  String id;
+  String title;
+  String desc;
+  String image;
+  bool featured;
+  List<String> tags;
+  List<String> subcategories;
+  List<String> products;
 
   Category copyWith({
     String? id,
