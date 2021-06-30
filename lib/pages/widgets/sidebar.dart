@@ -67,7 +67,7 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    print(context.router.topRoute.path);
+    // print(context.router.topRoute.path);
     setCurrentIndex();
     // checkIfCollapsible();
     return AnimatedContainer(
