@@ -3,9 +3,11 @@ import '../../../../../../pages.dart';
 
 class ChooseImage extends StatefulWidget {
   final String? imageUrl;
+  final Function(String) onSelected;
   const ChooseImage({
     Key? key,
     this.imageUrl,
+    required this.onSelected,
   }) : super(key: key);
 
   @override
@@ -21,6 +23,7 @@ class _ChooseImageState extends State<ChooseImage> {
     return GestureDetector(
       onTap: () async {
         _image = await _picker.getImage(source: ImageSource.gallery);
+        if (_image != null) widget.onSelected(_image!.path);
         setState(() {});
       },
       child: Container(
