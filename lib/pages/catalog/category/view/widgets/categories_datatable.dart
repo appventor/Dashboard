@@ -1,3 +1,5 @@
+import 'package:dashboard/pages/catalog/category/controller/delete_category.dart';
+
 import '../../../../../pages.dart';
 import '../../model/models.dart';
 import '../../controller/categories_provider.dart';
@@ -31,6 +33,7 @@ class CategoriesDataTable extends StatelessWidget {
                   DataColumn(label: Text("Title")),
                   DataColumn(label: Text("Sub-Category")),
                   DataColumn(label: Text("No of Products")),
+                  DataColumn(label: Text("Options")),
                 ],
                 rows: categoriesData.when(
                     data: (categories) {
@@ -43,12 +46,33 @@ class CategoriesDataTable extends StatelessWidget {
                                     category.subcategories.length.toString())),
                                 DataCell(
                                     Text(category.products.length.toString())),
+                                DataCell(PopupMenuButton(
+                                  icon: Icon(Icons.more_vert),
+                                  onSelected: (value) {
+                                    if (value == 0)
+                                      context.navigateTo(CategoryDetailsRoute(
+                                          id: category.id));
+                                    else if (value == 1)
+                                      context.read(deleteCategory(category.id));
+                                  },
+                                  itemBuilder: (context) => [
+                                    PopupMenuItem(
+                                      child: Text('Edit'),
+                                      value: 0,
+                                    ),
+                                    PopupMenuItem(
+                                      child: Text('Delete'),
+                                      value: 1,
+                                    ),
+                                  ],
+                                )),
                               ]))
                           .toList();
                     },
                     loading: () => [
                           DataRow(cells: [
                             DataCell(Icon(Icons.warning)),
+                            DataCell.empty,
                             DataCell.empty,
                             DataCell.empty,
                             DataCell.empty,
@@ -59,6 +83,7 @@ class CategoriesDataTable extends StatelessWidget {
                       return [
                         DataRow(cells: [
                           DataCell(Icon(Icons.warning)),
+                          DataCell.empty,
                           DataCell.empty,
                           DataCell.empty,
                           DataCell.empty,
