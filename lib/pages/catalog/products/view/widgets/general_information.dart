@@ -1,4 +1,5 @@
 import '../../../../../pages.dart';
+import '../../controller/upload_products_image.dart';
 
 class GeneralInformation extends StatelessWidget {
   const GeneralInformation({
@@ -21,7 +22,12 @@ class GeneralInformation extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(flex: 2, child: ChooseImage()),
+              Expanded(
+                  flex: 2,
+                  child: ChooseImage(
+                    onSelected: (imagePath) =>
+                        context.read(productImagePath).state = imagePath,
+                  )),
               Expanded(
                 flex: 3,
                 child: Form(
