@@ -20,4 +20,8 @@ class CategoryRepository {
       {required String id, required Map<String, dynamic> data}) async {
     return await _firestore.collection("categories").doc(id).set(data);
   }
+
+  Future<void> deleteCategory({required String id}) async {
+    return await _firestore.collection("categories").doc(id).delete();
+  }
 }
