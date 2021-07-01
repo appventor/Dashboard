@@ -31,5 +31,6 @@ export 'pages/unknown/unknown_page.dart';
 export 'pages/warehouse/view/warehouse_page.dart';
 export 'pages/warehouse/view/widgets/select_warehouse.dart';
 export 'pages/widgets/constants.dart';
+export 'pages/widgets/progress_indicator.dart';
 export 'pages/widgets/responsive.dart';
 export 'pages/widgets/sidebar.dart';
