@@ -15,20 +15,23 @@ class GeneralInformation extends StatelessWidget {
         Text('General Information'),
         Row(
           children: [
-            ChooseImage(),
+            ChooseImage(
+              onSelected: (imagePath) =>
+                  context.read(categoryImagePath).state = imagePath,
+            ),
             Expanded(
               child: Column(
                 children: [
                   TextFieldWidget(
                     label: 'Title',
                     onChanged: (String value) =>
-                        context.read(categoryProvider).state.title = value,
+                        context.read(categoryTitle).state = value,
                   ),
                   TextFieldWidget(
                     label: 'Description',
                     maxLines: 4,
                     onChanged: (String value) =>
-                        context.read(categoryProvider).state.desc = value,
+                        context.read(categoryDesc).state = value,
                   )
                 ],
               ),
