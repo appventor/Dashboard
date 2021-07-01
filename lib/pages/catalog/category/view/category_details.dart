@@ -1,14 +1,20 @@
-import 'package:multi_select_flutter/multi_select_flutter.dart';
-import '../../../../pages.dart';
-import '../model/models.dart';
-import '../controller/categories_provider.dart';
-import 'widgets/general_information.dart';
+import 'package:dashboard/pages/catalog/category/controller/categories_provider.dart';
 
-class CategoryDetails extends StatelessWidget {
+import '../../../../pages.dart';
+import 'widgets/general_information.dart';
+import '../controller/save_category_provider.dart';
+import '../../widgets/link_categories.dart';
+
+class CategoryDetails extends StatefulWidget {
   final String id;
   const CategoryDetails({Key? key, @PathParam('id') required this.id})
       : super(key: key);
 
+  @override
+  _CategoryDetailsState createState() => _CategoryDetailsState();
+}
+
+class _CategoryDetailsState extends State<CategoryDetails> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -17,48 +23,12 @@ class CategoryDetails extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(children: [
-              Text('Create Category',
-                  style: Theme.of(context).textTheme.headline6),
-            ]),
+            Text('Create Category',
+                style: Theme.of(context).textTheme.headline6),
             Divider(),
             GeneralInformation(),
             Divider(),
-            Row(
-              children: [
-                Text('Link to Category'),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Tooltip(
-                      message:
-                          'Linking to another category will make this a sub-category',
-                      child: Icon(
-                        Icons.info,
-                        size: 18,
-                      )),
-                )
-              ],
-            ),
-            Consumer(builder: (context, watch, child) {
-              List<Category>? categories =
-                  watch(categoriesProvider).data?.value;
-              return MultiSelectChipField(
-                headerColor: Colors.transparent,
-                searchable: true,
-                title: Text('Select Categories'),
-                onTap: (value) {
-                  print(value);
-                },
-                items: categories != null
-                    ? categories
-                        .map(
-                          (category) =>
-                              MultiSelectItem(category.id, category.title),
-                        )
-                        .toList()
-                    : [],
-              );
-            }),
+            LinkCategories(),
             SizedBox(height: 16),
             ButtonBar(
               children: [
@@ -74,7 +44,21 @@ class CategoryDetails extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      final overlay = LoadingOverlay.of(context);
+                      overlay
+                          .during(context
+                              .read(saveCategory(widget.id).notifier)
+                              .save())
+                          .whenComplete(() {
+                        context.read(categoryTitle).state = '';
+                        context.read(categoryDesc).state = '';
+                        context.read(categoryImagePath).state = '';
+                        context.read(categorySubcategories).state = [];
+                        context.refresh(categoriesProvider);
+                        context.popRoute();
+                      });
+                    },
                     child: Text('Save'),
                   ),
                 )
