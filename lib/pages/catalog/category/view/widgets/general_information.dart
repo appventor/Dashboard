@@ -15,24 +15,38 @@ class GeneralInformation extends StatelessWidget {
         Text('General Information'),
         Row(
           children: [
-            ChooseImage(
-              onSelected: (imagePath) =>
-                  context.read(categoryImagePath).state = imagePath,
-            ),
+            Consumer(
+                builder: (context, watch, child) => ChooseImage(
+                    imageUrl: watch(categoryProvider).state.image,
+                    onSelected: (imagePath) =>
+                        context.read(categoryProvider).state = context
+                            .read(categoryProvider)
+                            .state
+                            .copyWith(imagePath: imagePath))),
             Expanded(
               child: Column(
                 children: [
-                  TextFieldWidget(
-                    label: 'Title',
-                    onChanged: (String value) =>
-                        context.read(categoryTitle).state = value,
-                  ),
-                  TextFieldWidget(
-                    label: 'Description',
-                    maxLines: 4,
-                    onChanged: (String value) =>
-                        context.read(categoryDesc).state = value,
-                  )
+                  Consumer(
+                      builder: (context, watch, child) => TextFieldWidget(
+                            label: 'Title',
+                            text: watch(categoryProvider).state.title,
+                            onChanged: (String value) =>
+                                context.read(categoryProvider).state = context
+                                    .read(categoryProvider)
+                                    .state
+                                    .copyWith(title: value),
+                          )),
+                  Consumer(
+                      builder: (context, watch, child) => TextFieldWidget(
+                            label: 'Description',
+                            text: watch(categoryProvider).state.desc,
+                            maxLines: 4,
+                            onChanged: (String value) =>
+                                context.read(categoryProvider).state = context
+                                    .read(categoryProvider)
+                                    .state
+                                    .copyWith(desc: value),
+                          ))
                 ],
               ),
             ),
