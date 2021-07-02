@@ -10,6 +10,7 @@ class Category {
     required this.title,
     required this.desc,
     required this.image,
+    this.imagePath,
     required this.featured,
     required this.tags,
     required this.subcategories,
@@ -20,6 +21,7 @@ class Category {
   String title;
   String desc;
   String image;
+  String? imagePath;
   bool featured;
   List<String> tags;
   List<String> subcategories;
@@ -30,6 +32,7 @@ class Category {
     String? title,
     String? desc,
     String? image,
+    String? imagePath,
     bool? featured,
     List<String>? tags,
     List<String>? subcategories,
@@ -40,6 +43,7 @@ class Category {
         title: title ?? this.title,
         desc: desc ?? this.desc,
         image: image ?? this.image,
+        imagePath: imagePath ?? this.imagePath,
         featured: featured ?? this.featured,
         tags: tags ?? this.tags,
         subcategories: subcategories ?? this.subcategories,
@@ -51,10 +55,10 @@ class Category {
   String toJson() => json.encode(toMap());
 
   factory Category.fromMap(Map<String, dynamic> json) => Category(
-        id: json["id"],
+        id: json["id"] ?? '',
         title: json["title"] ?? '',
         desc: json["desc"] ?? '',
-        image: json["image"] ?? 'https://picsum.photos/100',
+        image: json["image"] ?? '',
         featured: json["featured"] ?? false,
         tags: json["tags"] != null
             ? List<String>.from(json["tags"].map((x) => x))
