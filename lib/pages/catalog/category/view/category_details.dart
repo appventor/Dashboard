@@ -1,7 +1,8 @@
-import 'package:dashboard/pages/catalog/category/controller/categories_provider.dart';
+import 'package:dashboard/pages/catalog/category/model/categories_model.dart';
 
 import '../../../../pages.dart';
 import 'widgets/general_information.dart';
+import '../controller/categories_provider.dart';
 import '../controller/save_category_provider.dart';
 import '../../widgets/link_categories.dart';
 
@@ -37,6 +38,8 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                   child: OutlinedButton(
                     child: Text('Cancel'),
                     onPressed: () {
+                      context.read(categoryProvider).state =
+                          Category.fromMap({});
                       context.popRoute();
                     },
                   ),
@@ -47,16 +50,24 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                     onPressed: () async {
                       final overlay = LoadingOverlay.of(context);
                       overlay
-                          .during(context
-                              .read(saveCategory(widget.id).notifier)
-                              .save())
-                          .whenComplete(() {
-                        context.read(categoryTitle).state = '';
-                        context.read(categoryDesc).state = '';
-                        context.read(categoryImagePath).state = '';
-                        context.read(categorySubcategories).state = [];
-                        context.refresh(categoriesProvider);
-                        context.popRoute();
+                          .during(context.read(saveCategory.notifier).save())
+                          .then((result) {
+                        if (result) {
+                          context.read(categoryProvider).state =
+                              Category.fromMap({});
+                          context.refresh(categoriesProvider);
+                          scaffoldMessengerKey.currentState!
+                              .showSnackBar(SnackBar(
+                            content: Text("Saved"),
+                            backgroundColor: Colors.green,
+                          ));
+                          context.popRoute();
+                        } else
+                          scaffoldMessengerKey.currentState!
+                              .showSnackBar(SnackBar(
+                            content: Text("Error, Please try again"),
+                            backgroundColor: Colors.red,
+                          ));
                       });
                     },
                     child: Text('Save'),
