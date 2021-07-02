@@ -9,7 +9,7 @@ class Category {
     required this.id,
     required this.title,
     required this.desc,
-    required this.image,
+    this.image,
     this.imagePath,
     required this.featured,
     required this.tags,
@@ -20,7 +20,7 @@ class Category {
   String id;
   String title;
   String desc;
-  String image;
+  String? image;
   String? imagePath;
   bool featured;
   List<String> tags;
@@ -58,7 +58,7 @@ class Category {
         id: json["id"] ?? '',
         title: json["title"] ?? '',
         desc: json["desc"] ?? '',
-        image: json["image"] ?? '',
+        image: json["image"],
         featured: json["featured"] ?? false,
         tags: json["tags"] != null
             ? List<String>.from(json["tags"].map((x) => x))
