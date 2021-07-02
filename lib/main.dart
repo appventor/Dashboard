@@ -16,6 +16,7 @@ class RootApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      scaffoldMessengerKey: scaffoldMessengerKey,
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: bgColor,
         cardColor: secondaryColor,
