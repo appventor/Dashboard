@@ -14,7 +14,7 @@ class LinkCategories extends StatelessWidget {
     return Column(
       children: [
         Row(children: [
-          Text('Add Sub-Categories'),
+          Text('Link Categories'),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Tooltip(
@@ -25,14 +25,20 @@ class LinkCategories extends StatelessWidget {
         ]),
         Consumer(builder: (context, watch, child) {
           List<Category>? categories = watch(categoriesProvider).data?.value;
+          List<String> subCatIDs =
+              context.read(categoryProvider).state.subcategories;
           return MultiSelectChipField(
             headerColor: Colors.transparent,
             searchable: true,
             title: Text('Select Categories'),
+            initialValue: subCatIDs,
             onTap: (value) {
-              print(value);
-              context.read(categorySubcategories).state =
-                  value.map((items) => items.toString()).toList();
+              context.read(categoryProvider).state = context
+                  .read(categoryProvider)
+                  .state
+                  .copyWith(
+                      subcategories:
+                          value.map((items) => items.toString()).toList());
             },
             items: categories != null
                 ? categories
