@@ -41,7 +41,10 @@ class CategoriesDataTable extends StatelessWidget {
                       return categories
                           .map((category) =>
                               DataRow(onSelectChanged: (value) {}, cells: [
-                                DataCell(Image.network(category.image)),
+                                DataCell(Image.network(
+                                  category.image!,
+                                  width: 100,
+                                )),
                                 DataCell(Text(category.title)),
                                 DataCell(Text(
                                     category.subcategories.length.toString())),
@@ -76,9 +79,9 @@ class CategoriesDataTable extends StatelessWidget {
                     },
                     loading: () => [
                           DataRow(cells: [
-                            DataCell(Icon(Icons.warning)),
                             DataCell.empty,
                             DataCell.empty,
+                            DataCell(CircularProgressIndicator()),
                             DataCell.empty,
                             DataCell.empty,
                           ])
@@ -87,10 +90,10 @@ class CategoriesDataTable extends StatelessWidget {
                       print(error);
                       return [
                         DataRow(cells: [
+                          DataCell.empty,
                           DataCell(Icon(Icons.warning)),
-                          DataCell.empty,
-                          DataCell.empty,
-                          DataCell.empty,
+                          DataCell(Text("looks like Theres a error")),
+                          DataCell(Text("Please refresh.")),
                           DataCell.empty,
                         ])
                       ];
