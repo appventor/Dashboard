@@ -1,4 +1,5 @@
 import 'package:dashboard/pages/catalog/category/controller/delete_category.dart';
+import 'package:dashboard/pages/catalog/category/controller/save_category_provider.dart';
 
 import '../../../../../pages.dart';
 import '../../model/models.dart';
@@ -49,10 +50,14 @@ class CategoriesDataTable extends StatelessWidget {
                                 DataCell(PopupMenuButton(
                                   icon: Icon(Icons.more_vert),
                                   onSelected: (value) {
-                                    if (value == 0)
-                                      context.navigateTo(CategoryDetailsRoute(
-                                          id: category.id));
-                                    else if (value == 1)
+                                    if (value == 0) {
+                                      {
+                                        context.read(categoryProvider).state =
+                                            category;
+                                        context.navigateTo(CategoryDetailsRoute(
+                                            id: category.id));
+                                      }
+                                    } else if (value == 1)
                                       context.read(deleteCategory(category.id));
                                   },
                                   itemBuilder: (context) => [
