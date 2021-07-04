@@ -1,4 +1,5 @@
-import 'package:dashboard/pages/catalog/category/view/widgets/add_category.dart';
+import 'package:dashboard/pages/catalog/products/controller/save_product_provider.dart';
+import 'package:dashboard/pages/catalog/widgets/link_categories.dart';
 
 import '../../../../../pages.dart';
 import 'choose_attribute.dart';
@@ -15,23 +16,18 @@ class AssignAttributes extends StatelessWidget {
       children: [
         Text('Assign Attributes'),
         Divider(),
-        ChooseAttribute(
-          title: "Choose Category",
-          onAdd: () => addCategoryDialog(context),
-        ),
-        Divider(),
-        ChooseAttribute(
-          title: "Choose Sub-Category",
-          onAdd: () => addCategoryDialog(context),
-        ),
+        LinkCategories(
+            initialValue: context.read(productProvider).state.categories,
+            onSelected: (List<Object?> value) =>
+                context.read(productProvider).state = context
+                    .read(productProvider)
+                    .state
+                    .copyWith(
+                        categories:
+                            value.map((items) => items.toString()).toList())),
         Divider(),
         ChooseAttribute(
           title: "Add to Collection",
-          onAdd: () {},
-        ),
-        Divider(),
-        ChooseAttribute(
-          title: "Select a Brand",
           onAdd: () {},
         ),
         Divider(),
