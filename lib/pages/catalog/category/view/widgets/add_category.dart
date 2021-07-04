@@ -1,4 +1,4 @@
-import 'package:dashboard/pages.dart';
+import '../../../../../pages.dart';
 
 addCategoryDialog(BuildContext context) {
   showDialog(

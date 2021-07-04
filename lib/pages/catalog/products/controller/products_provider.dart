@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../model/models.dart';
 
 final productsProvider =
-    StateNotifierProvider<ProductPaginationController, dynamic>((ref) {
+    StateNotifierProvider<ProductPaginationController, ProductPagination>(
+        (ref) {
   final _productRepository = ref.read(productRepository);
   return ProductPaginationController(_productRepository);
 });
