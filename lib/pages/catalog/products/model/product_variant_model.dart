@@ -2,37 +2,47 @@ import 'dart:convert';
 
 class Variant {
   Variant({
-    required this.id,
-    required this.images,
-    required this.price,
-    required this.stock,
+    this.id,
     required this.unit,
     required this.value,
+    required this.price,
+    this.images,
+    this.imagePaths,
+    required this.inventory,
+    this.selected = false,
   });
 
-  final String id;
-  final List<String> images;
-  final double price;
-  final int stock;
-  final String unit;
-  final String value;
+  String? id;
+  String unit;
+  String value;
+  double price;
+  List<String>? images;
+  List<String>? imagePaths;
+  List<Inventory> inventory;
+  bool selected;
 
   Variant copyWith({
     String? id,
-    List<String>? images,
-    double? price,
-    int? stock,
     String? unit,
     String? value,
+    double? price,
+    List<String>? images,
+    List<String>? imagePaths,
+    List<Inventory>? inventory,
   }) =>
       Variant(
         id: id ?? this.id,
-        images: images ?? this.images,
-        price: price ?? this.price,
-        stock: stock ?? this.stock,
         unit: unit ?? this.unit,
         value: value ?? this.value,
+        price: price ?? this.price,
+        images: images ?? this.images,
+        imagePaths: imagePaths ?? this.imagePaths,
+        inventory: inventory ?? this.inventory,
       );
+
+  bool operator ==(o) => o is Variant && o.id == id;
+
+  int get hashCode => id.hashCode;
 
   factory Variant.fromJson(String str) => Variant.fromMap(json.decode(str));
 
@@ -40,21 +50,58 @@ class Variant {
 
   factory Variant.fromMap(Map<String, dynamic> json) => Variant(
         id: json["id"],
+        unit: json["unit"] ?? '',
+        value: json["value"] ?? '',
+        price: json["price"] ?? 0.0,
         images: json["images"] != null
             ? List<String>.from(json["images"].map((x) => x))
             : [],
-        price: json["price"] ?? 0.0,
-        stock: json["stock"] ?? 0,
-        unit: json["unit"] ?? '',
-        value: json["value"] ?? '',
+        inventory: json["inventory"] != null
+            ? List<Inventory>.from(
+                json["inventory"].map((x) => Inventory.fromMap(x)))
+            : [],
       );
 
   Map<String, dynamic> toMap() => {
         "id": id,
-        "images": List<dynamic>.from(images.map((x) => x)),
-        "price": price,
-        "stock": stock,
         "unit": unit,
         "value": value,
+        "price": price,
+        "images":
+            images != null ? List<dynamic>.from(images!.map((x) => x)) : [],
+        "inventory": List<dynamic>.from(inventory.map((x) => x.toMap())),
+      };
+}
+
+class Inventory {
+  Inventory({
+    required this.id,
+    required this.stock,
+  });
+
+  final String id;
+  int stock;
+
+  Inventory copyWith({
+    String? id,
+    int? stock,
+  }) =>
+      Inventory(
+        id: id ?? this.id,
+        stock: stock ?? this.stock,
+      );
+
+  factory Inventory.fromJson(String str) => Inventory.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Inventory.fromMap(Map<String, dynamic> json) => Inventory(
+        id: json["id"] ?? '',
+        stock: json["stock"] ?? 0,
+      );
+
+  Map<String, dynamic> toMap() => {
+        "id": id,
+        "stock": stock,
       };
 }

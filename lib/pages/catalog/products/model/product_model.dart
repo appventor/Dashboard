@@ -9,87 +9,89 @@ import 'models.dart';
 class Product {
   Product({
     required this.id,
-    required this.catId,
-    required this.subCatId,
     required this.title,
     required this.desc,
-    required this.image,
+    this.image,
+    this.imagePath,
     required this.featured,
-    required this.stock,
     required this.pricetag,
-    required this.brandId,
-    required this.brand,
+    required this.tax,
+    required this.categories,
+    required this.collection,
     required this.tags,
     required this.offer,
     required this.variants,
   });
 
-  final String id;
-  final String catId;
-  final String subCatId;
-  final String title;
-  final String desc;
-  final String image;
-  final bool featured;
-  final int stock;
-  final String pricetag;
-  final String brandId;
-  final String brand;
-  final List<String> tags;
-  final ProductOffer offer;
-  final List<Variant> variants;
-
+  String id;
+  String title;
+  String desc;
+  String? image;
+  String? imagePath;
+  bool featured;
+  String pricetag;
+  double tax;
+  List<String> categories;
+  List<String> collection;
+  List<String> tags;
+  ProductOffer offer;
+  List<Variant> variants;
   bool selected = false;
 
   Product copyWith({
     String? id,
-    String? catId,
-    String? subCatId,
     String? title,
     String? desc,
     String? image,
+    String? imagePath,
     bool? featured,
     int? stock,
     String? pricetag,
-    String? brandId,
-    String? brand,
+    double? tax,
+    List<String>? categories,
+    List<String>? collection,
     List<String>? tags,
     ProductOffer? offer,
     List<Variant>? variants,
   }) =>
       Product(
         id: id ?? this.id,
-        catId: catId ?? this.catId,
-        subCatId: subCatId ?? this.subCatId,
         title: title ?? this.title,
         desc: desc ?? this.desc,
         image: image ?? this.image,
+        imagePath: imagePath ?? this.imagePath,
         featured: featured ?? this.featured,
-        stock: stock ?? this.stock,
         pricetag: pricetag ?? this.pricetag,
-        brandId: brandId ?? this.brandId,
-        brand: brand ?? this.brand,
+        tax: tax ?? this.tax,
+        categories: categories ?? this.categories,
+        collection: collection ?? this.collection,
         tags: tags ?? this.tags,
         offer: offer ?? this.offer,
         variants: variants ?? this.variants,
       );
+
+  bool operator ==(o) => o is Product && o.id == id;
+
+  int get hashCode => id.hashCode;
 
   factory Product.fromJson(String str) => Product.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
   factory Product.fromMap(Map<String, dynamic> json) => Product(
-        id: json["id"],
-        catId: json["catId"] ?? '',
-        subCatId: json["subCatId"] ?? '',
+        id: json["id"] ?? '',
         title: json["title"] ?? '',
         desc: json["desc"] ?? '',
-        image: json["image"] ?? "https://picsum.photos/100",
+        image: json["image"],
         featured: json["featured"] ?? false,
-        stock: json["stock"] ?? 0,
         pricetag: json["pricetag"] ?? '',
-        brandId: json["brandId"] ?? '',
-        brand: json["brand"] ?? '',
+        tax: json["tax"] != null ? json["tax"].toDouble() : 0.0,
+        categories: json["categories"] != null
+            ? List<String>.from(json["categories"].map((x) => x))
+            : [],
+        collection: json["collection"] != null
+            ? List<String>.from(json["collection"].map((x) => x))
+            : [],
         tags: json["tags"] != null
             ? List<String>.from(json["tags"].map((x) => x))
             : [],
@@ -104,16 +106,14 @@ class Product {
 
   Map<String, dynamic> toMap() => {
         "id": id,
-        "catId": catId,
-        "subCatId": subCatId,
         "title": title,
         "desc": desc,
         "image": image,
         "featured": featured,
-        "stock": stock,
         "pricetag": pricetag,
-        "brandId": brandId,
-        "brand": brand,
+        "tax": tax,
+        "categories": List<dynamic>.from(categories.map((x) => x)),
+        "collection": List<dynamic>.from(collection.map((x) => x)),
         "tags": List<dynamic>.from(tags.map((x) => x)),
         "offer": offer.toMap(),
         "variants": List<dynamic>.from(variants.map((x) => x.toMap())),
@@ -123,31 +123,65 @@ class Product {
 ///JSON PRODUCT SCHEMA
 Map<String, Object> productJsonSchema = {
   "id": "ABCDEFGHIJKLMNOP",
-  "catId": "ABCDEFG123456789",
-  "subCatId": "123456789KLMNOP",
   "title": "Cucumber",
   "desc": "Green Vegetable",
-  "image": "https://picsum.photos/101",
+  "image": "https://picsum.photos/400",
   "featured": true,
   "pricetag": "12.00/Kg",
-  "stock": 200,
-  "brandId": "BVGCFDHBJKHK",
-  "brand": "Veggies",
+  "categories": ["ABCDEFG123456789"],
+  "collections": ["khsdgjahsgdf"],
   "tags": ["Veg"],
   "offer": {"id": "ASDFGHJKLMNBVC", "type": "perc/price", "value": 23.32},
   "variants": [
     {
-      "id": "KKSKSKSASKSAS<",
+      "id": "KKSKSKSASKSAS'",
+      "unit": "kg",
+      "value": "1",
+      "price": 12.00,
       "images": [
         "https://picsum.photos/100",
-        "https://picsum.photos/101",
-        "https://picsum.photos/101",
+        "https://picsum.photos/102",
         "https://picsum.photos/101",
       ],
+      "inventory": [
+        {"id": "adfwedffdfdwfewfwdfc", "stock": 12},
+        {"id": "dsfdsfdsfdsfsvvdfdsf", "stock": 20},
+        {"id": "werwervcxzcvsdsdfwfv", "stock": 40}
+      ]
+    },
+    {
+      "id": "wefewweewfwe'",
+      "unit": "gm",
+      "value": "500",
       "price": 12.00,
-      "stock": 12,
+      "images": [
+        "https://picsum.photos/109",
+        "https://picsum.photos/110",
+        "https://picsum.photos/111",
+        "https://picsum.photos/112",
+      ],
+      "inventory": [
+        {"id": "adfwedffdfdwfewfwdfc", "stock": 40},
+        {"id": "dsfdsfdsfdsfsvvdfdsf", "stock": 20},
+        {"id": "werwervcxzcvsdsdfwfv", "stock": 79}
+      ]
+    },
+    {
+      "id": "KKSKSKSASKSAS'",
       "unit": "kg",
-      "value": "1"
+      "value": "1",
+      "price": 12.00,
+      "images": [
+        "https://picsum.photos/108",
+        "https://picsum.photos/107",
+        "https://picsum.photos/106",
+        "https://picsum.photos/105",
+      ],
+      "inventory": [
+        {"id": "adfwedffdfdwfewfwdfc", "stock": 60},
+        {"id": "dsfdsfdsfdsfsvvdfdsf", "stock": 20},
+        {"id": "werwervcxzcvsdsdfwfv", "stock": 12}
+      ]
     }
   ]
 };
