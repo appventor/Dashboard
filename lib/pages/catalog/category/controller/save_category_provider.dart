@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart' as web;
+import 'package:image_picker/image_picker.dart';
+
 import '../../../../pages.dart';
 import '../model/models.dart';
 import '../repository/category_repository.dart';
@@ -43,16 +46,26 @@ class SaveCategory extends StateNotifier<Category> {
 
   Future<String?> uploadImage() async {
     try {
-      TaskSnapshot task = await storage
-          .ref('categories/${state.id}.jpg')
-          .putFile(File(state.imagePath!));
+      TaskSnapshot task;
+      if (!web.kIsWeb)
+        task = await storage
+            .ref('categories/${state.id}.jpg')
+            .putFile(File(state.imagePath!));
+      else
+        task = await storage.ref('categories/${state.id}.jpg').putData(
+              await PickedFile(state.imagePath!).readAsBytes(),
+              SettableMetadata(contentType: 'image/jpeg'),
+            );
       return task.ref.getDownloadURL();
     } catch (error) {
+      print(error);
       return null;
     }
   }
 
   Future<bool> save() async {
+    print(state.toMap());
+
     if (validate()) {
       if (state.imagePath != null)
         return uploadImage().then((imageUrl) async {
