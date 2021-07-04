@@ -1,12 +1,18 @@
-import 'package:dashboard/pages/catalog/category/controller/save_category_provider.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import '../../../pages.dart';
 import '../category/model/models.dart';
 import '../category/controller/categories_provider.dart';
 
 class LinkCategories extends StatelessWidget {
+  final List<String> initialValue;
+  final String? excludeID;
+  final Function onSelected;
+
   const LinkCategories({
     Key? key,
+    required this.initialValue,
+    this.excludeID,
+    required this.onSelected,
   }) : super(key: key);
 
   @override
@@ -24,31 +30,27 @@ class LinkCategories extends StatelessWidget {
           )
         ]),
         Consumer(builder: (context, watch, child) {
-          List<Category>? categories = watch(categoriesProvider).data?.value;
-          List<String> subCatIDs =
-              context.read(categoryProvider).state.subcategories;
+          AsyncValue<List<Category>> categoriesData = watch(categoriesProvider);
           return MultiSelectChipField(
-            headerColor: Colors.transparent,
-            searchable: true,
-            title: Text('Select Categories'),
-            initialValue: subCatIDs,
-            onTap: (value) {
-              context.read(categoryProvider).state = context
-                  .read(categoryProvider)
-                  .state
-                  .copyWith(
-                      subcategories:
-                          value.map((items) => items.toString()).toList());
-            },
-            items: categories != null
-                ? categories
-                    .map(
-                      (category) =>
-                          MultiSelectItem(category.id, category.title),
-                    )
-                    .toList()
-                : [],
-          );
+              headerColor: Colors.transparent,
+              searchable: true,
+              title: Text('Select Categories'),
+              initialValue: initialValue,
+              onTap: (value) => onSelected(value),
+              items: categoriesData.when(
+                  data: (categories) {
+                    List<Category> cat = List.from(categories);
+                    if (excludeID != null)
+                      cat.removeWhere((element) => element.id == excludeID);
+                    return cat
+                        .map(
+                          (category) =>
+                              MultiSelectItem(category.id, category.title),
+                        )
+                        .toList();
+                  },
+                  loading: () => [],
+                  error: (_, __) => []));
         }),
       ],
     );
