@@ -1,12 +1,11 @@
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-
 import '../../pages.dart';
 
 class LoadingOverlay {
   BuildContext _context;
 
   void hide() {
-    Navigator.of(_context).pop();
+    // Navigator.of(_context).pop();
+    _context.popRoute();
   }
 
   void show() {
