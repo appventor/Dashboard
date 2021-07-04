@@ -40,7 +40,6 @@ class _ChooseImageState extends State<ChooseImage> {
     final files = await FileSelectorPlatform.instance
         .openFiles(acceptedTypeGroups: [typeGroup]);
     final file = files[0];
-    final fileName = file.name;
     return file.path;
   }
 

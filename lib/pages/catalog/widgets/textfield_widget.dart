@@ -44,7 +44,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         maxLines: widget.maxLines,
         decoration: InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-          hintText: widget.label,
+          labelText: widget.label,
         ),
         onChanged: (value) {
           if (_debounce?.isActive ?? false) _debounce!.cancel();
