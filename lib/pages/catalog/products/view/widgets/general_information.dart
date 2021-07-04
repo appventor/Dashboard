@@ -1,5 +1,7 @@
+import 'package:dashboard/pages/catalog/products/controller/save_product_provider.dart';
+import 'package:dashboard/pages/catalog/widgets/textfield_widget.dart';
+
 import '../../../../../pages.dart';
-import '../../controller/upload_products_image.dart';
 
 class GeneralInformation extends StatelessWidget {
   const GeneralInformation({
@@ -24,47 +26,56 @@ class GeneralInformation extends StatelessWidget {
             children: [
               Expanded(
                   flex: 2,
-                  child: ChooseImage(
-                    onSelected: (imagePath) =>
-                        context.read(productImagePath).state = imagePath,
-                  )),
+                  child: Consumer(builder: (context, watch, child) {
+                    return ChooseImage(
+                      imageUrl: watch(productProvider).state.image,
+                      onSelected: (imagePath) =>
+                          context.read(productProvider).state = context
+                              .read(productProvider)
+                              .state
+                              .copyWith(imagePath: imagePath),
+                    );
+                  })),
               Expanded(
                 flex: 3,
                 child: Form(
                     child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          labelText: 'Title',
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          labelText: 'Description',
-                        ),
+                    Consumer(builder: (context, watch, child) {
+                      return TextFieldWidget(
+                        text: watch(productProvider).state.title,
+                        label: 'Title',
+                        onChanged: (value) =>
+                            context.read(productProvider).state = context
+                                .read(productProvider)
+                                .state
+                                .copyWith(title: value),
+                      );
+                    }),
+                    Consumer(builder: (context, watch, child) {
+                      return TextFieldWidget(
+                        text: watch(productProvider).state.desc,
+                        label: 'Description',
                         maxLines: 4,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          labelText: 'Price',
-                        ),
-                      ),
-                    ),
+                        onChanged: (value) =>
+                            context.read(productProvider).state = context
+                                .read(productProvider)
+                                .state
+                                .copyWith(desc: value),
+                      );
+                    }),
+                    Consumer(builder: (context, watch, child) {
+                      return TextFieldWidget(
+                        text: watch(productProvider).state.pricetag,
+                        label: 'Price',
+                        onChanged: (value) =>
+                            context.read(productProvider).state = context
+                                .read(productProvider)
+                                .state
+                                .copyWith(pricetag: value),
+                      );
+                    }),
                   ],
                 )),
               )
