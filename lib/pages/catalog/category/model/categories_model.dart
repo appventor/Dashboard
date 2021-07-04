@@ -15,6 +15,7 @@ class Category {
     required this.tags,
     required this.subcategories,
     required this.products,
+    this.selected = false,
   });
 
   String id;
@@ -26,6 +27,7 @@ class Category {
   List<String> tags;
   List<String> subcategories;
   List<String> products;
+  bool selected;
 
   Category copyWith({
     String? id,
@@ -37,6 +39,7 @@ class Category {
     List<String>? tags,
     List<String>? subcategories,
     List<String>? products,
+    bool? selected,
   }) =>
       Category(
         id: id ?? this.id,
@@ -48,6 +51,7 @@ class Category {
         tags: tags ?? this.tags,
         subcategories: subcategories ?? this.subcategories,
         products: products ?? this.products,
+        selected: selected ?? this.selected,
       );
 
   factory Category.fromJson(String str) => Category.fromMap(json.decode(str));
