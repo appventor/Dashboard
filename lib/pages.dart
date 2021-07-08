@@ -35,3 +35,4 @@ export 'pages/widgets/global_keys.dart';
 export 'pages/widgets/progress_indicator.dart';
 export 'pages/widgets/responsive.dart';
 export 'pages/widgets/sidebar.dart';
+export 'pages/widgets/stacked_avatars.dart';
