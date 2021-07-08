@@ -1,9 +1,7 @@
-import 'package:dashboard/pages/catalog/products/controller/save_product_provider.dart';
 import 'package:dashboard/pages/catalog/products/controller/save_variant_provider.dart';
 import 'package:dashboard/pages/catalog/products/model/product_variant_model.dart';
 import 'package:dashboard/pages/catalog/products/view/widgets/inventory_details.dart';
 import 'package:dashboard/pages/catalog/widgets/textfield_widget.dart';
-import 'package:dashboard/pages/warehouse/controller/warehouses_provider.dart';
 
 import '../../../../pages.dart';
 import 'widgets/choose_images.dart';
@@ -31,6 +29,7 @@ class VariantDetails extends StatelessWidget {
                   BackButton(
                     onPressed: () {
                       context.read(variantProvider).state = Variant.fromMap({});
+                      context.refresh(inventoryProvider);
                       context.popRoute();
                     },
                   ),
@@ -38,23 +37,8 @@ class VariantDetails extends StatelessWidget {
                       style: Theme.of(context).textTheme.headline6),
                   Spacer(),
                   ElevatedButton(
-                      onPressed: () {
-                        List<Variant> variants =
-                            context.read(productProvider).state.variants;
-                        print(variants.map((e) => e.id));
-                        print("ID: ${context.read(variantProvider).state.id}");
-                        if (variants
-                            .contains(context.read(variantProvider).state)) {
-                          int index = variants
-                              .indexOf(context.read(variantProvider).state);
-                          variants.replaceRange(index, index + 1,
-                              [context.read(variantProvider).state]);
-                        } else
-                          variants.add(context.read(variantProvider).state);
-                        context.read(productProvider).state = context
-                            .read(productProvider)
-                            .state
-                            .copyWith(variants: variants);
+                      onPressed: () async {
+                        await context.read(saveVariant.notifier).saveVariant();
                         context.read(variantProvider).state =
                             Variant.fromMap({});
                         context.popRoute();
@@ -68,39 +52,55 @@ class VariantDetails extends StatelessWidget {
                   Expanded(
                       flex: 2,
                       child: ChooseImages(
-                        onSelected: (imagePaths) {},
+                        images: [
+                          "https://picsum.photos/700",
+                          "https://picsum.photos/701",
+                          "https://picsum.photos/703",
+                        ],
+                        onSelected: (imagePaths) =>
+                            context.read(variantProvider).state = context
+                                .read(variantProvider)
+                                .state
+                                .copyWith(imagePaths: imagePaths),
                       )),
                   Expanded(
                     flex: 3,
                     child: Column(
                       children: [
-                        TextFieldWidget(
-                          label: 'Value',
-                          text: '',
-                          onChanged: (value) =>
-                              context.read(variantProvider).state = context
-                                  .read(variantProvider)
-                                  .state
-                                  .copyWith(value: value),
-                        ),
-                        TextFieldWidget(
-                          label: 'Unit',
-                          text: '',
-                          onChanged: (value) =>
-                              context.read(variantProvider).state = context
-                                  .read(variantProvider)
-                                  .state
-                                  .copyWith(unit: value),
-                        ),
-                        TextFieldWidget(
-                          label: 'Price',
-                          text: '',
-                          onChanged: (value) =>
-                              context.read(variantProvider).state = context
-                                  .read(variantProvider)
-                                  .state
-                                  .copyWith(price: double.parse(value)),
-                        ),
+                        Consumer(builder: (context, watch, child) {
+                          return TextFieldWidget(
+                            label: 'Value',
+                            text: watch(variantProvider).state.value,
+                            onChanged: (value) =>
+                                context.read(variantProvider).state = context
+                                    .read(variantProvider)
+                                    .state
+                                    .copyWith(value: value),
+                          );
+                        }),
+                        Consumer(builder: (context, watch, child) {
+                          return TextFieldWidget(
+                            label: 'Unit',
+                            text: watch(variantProvider).state.unit,
+                            onChanged: (value) =>
+                                context.read(variantProvider).state = context
+                                    .read(variantProvider)
+                                    .state
+                                    .copyWith(unit: value),
+                          );
+                        }),
+                        Consumer(builder: (context, watch, child) {
+                          return TextFieldWidget(
+                            label: 'Price',
+                            digit: true,
+                            text: watch(variantProvider).state.price.toString(),
+                            onChanged: (value) =>
+                                context.read(variantProvider).state = context
+                                    .read(variantProvider)
+                                    .state
+                                    .copyWith(price: double.parse(value)),
+                          );
+                        }),
                       ],
                     ),
                   )
