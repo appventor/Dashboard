@@ -1,38 +1,55 @@
 import 'package:dashboard/pages/dashboard/model/MyFiles.dart';
 
 import '../../../../pages.dart';
+import 'calendar_timeline/calendar_timeline.dart';
 import 'file_info_card.dart';
 
-class MyFiles extends StatelessWidget {
-  const MyFiles({
+class TimeLine extends StatefulWidget {
+  const TimeLine({
     Key? key,
   }) : super(key: key);
+
+  @override
+  _TimeLineState createState() => _TimeLineState();
+}
+
+class _TimeLineState extends State<TimeLine> {
+  late DateTime _selectedDate;
+
+  @override
+  void initState() {
+    super.initState();
+    _resetSelectedDate();
+  }
+
+  void _resetSelectedDate() {
+    _selectedDate = DateTime.now().add(Duration(days: 5));
+  }
 
   @override
   Widget build(BuildContext context) {
     final Size _size = MediaQuery.of(context).size;
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "My Files",
-              style: Theme.of(context).textTheme.subtitle1,
-            ),
-            ElevatedButton.icon(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(
-                  horizontal: defaultPadding * 1.5,
-                  vertical:
-                      defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
-                ),
-              ),
-              onPressed: () {},
-              icon: Icon(Icons.add),
-              label: Text("Add New"),
-            ),
-          ],
+        CalendarTimeline(
+          showYears: false,
+          initialDate: _selectedDate,
+          firstDate: DateTime(2021, 6, 1),
+          lastDate: DateTime.now().add(Duration(days: 365)),
+          onDateSelected: (date) {
+            setState(() {
+              _selectedDate = date!;
+            });
+          },
+          leftMargin: 20,
+          monthColor: Colors.white70,
+          dayColor: Colors.teal[200],
+          dayNameColor: Color(0xFF333A47),
+          activeDayColor: Colors.white,
+          activeBackgroundDayColor: Colors.redAccent[100],
+          dotsColor: Color(0xFF333A47),
+          selectableDayPredicate: (date) => date.day != 23,
+          locale: 'en',
         ),
         SizedBox(height: defaultPadding),
         Responsive(
