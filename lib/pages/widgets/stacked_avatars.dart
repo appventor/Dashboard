@@ -1,7 +1,12 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
+
+import '../catalog/products/model/models.dart';
 import '../../pages.dart';
 
 class StackedAvatars extends StatelessWidget {
-  final List<String> images;
+  final List<ImageModel> images;
   const StackedAvatars({Key? key, required this.images}) : super(key: key);
 
   @override
@@ -23,7 +28,12 @@ class StackedAvatars extends StatelessWidget {
                                 border: Border.all(color: Colors.white),
                               ),
                             ),
-                            backgroundImage: NetworkImage(images[index]),
+                            backgroundImage: images[index].url
+                                ? NetworkImage(images[index].path)
+                                : kIsWeb
+                                    ? NetworkImage(images[index].path)
+                                    : FileImage(File(images[index].path))
+                                        as ImageProvider,
                           ))),
                 ),
               ),
