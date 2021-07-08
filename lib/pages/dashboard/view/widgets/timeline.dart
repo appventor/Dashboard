@@ -31,26 +31,26 @@ class _TimeLineState extends State<TimeLine> {
     final Size _size = MediaQuery.of(context).size;
     return Column(
       children: [
-        CalendarTimeline(
-          showYears: false,
-          initialDate: _selectedDate,
-          firstDate: DateTime(2021, 6, 1),
-          lastDate: DateTime.now().add(Duration(days: 365)),
-          onDateSelected: (date) {
-            setState(() {
-              _selectedDate = date!;
-            });
-          },
-          leftMargin: 20,
-          monthColor: Colors.white70,
-          dayColor: Colors.teal[200],
-          dayNameColor: Color(0xFF333A47),
-          activeDayColor: Colors.white,
-          activeBackgroundDayColor: Colors.redAccent[100],
-          dotsColor: Color(0xFF333A47),
-          selectableDayPredicate: (date) => date.day != 23,
-          locale: 'en',
-        ),
+        // CalendarTimeline(
+        //   showYears: false,
+        //   initialDate: _selectedDate,
+        //   firstDate: DateTime(2021, 6, 1),
+        //   lastDate: DateTime.now().add(Duration(days: 365)),
+        //   onDateSelected: (date) {
+        //     setState(() {
+        //       _selectedDate = date!;
+        //     });
+        //   },
+        //   leftMargin: 20,
+        //   monthColor: Colors.white70,
+        //   dayColor: Colors.teal[200],
+        //   dayNameColor: Color(0xFF333A47),
+        //   activeDayColor: Colors.white,
+        //   activeBackgroundDayColor: Colors.redAccent[100],
+        //   dotsColor: Color(0xFF333A47),
+        //   selectableDayPredicate: (date) => date.day != 23,
+        //   locale: 'en',
+        // ),
         SizedBox(height: defaultPadding),
         Responsive(
           mobile: FileInfoCardGridView(
