@@ -1,7 +1,7 @@
 import '../../../pages.dart';
-import 'widgets/my_files.dart';
+import 'widgets/timeline.dart';
 import 'widgets/recent_files.dart';
-import 'widgets/storage_details.dart';
+import 'widgets/revenue_details.dart';
 
 class DashboardPage extends StatelessWidget {
   @override
@@ -18,12 +18,12 @@ class DashboardPage extends StatelessWidget {
                   flex: 5,
                   child: Column(
                     children: [
-                      MyFiles(),
+                      TimeLine(),
                       SizedBox(height: 16),
                       RecentFiles(),
                       if (Responsive.isMobile(context))
                         SizedBox(height: defaultPadding),
-                      if (Responsive.isMobile(context)) StarageDetails(),
+                      if (Responsive.isMobile(context)) RevenueDetails(),
                     ],
                   ),
                 ),
@@ -33,7 +33,7 @@ class DashboardPage extends StatelessWidget {
                 if (!Responsive.isMobile(context))
                   Expanded(
                     flex: 2,
-                    child: StarageDetails(),
+                    child: RevenueDetails(),
                   ),
               ],
             )
