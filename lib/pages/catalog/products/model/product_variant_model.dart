@@ -1,23 +1,25 @@
 import 'dart:convert';
 
+import 'models.dart';
+
 class Variant {
   Variant({
-    this.id,
+    required this.id,
     required this.unit,
     required this.value,
     required this.price,
-    this.images,
-    this.imagePaths,
+    required this.images,
+    this.imagePaths = const [],
     required this.inventory,
     this.selected = false,
   });
 
-  String? id;
+  String id;
   String unit;
   String value;
   double price;
-  List<String>? images;
-  List<String>? imagePaths;
+  List<String> images;
+  List<ImageModel> imagePaths;
   List<Inventory> inventory;
   bool selected;
 
@@ -27,7 +29,7 @@ class Variant {
     String? value,
     double? price,
     List<String>? images,
-    List<String>? imagePaths,
+    List<ImageModel>? imagePaths,
     List<Inventory>? inventory,
   }) =>
       Variant(
@@ -49,7 +51,7 @@ class Variant {
   String toJson() => json.encode(toMap());
 
   factory Variant.fromMap(Map<String, dynamic> json) => Variant(
-        id: json["id"],
+        id: json["id"] ?? '',
         unit: json["unit"] ?? '',
         value: json["value"] ?? '',
         price: json["price"] ?? 0.0,
@@ -67,8 +69,7 @@ class Variant {
         "unit": unit,
         "value": value,
         "price": price,
-        "images":
-            images != null ? List<dynamic>.from(images!.map((x) => x)) : [],
+        "images": List<dynamic>.from(images.map((x) => x)),
         "inventory": List<dynamic>.from(inventory.map((x) => x.toMap())),
       };
 }
@@ -90,6 +91,10 @@ class Inventory {
         id: id ?? this.id,
         stock: stock ?? this.stock,
       );
+
+  bool operator ==(o) => o is Inventory && o.id == id;
+
+  int get hashCode => id.hashCode;
 
   factory Inventory.fromJson(String str) => Inventory.fromMap(json.decode(str));
 
