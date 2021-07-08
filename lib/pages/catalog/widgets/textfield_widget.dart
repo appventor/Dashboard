@@ -1,16 +1,20 @@
 import 'dart:async';
+import 'package:flutter/services.dart';
+
 import '../../../pages.dart';
 
 class TextFieldWidget extends StatefulWidget {
   final String label;
   final String text;
   final int maxLines;
+  final bool digit;
   final Function(String) onChanged;
   const TextFieldWidget({
     Key? key,
     required this.label,
     required this.text,
     this.maxLines = 1,
+    this.digit = false,
     required this.onChanged,
   }) : super(key: key);
 
@@ -41,6 +45,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       padding: const EdgeInsets.all(8.0),
       child: TextField(
         controller: _controller,
+        inputFormatters: [
+          if (widget.digit) FilteringTextInputFormatter.digitsOnly,
+        ],
         maxLines: widget.maxLines,
         decoration: InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
