@@ -14,10 +14,7 @@ showVariantDialog(BuildContext context) {
             vertical: MediaQuery.of(context).size.height / 8,
           ),
           backgroundColor: secondaryColor,
-          child: VariantDetails(
-            id: context.read(variantProvider).state.id ??
-                context.read(firestoreIdProvider),
-          ),
+          child: VariantDetails(id: context.read(variantProvider).state.id),
         );
       });
     },

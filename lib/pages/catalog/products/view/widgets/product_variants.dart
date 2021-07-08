@@ -1,11 +1,10 @@
-import 'package:dashboard/pages/catalog/products/controller/delete_product.dart';
-import 'package:dashboard/pages/catalog/products/controller/save_product_provider.dart';
-import 'package:dashboard/pages/catalog/products/controller/save_variant_provider.dart';
-import 'package:dashboard/pages/catalog/products/model/models.dart';
-import 'package:dashboard/pages/catalog/products/view/widgets/show_variant.dart';
-import 'package:dashboard/pages/warehouse/controller/warehouses_provider.dart';
-import 'package:dashboard/pages/warehouse/models/warehouse_model.dart';
-import 'package:dashboard/pages/widgets/stacked_avatars.dart';
+import '../../controller/delete_product.dart';
+import '../../controller/save_product_provider.dart';
+import '../../controller/save_variant_provider.dart';
+import '../../model/models.dart';
+import '../../view/widgets/show_variant.dart';
+import '../../../../warehouse/controller/warehouses_provider.dart';
+import '../../../../warehouse/models/warehouse_model.dart';
 
 import '../../../../../pages.dart';
 
@@ -19,6 +18,11 @@ class ProductVariants extends StatefulWidget {
 }
 
 class _ProductVariantsState extends State<ProductVariants> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -80,8 +84,7 @@ class _ProductVariantsState extends State<ProductVariants> {
                                 DataCell(
                                   Padding(
                                     padding: const EdgeInsets.all(4.0),
-                                    child: StackedAvatars(
-                                        images: variant.images ?? []),
+                                    // child: StackedAvatars(images: images),
                                   ),
                                 ),
                                 DataCell(Text(variant.value)),
@@ -98,7 +101,7 @@ class _ProductVariantsState extends State<ProductVariants> {
                                         showVariantDialog(context);
                                       }
                                     } else if (value == 1)
-                                      context.read(deleteVariant(variant.id!));
+                                      context.read(deleteVariant(variant.id));
                                   },
                                   itemBuilder: (context) => [
                                     PopupMenuItem(

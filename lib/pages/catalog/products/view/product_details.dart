@@ -1,7 +1,6 @@
-import 'package:dashboard/pages/catalog/products/controller/products_provider.dart';
-import 'package:dashboard/pages/catalog/products/model/models.dart';
-
 import '../../../../pages.dart';
+import '../model/models.dart';
+import '../controller/products_provider.dart';
 import '../controller/save_product_provider.dart';
 import 'widgets/assign_attributes.dart';
 import 'widgets/general_information.dart';

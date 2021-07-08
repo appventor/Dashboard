@@ -2,6 +2,7 @@ import 'package:dashboard/pages/catalog/products/controller/save_variant_provide
 import 'package:dashboard/pages/catalog/products/model/models.dart';
 import 'package:dashboard/pages/catalog/widgets/textfield_widget.dart';
 import 'package:dashboard/pages/warehouse/controller/warehouses_provider.dart';
+import 'package:dashboard/pages/warehouse/models/warehouse_model.dart';
 
 import '../../../../../pages.dart';
 
@@ -15,7 +16,7 @@ class InventoryDetails extends StatelessWidget {
       children: [
         Text('Inventory', style: Theme.of(context).textTheme.headline6),
         Consumer(builder: (context, watch, child) {
-          var warehouses = watch(warehousesProvider).data!.value;
+          List<Warehouse> warehouses = watch(warehousesProvider).data!.value;
           return GridView.builder(
             shrinkWrap: true,
             primary: false,
@@ -33,14 +34,16 @@ class InventoryDetails extends StatelessWidget {
                     child: TextFieldWidget(
                       label: "Stock Value",
                       text: '',
+                      digit: true,
                       onChanged: (value) {
-                        Inventory inventory = context
-                            .read(variantProvider)
-                            .state
-                            .inventory[index];
-
-                        context.read(variantProvider).state =
-                            context.read(variantProvider).state.copyWith();
+                        print(value);
+                        Inventory currentInventory = Inventory(
+                            id: warehouses[index].id, stock: int.parse(value));
+                        context.read(inventoryProvider).state[index] =
+                            currentInventory;
+                        context.read(variantProvider).state.inventory =
+                            context.read(inventoryProvider).state;
+                        print(context.read(variantProvider).state.toMap());
                       },
                     ),
                   )
