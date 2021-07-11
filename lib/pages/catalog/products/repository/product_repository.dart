@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dashboard/services/firestore_provider.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../model/models.dart';
 
@@ -13,15 +14,18 @@ class ProductRepository {
 
   final FirebaseFirestore _firestore;
 
-  Future<List<Product>> getProducts([int page = 1]) async {
+  Future<List<Product>> getProducts([int page = 0]) async {
     try {
+      debugPrint("page: $page");
       QuerySnapshot<Map<String, dynamic>> documentList = await _firestore
           .collection("products")
           .orderBy("title")
-          .limit(10)
+          .startAt([page])
+          .limit(11)
           .get();
       final results = List<Map<String, dynamic>>.from(
           documentList.docs.map((doc) => doc.data()));
+      debugPrint(results.toString());
       List<Product> products = results
           .map((product) => Product.fromMap(product))
           .toList(growable: false);
