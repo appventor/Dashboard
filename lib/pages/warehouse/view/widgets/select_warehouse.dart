@@ -19,7 +19,6 @@ class _SelectWarehouseState extends State<SelectWarehouse> {
       AsyncValue<List<Warehouse>> warehousesData = watch(warehousesProvider);
       return warehousesData.when(
           data: (warehouses) {
-            print(warehouses.map((e) => e.title).toList());
             return DropdownButton<Warehouse>(
               focusColor: Colors.white,
               value: _warehouse ?? warehouses.first,
@@ -35,7 +34,7 @@ class _SelectWarehouseState extends State<SelectWarehouse> {
                 );
               }).toList(),
               hint: Text(
-                "Please choose a langauage",
+                "Select a Warehouse",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 14,

@@ -41,8 +41,10 @@ class ProductsTable extends StatelessWidget {
               //       Icons.delete,
               //     )),
               IconButton(
-                  onPressed: () =>
-                      context.read(productsProvider.notifier).getProducts(),
+                  onPressed: () {
+                    //  context.read(productsProvider.notifier).getProducts();
+                    context.refresh(productsProvider);
+                  },
                   icon: Icon(
                     Icons.refresh,
                   )),
@@ -63,7 +65,11 @@ class ProductsTable extends StatelessWidget {
               DataColumn(label: Text('Variants')),
               DataColumn(label: Text('Options')),
             ],
-            onPageChanged: (value) {},
+            onPageChanged: (value) {
+              context
+                  .read(productsProvider.notifier)
+                  .handleScrollWithIndex(value);
+            },
           ),
         ),
       );
