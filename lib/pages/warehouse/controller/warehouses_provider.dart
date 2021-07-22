@@ -1,4 +1,4 @@
-import 'package:dashboard/pages.dart';
+import 'package:dashboard/export.dart';
 import 'package:dashboard/pages/warehouse/models/warehouse_model.dart';
 
 final warehousesProvider = FutureProvider<List<Warehouse>>((ref) async {

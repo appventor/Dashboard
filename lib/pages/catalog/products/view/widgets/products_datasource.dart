@@ -1,4 +1,4 @@
-import '../../../../../pages.dart';
+import '../../../../../export.dart';
 import '../../model/models.dart';
 import '../../controller/delete_product.dart';
 import '../../controller/save_product_provider.dart';
@@ -40,7 +40,8 @@ class ProductsDataSource extends DataTableSource {
               borderRadius: BorderRadius.circular(5),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage(product.image!),
+                image:
+                    NetworkImage(product.image ?? 'Https://picsum.photos/650'),
               )),
         )),
         DataCell(Text(product.title)),

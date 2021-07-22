@@ -1,4 +1,4 @@
-import '../../../../pages.dart';
+import '../../../../export.dart';
 import 'widgets/products_table.dart';
 
 class ProductsPage extends StatelessWidget {

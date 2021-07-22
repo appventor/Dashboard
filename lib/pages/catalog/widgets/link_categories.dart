@@ -1,5 +1,5 @@
 import 'package:multi_select_flutter/multi_select_flutter.dart';
-import '../../../pages.dart';
+import '../../../export.dart';
 import '../category/model/models.dart';
 import '../category/controller/categories_provider.dart';
 

@@ -6,7 +6,7 @@ import '../../view/widgets/show_variant.dart';
 import '../../../../warehouse/controller/warehouses_provider.dart';
 import '../../../../warehouse/models/warehouse_model.dart';
 
-import '../../../../../pages.dart';
+import '../../../../../export.dart';
 
 class ProductVariants extends StatefulWidget {
   const ProductVariants({

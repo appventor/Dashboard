@@ -1,6 +1,6 @@
 import 'package:dashboard/pages/catalog/products/controller/save_variant_provider.dart';
 
-import '../../../../../pages.dart';
+import '../../../../../export.dart';
 import '../product_variant_details.dart';
 
 showVariantDialog(BuildContext context) {

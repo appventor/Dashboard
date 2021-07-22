@@ -1,4 +1,4 @@
-import '../../../../pages.dart';
+import '../../../../export.dart';
 
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({Key? key}) : super(key: key);

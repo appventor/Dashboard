@@ -1,4 +1,4 @@
-import '../pages.dart';
+import '../export.dart';
 
 @CustomAutoRouter(
   replaceInRouteName: 'Page,Route',

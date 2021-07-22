@@ -1,7 +1,7 @@
 import 'package:dashboard/pages/catalog/category/controller/delete_category.dart';
 import 'package:dashboard/pages/catalog/category/controller/save_category_provider.dart';
 
-import '../../../../../pages.dart';
+import '../../../../../export.dart';
 import '../../model/models.dart';
 import '../../controller/categories_provider.dart';
 
@@ -62,8 +62,9 @@ class _CategoriesDataTableState extends State<CategoriesDataTable> {
                                               BorderRadius.circular(5),
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
-                                            image:
-                                                NetworkImage(category.image!),
+                                            image: NetworkImage(category
+                                                    .image ??
+                                                "https://picsum.photos/640"),
                                           )),
                                     )),
                                     DataCell(Text(category.title)),

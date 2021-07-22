@@ -1,4 +1,4 @@
-import '../../../../pages.dart';
+import '../../../../export.dart';
 import '../repository/product_repository.dart';
 
 final deleteProduct = FutureProvider.family<dynamic, String>((ref, id) async {

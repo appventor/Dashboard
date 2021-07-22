@@ -1,7 +1,7 @@
 import 'package:dashboard/pages/catalog/products/controller/save_product_provider.dart';
 import 'package:dashboard/pages/catalog/widgets/textfield_widget.dart';
 
-import '../../../../../pages.dart';
+import '../../../../../export.dart';
 
 class GeneralInformation extends StatelessWidget {
   const GeneralInformation({

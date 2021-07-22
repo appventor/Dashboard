@@ -1,4 +1,4 @@
-import '../../../../pages.dart';
+import '../../../../export.dart';
 import '../controller/categories_provider.dart';
 import 'widgets/add_category.dart';
 import 'widgets/categories_datatable.dart';

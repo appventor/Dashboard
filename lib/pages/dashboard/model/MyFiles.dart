@@ -1,4 +1,4 @@
-import '../../../pages.dart';
+import '../../../export.dart';
 
 class CloudStorageInfo {
   final String? svgSrc, title, totalStorage;

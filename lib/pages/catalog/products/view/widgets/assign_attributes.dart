@@ -1,7 +1,7 @@
 import 'package:dashboard/pages/catalog/products/controller/save_product_provider.dart';
 import 'package:dashboard/pages/catalog/widgets/link_categories.dart';
 
-import '../../../../../pages.dart';
+import '../../../../../export.dart';
 import 'choose_attribute.dart';
 
 class AssignAttributes extends StatelessWidget {

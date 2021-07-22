@@ -1,4 +1,4 @@
-import '../../../../pages.dart';
+import '../../../../export.dart';
 import '../repository/category_repository.dart';
 
 final deleteCategory = FutureProvider.family<dynamic, String>((ref, id) async {

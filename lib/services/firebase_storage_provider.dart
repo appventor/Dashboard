@@ -1,4 +1,4 @@
-import '../pages.dart';
+import '../export.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 export 'package:firebase_storage/firebase_storage.dart';
 

@@ -54,7 +54,7 @@ class Variant {
         id: json["id"] ?? '',
         unit: json["unit"] ?? '',
         value: json["value"] ?? '',
-        price: json["price"] ?? 0.0,
+        price: json["price"] != null ? json["price"].toDouble() : 0.0,
         images: json["images"] != null
             ? List<String>.from(json["images"].map((x) => x))
             : [],

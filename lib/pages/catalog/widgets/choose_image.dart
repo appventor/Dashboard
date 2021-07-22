@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:file_selector_platform_interface/file_selector_platform_interface.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../../../../pages.dart';
+import '../../../export.dart';
 
 class ChooseImage extends StatefulWidget {
   final String? imageUrl;

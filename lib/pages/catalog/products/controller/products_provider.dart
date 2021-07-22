@@ -1,17 +1,18 @@
-import 'package:dashboard/pages/catalog/products/repository/product_repository.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:core';
+
 import '../model/models.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../repository/product_repository.dart';
 
 final productsProvider =
-    StateNotifierProvider<ProductPaginationController, ProductPagination>(
-        (ref) {
+    StateNotifierProvider<ProductsController, Products>((ref) {
+  print('refresh');
   final _productRepository = ref.read(productRepository);
-  return ProductPaginationController(_productRepository);
+  return ProductsController(_productRepository);
 });
 
-class ProductPaginationController extends StateNotifier<ProductPagination> {
-  ProductPaginationController(this._productRepository)
-      : super(ProductPagination.initial()) {
+class ProductsController extends StateNotifier<Products> {
+  ProductsController(this._productRepository) : super(Products(products: [])) {
     getProducts();
   }
 
@@ -19,12 +20,29 @@ class ProductPaginationController extends StateNotifier<ProductPagination> {
 
   Future<void> getProducts() async {
     try {
-      final products = await _productRepository.getProducts(state.page);
-      state = state.copyWith(
-          products: [...state.products, ...products],
-          page: state.page + 1 * 10);
+      final productsData = await _productRepository.getProducts(
+          lastDocument: state.lastDocument);
+      List<Product> products = productsData.docs
+          .map((product) => Product.fromMap(product.data()))
+          .toList();
+      state = state.copyWith(products: [...state.products, ...products]);
     } catch (e) {
-      state = state.copyWith(errorMessage: e.toString());
+      print(e);
+      // state = state.copyWith(errorMessage: e.toString());
+    }
+  }
+
+  Future<void> refresh() async {
+    try {
+      final productsData =
+          await _productRepository.getProducts(lastDocument: null);
+      List<Product> products = productsData.docs
+          .map((product) => Product.fromMap(product.data()))
+          .toList();
+      state = state.copyWith(products: products);
+    } catch (e) {
+      print(e);
+      // state = state.copyWith(errorMessage: e.toString());
     }
   }
 
@@ -36,9 +54,9 @@ class ProductPaginationController extends StateNotifier<ProductPagination> {
     print(
         'itemPosition: $itemPosition, requestMoreData: $requestMoreData, pageToRequest: $pageToRequest ');
 
-    if (requestMoreData && pageToRequest + 1 >= state.page) {
-      print('getting products');
-      getProducts();
-    }
+    // if (requestMoreData && pageToRequest + 1 >= state.lastProduct) {
+    //   print('getting products');
+    //   getProducts();
+    // }
   }
 }

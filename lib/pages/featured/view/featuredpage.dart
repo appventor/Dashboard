@@ -1,7 +1,7 @@
 import '../../../export.dart';
 
-class PendingOrders extends StatelessWidget {
-  const PendingOrders({Key? key}) : super(key: key);
+class FeaturedPage extends StatelessWidget {
+  const FeaturedPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

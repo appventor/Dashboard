@@ -1,4 +1,4 @@
-import '../../pages.dart';
+import '../../export.dart';
 
 class HeaderLogo extends StatelessWidget {
   const HeaderLogo({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:dashboard/pages/catalog/category/model/categories_model.dart';
 
-import '../../../../pages.dart';
+import '../../../../export.dart';
 import 'widgets/general_information.dart';
 import '../controller/categories_provider.dart';
 import '../controller/save_category_provider.dart';

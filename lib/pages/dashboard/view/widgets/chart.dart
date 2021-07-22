@@ -1,6 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 
-import '../../../../pages.dart';
+import '../../../../export.dart';
 
 class Chart extends StatelessWidget {
   const Chart({

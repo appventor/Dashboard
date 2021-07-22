@@ -1,7 +1,7 @@
 import 'package:dashboard/pages/warehouse/controller/warehouses_provider.dart';
 import 'package:dashboard/pages/warehouse/models/warehouse_model.dart';
 
-import '../../../../pages.dart';
+import '../../../../export.dart';
 
 class SelectWarehouse extends StatefulWidget {
   const SelectWarehouse({Key? key}) : super(key: key);

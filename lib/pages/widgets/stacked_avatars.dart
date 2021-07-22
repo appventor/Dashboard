@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 
 import '../catalog/products/model/models.dart';
-import '../../pages.dart';
+import '../../export.dart';
 
 class StackedAvatars extends StatelessWidget {
   final List<ImageModel> images;

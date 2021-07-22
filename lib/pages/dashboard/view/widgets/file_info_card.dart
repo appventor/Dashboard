@@ -1,7 +1,7 @@
 import 'package:dashboard/pages/dashboard/model/MyFiles.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../pages.dart';
+import '../../../../export.dart';
 
 class FileInfoCard extends StatelessWidget {
   const FileInfoCard({

@@ -1,7 +1,7 @@
 import 'package:dashboard/pages/widgets/header_logo.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../pages.dart';
+import '../../export.dart';
 
 class SideBar extends StatefulWidget {
   @override

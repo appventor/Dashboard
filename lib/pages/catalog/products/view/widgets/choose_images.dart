@@ -5,7 +5,7 @@ import 'package:file_selector_platform_interface/file_selector_platform_interfac
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../../pages.dart';
+import '../../../../../export.dart';
 
 class ChooseImages extends StatefulWidget {
   final List<String> images;

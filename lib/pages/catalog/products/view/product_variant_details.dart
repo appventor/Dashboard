@@ -3,7 +3,7 @@ import 'package:dashboard/pages/catalog/products/model/product_variant_model.dar
 import 'package:dashboard/pages/catalog/products/view/widgets/inventory_details.dart';
 import 'package:dashboard/pages/catalog/widgets/textfield_widget.dart';
 
-import '../../../../pages.dart';
+import '../../../../export.dart';
 import 'widgets/choose_images.dart';
 
 class VariantDetails extends StatelessWidget {
@@ -92,13 +92,17 @@ class VariantDetails extends StatelessWidget {
                             return TextFieldWidget(
                               label: 'Price',
                               digit: true,
+                              decimal: true,
                               text:
                                   watch(variantProvider).state.price.toString(),
                               onChanged: (value) =>
                                   context.read(variantProvider).state = context
                                       .read(variantProvider)
                                       .state
-                                      .copyWith(price: double.parse(value)),
+                                      .copyWith(
+                                          price: value.isNotEmpty
+                                              ? double.parse(value)
+                                              : 0),
                             );
                           })
                         ]))

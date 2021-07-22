@@ -2,7 +2,7 @@ import 'package:dashboard/pages/catalog/products/controller/products_provider.da
 import 'package:dashboard/pages/catalog/products/controller/save_product_provider.dart';
 import 'package:dashboard/pages/catalog/products/model/models.dart';
 
-import '../../../../../pages.dart';
+import '../../../../../export.dart';
 import 'products_datasource.dart';
 
 class ProductsTable extends StatelessWidget {
@@ -11,7 +11,7 @@ class ProductsTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      ProductPagination productsData = watch(productsProvider);
+      Products productsData = watch(productsProvider);
       return SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -35,15 +35,10 @@ class ProductsTable extends StatelessWidget {
               ],
             ),
             actions: [
-              // IconButton(
-              //     onPressed: () {},
-              //     icon: Icon(
-              //       Icons.delete,
-              //     )),
               IconButton(
                   onPressed: () {
                     //  context.read(productsProvider.notifier).getProducts();
-                    context.refresh(productsProvider);
+                    context.refresh(productsProvider.notifier).refresh();
                   },
                   icon: Icon(
                     Icons.refresh,

@@ -4,7 +4,7 @@ import 'package:dashboard/pages/catalog/widgets/textfield_widget.dart';
 import 'package:dashboard/pages/warehouse/controller/warehouses_provider.dart';
 import 'package:dashboard/pages/warehouse/models/warehouse_model.dart';
 
-import '../../../../../pages.dart';
+import '../../../../../export.dart';
 
 class InventoryDetails extends StatelessWidget {
   const InventoryDetails({Key? key}) : super(key: key);
@@ -36,14 +36,13 @@ class InventoryDetails extends StatelessWidget {
                       text: '',
                       digit: true,
                       onChanged: (value) {
-                        print(value);
                         Inventory currentInventory = Inventory(
-                            id: warehouses[index].id, stock: int.parse(value));
+                            id: warehouses[index].id,
+                            stock: value.isNotEmpty ? int.parse(value) : 0);
                         context.read(inventoryProvider).state[index] =
                             currentInventory;
                         context.read(variantProvider).state.inventory =
                             context.read(inventoryProvider).state;
-                        print(context.read(variantProvider).state.toMap());
                       },
                     ),
                   )

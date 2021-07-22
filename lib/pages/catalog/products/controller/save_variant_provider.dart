@@ -4,7 +4,7 @@ import 'package:dashboard/pages/warehouse/controller/warehouses_provider.dart';
 import 'package:dashboard/pages/warehouse/models/warehouse_model.dart';
 // import 'package:flutter/foundation.dart' as web;
 // import 'package:image_picker/image_picker.dart';
-import '../../../../pages.dart';
+import '../../../../export.dart';
 import '../model/models.dart';
 
 final variantProvider = StateProvider<Variant>((ref) => Variant.fromMap({}));

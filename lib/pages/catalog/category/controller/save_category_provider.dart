@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart' as web;
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../pages.dart';
+import '../../../../export.dart';
 import '../model/models.dart';
 import '../repository/category_repository.dart';
 

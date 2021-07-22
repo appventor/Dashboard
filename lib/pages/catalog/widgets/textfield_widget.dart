@@ -1,13 +1,14 @@
 import 'dart:async';
 import 'package:flutter/services.dart';
 
-import '../../../pages.dart';
+import '../../../export.dart';
 
 class TextFieldWidget extends StatefulWidget {
   final String label;
   final String text;
   final int maxLines;
   final bool digit;
+  final bool decimal;
   final Function(String) onChanged;
   const TextFieldWidget({
     Key? key,
@@ -15,6 +16,7 @@ class TextFieldWidget extends StatefulWidget {
     required this.text,
     this.maxLines = 1,
     this.digit = false,
+    this.decimal = false,
     required this.onChanged,
   }) : super(key: key);
 
@@ -46,7 +48,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       child: TextField(
         controller: _controller,
         inputFormatters: [
-          if (widget.digit) FilteringTextInputFormatter.digitsOnly,
+          if (widget.digit)
+            FilteringTextInputFormatter.allow(
+                RegExp(widget.decimal ? r"[0-9.]" : r"[0-9]"))
         ],
         maxLines: widget.maxLines,
         decoration: InputDecoration(

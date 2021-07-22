@@ -1,4 +1,4 @@
-import '../../../pages.dart';
+import '../../../export.dart';
 
 class WarehousePage extends StatelessWidget {
   const WarehousePage({Key? key}) : super(key: key);

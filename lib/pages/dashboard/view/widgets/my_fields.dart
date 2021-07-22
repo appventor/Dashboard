@@ -1,6 +1,6 @@
 import 'package:dashboard/pages/dashboard/model/MyFiles.dart';
 
-import '../../../../pages.dart';
+import '../../../../export.dart';
 import 'file_info_card.dart';
 
 class MyFiles extends StatelessWidget {

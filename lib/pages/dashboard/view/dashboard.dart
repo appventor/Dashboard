@@ -1,4 +1,4 @@
-import '../../../pages.dart';
+import '../../../export.dart';
 import 'widgets/timeline.dart';
 import 'widgets/recent_files.dart';
 import 'widgets/revenue_details.dart';

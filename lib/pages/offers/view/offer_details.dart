@@ -1,4 +1,4 @@
-import '../../../pages.dart';
+import '../../../export.dart';
 
 class OfferDetails extends StatelessWidget {
   final String id;

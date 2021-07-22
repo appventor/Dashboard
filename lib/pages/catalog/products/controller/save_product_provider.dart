@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dashboard/pages.dart';
+import 'package:dashboard/export.dart';
 import 'package:dashboard/pages/catalog/products/repository/product_repository.dart';
 import '../model/models.dart';
 

@@ -1,4 +1,4 @@
-import '../../pages.dart';
+import '../../export.dart';
 
 double watchBreakpoint = 220;
 double mobileBreakpoint = 480;

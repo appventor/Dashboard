@@ -1,4 +1,4 @@
-import '../../../../pages.dart';
+import '../../../../export.dart';
 
 class ProfileAvatar extends StatelessWidget {
   const ProfileAvatar({Key? key}) : super(key: key);
@@ -9,7 +9,7 @@ class ProfileAvatar extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: CircleAvatar(
         minRadius: 50,
-        backgroundImage: NetworkImage('http://picsum.photos/200'),
+        backgroundImage: NetworkImage('https://picsum.photos/200'),
       ),
     );
   }
