@@ -44,8 +44,8 @@ class _ChooseAttributeState extends State<ChooseAttribute> {
                     ),
                   );
                 }).toList(),
-                hint: Text(
-                  "Please choose a langauage",
+                hint: const Text(
+                  'Please choose a langauage',
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 14,
@@ -57,9 +57,10 @@ class _ChooseAttributeState extends State<ChooseAttribute> {
                   });
                 },
               ),
-              Spacer(),
+              const Spacer(),
               OutlinedButton(
-                  onPressed: () => widget.onAdd(), child: Icon(Icons.add)),
+                  onPressed: () => widget.onAdd(),
+                  child: const Icon(Icons.add)),
             ],
           ),
         ],

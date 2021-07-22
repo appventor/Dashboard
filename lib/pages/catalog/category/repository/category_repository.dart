@@ -12,16 +12,16 @@ class CategoryRepository {
 
   Future<List<Map<String, dynamic>>> fetchCategories() async {
     QuerySnapshot<Map<String, dynamic>> categories =
-        await _firestore.collection("categories").get();
+        await _firestore.collection('categories').get();
     return categories.docs.map((category) => category.data()).toList();
   }
 
   Future<void> saveCategory(
       {required String id, required Map<String, dynamic> data}) async {
-    return await _firestore.collection("categories").doc(id).set(data);
+    return await _firestore.collection('categories').doc(id).set(data);
   }
 
   Future<void> deleteCategory({required String id}) async {
-    return await _firestore.collection("categories").doc(id).delete();
+    return await _firestore.collection('categories').doc(id).delete();
   }
 }

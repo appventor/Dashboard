@@ -42,8 +42,10 @@ class Variant {
         inventory: inventory ?? this.inventory,
       );
 
-  bool operator ==(o) => o is Variant && o.id == id;
+  @override
+  bool operator ==(other) => other is Variant && other.id == id;
 
+  @override
   int get hashCode => id.hashCode;
 
   factory Variant.fromJson(String str) => Variant.fromMap(json.decode(str));
@@ -51,26 +53,26 @@ class Variant {
   String toJson() => json.encode(toMap());
 
   factory Variant.fromMap(Map<String, dynamic> json) => Variant(
-        id: json["id"] ?? '',
-        unit: json["unit"] ?? '',
-        value: json["value"] ?? '',
-        price: json["price"] != null ? json["price"].toDouble() : 0.0,
-        images: json["images"] != null
-            ? List<String>.from(json["images"].map((x) => x))
+        id: json['id'] ?? '',
+        unit: json['unit'] ?? '',
+        value: json['value'] ?? '',
+        price: json['price'] != null ? json['price'].toDouble() : 0.0,
+        images: json['images'] != null
+            ? List<String>.from(json['images'].map((x) => x))
             : [],
-        inventory: json["inventory"] != null
+        inventory: json['inventory'] != null
             ? List<Inventory>.from(
-                json["inventory"].map((x) => Inventory.fromMap(x)))
+                json['inventory'].map((x) => Inventory.fromMap(x)))
             : [],
       );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "unit": unit,
-        "value": value,
-        "price": price,
-        "images": List<dynamic>.from(images.map((x) => x)),
-        "inventory": List<dynamic>.from(inventory.map((x) => x.toMap())),
+        'id': id,
+        'unit': unit,
+        'value': value,
+        'price': price,
+        'images': List<dynamic>.from(images.map((x) => x)),
+        'inventory': List<dynamic>.from(inventory.map((x) => x.toMap())),
       };
 }
 
@@ -92,8 +94,10 @@ class Inventory {
         stock: stock ?? this.stock,
       );
 
-  bool operator ==(o) => o is Inventory && o.id == id;
+  @override
+  bool operator ==(other) => other is Inventory && other.id == id;
 
+  @override
   int get hashCode => id.hashCode;
 
   factory Inventory.fromJson(String str) => Inventory.fromMap(json.decode(str));
@@ -101,12 +105,12 @@ class Inventory {
   String toJson() => json.encode(toMap());
 
   factory Inventory.fromMap(Map<String, dynamic> json) => Inventory(
-        id: json["id"] ?? '',
-        stock: json["stock"] ?? 0,
+        id: json['id'] ?? '',
+        stock: json['stock'] ?? 0,
       );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "stock": stock,
+        'id': id,
+        'stock': stock,
       };
 }

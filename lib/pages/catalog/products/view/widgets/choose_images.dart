@@ -46,7 +46,7 @@ class _ChooseImagesState extends State<ChooseImages> {
     return file.path;
   }
 
-  pickImage() async {
+  void pickImage() async {
     if (kIsWeb) {
       _image = await _picker.getImage(source: ImageSource.gallery);
       if (_image != null) {
@@ -69,12 +69,13 @@ class _ChooseImagesState extends State<ChooseImages> {
       return DecorationImage(
           fit: BoxFit.cover, image: NetworkImage(image.path));
     } else {
-      if (kIsWeb)
+      if (kIsWeb) {
         return DecorationImage(
             fit: BoxFit.cover, image: NetworkImage(image.path));
-      else
+      } else {
         return DecorationImage(
             fit: BoxFit.cover, image: FileImage(File(image.path)));
+      }
     }
   }
 
@@ -86,7 +87,7 @@ class _ChooseImagesState extends State<ChooseImages> {
           // onTap: () => pickImage(),
           child: Container(
               clipBehavior: Clip.hardEdge,
-              margin: EdgeInsets.all(8),
+              margin: const EdgeInsets.all(8),
               height: 250,
               width: 250,
               alignment: images.isEmpty ? Alignment.center : Alignment.topRight,
@@ -97,7 +98,7 @@ class _ChooseImagesState extends State<ChooseImages> {
                     images.isNotEmpty ? loadImage(images[_currentIndex]) : null,
               ),
               child: images.isEmpty
-                  ? Text('Upload Images')
+                  ? const Text('Upload Images')
                   : IconButton(
                       onPressed: () {
                         images.removeAt(_currentIndex);
@@ -106,9 +107,9 @@ class _ChooseImagesState extends State<ChooseImages> {
                           if (_currentIndex < 0) _currentIndex = 0;
                         });
                       },
-                      icon: Icon(Icons.delete),
+                      icon: const Icon(Icons.delete),
                       color: Colors.red,
-                      tooltip: "Delete",
+                      tooltip: 'Delete',
                     )),
         ),
         SizedBox(
@@ -128,7 +129,7 @@ class _ChooseImagesState extends State<ChooseImages> {
                               });
                             },
                             child: Container(
-                              margin: EdgeInsets.all(8),
+                              margin: const EdgeInsets.all(8),
                               height: 50,
                               width: 60,
                               decoration: BoxDecoration(
@@ -149,7 +150,7 @@ class _ChooseImagesState extends State<ChooseImages> {
                 padding: const EdgeInsets.all(8.0),
                 child: OutlinedButton(
                   onPressed: () => pickImage(),
-                  child: Icon(
+                  child: const Icon(
                     Icons.add,
                     size: 50,
                   ),

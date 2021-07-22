@@ -22,14 +22,14 @@ class AppRouter extends _i1.RootStackRouter {
     HomeRoute.name: (routeData) => _i1.CustomPage<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i3.Home();
+          return const _i3.Home();
         },
         opaque: true,
         barrierDismissible: false),
     UnknownRoute.name: (routeData) => _i1.CustomPage<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i3.UnknownPage();
+          return const _i3.UnknownPage();
         },
         opaque: true,
         barrierDismissible: false),
@@ -43,7 +43,7 @@ class AppRouter extends _i1.RootStackRouter {
     DashboardRoute.name: (routeData) => _i1.CustomPage<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i3.DashboardPage();
+          return const _i3.DashboardPage();
         },
         opaque: true,
         barrierDismissible: false),
@@ -71,7 +71,7 @@ class AppRouter extends _i1.RootStackRouter {
     SettingsRoute.name: (routeData) => _i1.CustomPage<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i3.SettingsPage();
+          return const _i3.SettingsPage();
         },
         opaque: true,
         barrierDismissible: false),

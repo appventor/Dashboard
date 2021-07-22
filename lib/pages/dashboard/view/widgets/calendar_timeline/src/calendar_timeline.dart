@@ -10,8 +10,8 @@ import 'year_item.dart';
 typedef OnDateSelected = void Function(DateTime?);
 
 /// Creates a minimal, small profile calendar to select specific dates.
-/// [initialDate] must not be [null], the same or after [firstDate] and
-/// the same or before [lastDate]. [firstDate] must not be [null].
+/// [initialDate] must not be null, the same or after [firstDate] and
+/// the same or before [lastDate]. [firstDate] must not be null.
 /// [lastDate] must not be null and the same or after [firstDate]
 class CalendarTimeline extends StatefulWidget {
   final DateTime initialDate;
@@ -84,15 +84,15 @@ class _CalendarTimelineState extends State<CalendarTimeline> {
   int? _daySelectedIndex;
   late double _scrollAlignment;
 
-  List<DateTime> _years = [];
-  List<DateTime> _months = [];
-  List<DateTime> _days = [];
+  final List<DateTime> _years = [];
+  final List<DateTime> _months = [];
+  final List<DateTime> _days = [];
   DateTime? _selectedDate;
 
   String get _locale =>
       widget.locale ?? Localizations.localeOf(context).languageCode;
 
-  /// Populates the calendar and animates to the [widget.initialDate]
+  /// Populates the calendar and animates to the widget.initialDate
   @override
   void initState() {
     super.initState();
@@ -124,8 +124,8 @@ class _CalendarTimelineState extends State<CalendarTimeline> {
     );
   }
 
-  /// Creates the row with the day of the [selectedDate.month]. If the
-  /// [selectedDate.year] && [selectedDate.month] is the [widget.firstDate] or [widget.lastDate]
+  /// Creates the row with the day of the selectedDate.month. If the
+  /// selectedDate.year && selectedDate.month is the widget.firstDate or widget.lastDate
   /// the days show will be the available
   SizedBox _buildDayList() {
     return SizedBox(
@@ -171,11 +171,11 @@ class _CalendarTimelineState extends State<CalendarTimeline> {
     );
   }
 
-  /// Creates the row with all the months in the calendar. If [widget.showYears] is set to true
+  /// Creates the row with all the months in the calendar. If widget.showYears is set to true
   /// it will only show the months allowed in the selected year. By default it will show all
   /// months in the calendar and the small version of [YearItem] for each year in between
   Widget _buildMonthList() {
-    return Container(
+    return SizedBox(
       height: 40,
       child: ScrollablePositionedList.builder(
         initialScrollIndex: _monthSelectedIndex ?? 0,
@@ -227,9 +227,9 @@ class _CalendarTimelineState extends State<CalendarTimeline> {
   }
 
   /// Creates the row with all the years in the calendar. It will only show if
-  /// [widget.showYears] is set to true. It is false by default
+  /// widget.showYears is set to true. It is false by default
   Widget _buildYearList() {
-    return Container(
+    return SizedBox(
       height: 40,
       child: ScrollablePositionedList.builder(
         initialScrollIndex: _yearSelectedIndex!,
@@ -271,26 +271,27 @@ class _CalendarTimelineState extends State<CalendarTimeline> {
   }
 
   /// It will populate the [_days] list with all the allowed days. Adding all days of the month
-  /// when the [selectedDate.month] is not the first or the last in [widget.firstDate] or [widget.lastDate].
-  /// In that case it will only show the allowed days from and up to the specified in [widget.firstDate]
-  /// and [widget.lastDate]
-  _generateDays(DateTime? selectedDate) {
+  /// when the selectedDate.month is not the first or the last in widget.firstDate or widget.lastDate.
+  /// In that case it will only show the allowed days from and up to the specified in widget.firstDate
+  /// and widget.lastDate
+  void _generateDays(DateTime? selectedDate) {
     _days.clear();
     for (var i = 1; i <= 31; i++) {
       final day = DateTime(selectedDate!.year, selectedDate.month, i);
       if (day.difference(widget.firstDate).inDays < 0) continue;
-      if (day.month != selectedDate.month || day.isAfter(widget.lastDate))
+      if (day.month != selectedDate.month || day.isAfter(widget.lastDate)) {
         break;
+      }
       _days.add(day);
     }
   }
 
-  /// It will populate the [_months] list. If [widget.showYears] is true, it will add from January
+  /// It will populate the [_months] list. If widget.showYears is true, it will add from January
   /// to December, unless the selected year is the [widget.firstDate.year] or the [widget.lastDate.year].
-  /// In that case it will only from and up to the allowed months in [widget.firstDate] and [widget.lastDate].
-  /// By default, when [widget.showYears] is false, it will add all months from [widget.firstDate] to
-  /// [widget.lastDate] and all in between
-  _generateMonths(DateTime? selectedDate) {
+  /// In that case it will only from and up to the allowed months in widget.firstDate and widget.lastDate.
+  /// By default, when widget.showYears is false, it will add all months from widget.firstDate to
+  /// widget.lastDate and all in between
+  void _generateMonths(DateTime? selectedDate) {
     _months.clear();
     if (widget.showYears) {
       int month = selectedDate!.year == widget.firstDate.year
@@ -312,7 +313,7 @@ class _CalendarTimelineState extends State<CalendarTimeline> {
   }
 
   /// It will populate the [_years] list with the years between firstDate and lastDate
-  _generateYears() {
+  void _generateYears() {
     _years.clear();
     DateTime date = widget.firstDate;
     while (date.isBefore(widget.lastDate)) {
@@ -322,7 +323,7 @@ class _CalendarTimelineState extends State<CalendarTimeline> {
   }
 
   /// It will reset the calendar to the initial date
-  _resetCalendar(DateTime date) {
+  void _resetCalendar(DateTime date) {
     if (widget.showYears) {
       _generateMonths(date);
       _moveToMonthIndex(_monthSelectedIndex ?? 0);
@@ -335,7 +336,7 @@ class _CalendarTimelineState extends State<CalendarTimeline> {
     _moveToDayIndex(_daySelectedIndex ?? 0);
   }
 
-  _goToActualYear(int index) {
+  void _goToActualYear(int index) {
     _moveToYearIndex(index);
     _yearSelectedIndex = index;
     _monthSelectedIndex = null;
@@ -347,12 +348,12 @@ class _CalendarTimelineState extends State<CalendarTimeline> {
     _controllerYear.scrollTo(
       index: index,
       alignment: _scrollAlignment,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.easeIn,
     );
   }
 
-  _goToActualMonth(int index) {
+  void _goToActualMonth(int index) {
     _moveToMonthIndex(index);
     _monthSelectedIndex = index;
     _resetCalendar(_months[index]);
@@ -363,12 +364,12 @@ class _CalendarTimelineState extends State<CalendarTimeline> {
     _controllerMonth.scrollTo(
       index: index,
       alignment: _scrollAlignment,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.easeIn,
     );
   }
 
-  _goToActualDay(int index) {
+  void _goToActualDay(int index) {
     _moveToDayIndex(index);
     _daySelectedIndex = index;
     _selectedDate = _days[index];
@@ -380,33 +381,34 @@ class _CalendarTimelineState extends State<CalendarTimeline> {
     _controllerDay.scrollTo(
       index: index,
       alignment: _scrollAlignment,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.easeIn,
     );
   }
 
-  selectedYear() {
+  void selectedYear() {
     _yearSelectedIndex = _years.indexOf(_years
         .firstWhere((yearDate) => yearDate.year == widget.initialDate.year));
   }
 
-  selectedMonth() {
-    if (widget.showYears)
+  void selectedMonth() {
+    if (widget.showYears) {
       _monthSelectedIndex = _months.indexOf(_months.firstWhere(
           (monthDate) => monthDate.month == widget.initialDate.month));
-    else
+    } else {
       _monthSelectedIndex = _months.indexOf(_months.firstWhere((monthDate) =>
           monthDate.year == widget.initialDate.year &&
           monthDate.month == widget.initialDate.month));
+    }
   }
 
-  selectedDay() {
+  void selectedDay() {
     _daySelectedIndex = _days.indexOf(
         _days.firstWhere((dayDate) => dayDate.day == widget.initialDate.day));
   }
 
   /// Initializes the calendar. It will be executed every time a new date is selected
-  _initCalendar() {
+  void _initCalendar() {
     _selectedDate = widget.initialDate;
     if (widget.showYears) {
       _generateYears();

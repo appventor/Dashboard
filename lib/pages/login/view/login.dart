@@ -7,9 +7,9 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login to continue'),
+        title: const Text('Login to continue'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Login'),
       ),
     );

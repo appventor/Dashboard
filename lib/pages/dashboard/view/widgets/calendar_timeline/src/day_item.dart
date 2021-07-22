@@ -32,7 +32,7 @@ class DayItem extends StatelessWidget {
 
   ///? I united both widgets to increase the touch target of non selected days by using a transparent box decorator.
   ///? Now if the user click close to the number but not straight on top it will still select the date. (ONLY INFORMATION - ERASE)
-  _buildDay(BuildContext context) {
+  Widget _buildDay(BuildContext context) {
     final textStyle = TextStyle(
         color: available
             ? dayColor ?? Theme.of(context).accentColor
@@ -56,17 +56,17 @@ class DayItem extends StatelessWidget {
                     activeDayBackgroundColor ?? Theme.of(context).accentColor,
                 borderRadius: BorderRadius.circular(12.0),
               )
-            : BoxDecoration(color: Colors.transparent),
+            : const BoxDecoration(color: Colors.transparent),
         height: height,
         width: width,
         child: Column(
           children: <Widget>[
             if (isSelected) ...[
-              SizedBox(height: 7),
+              const SizedBox(height: 7),
               _buildDots(),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
             ] else
-              SizedBox(height: 14),
+              const SizedBox(height: 14),
             Text(
               dayNumber.toString(),
               style: isSelected ? selectedStyle : textStyle,
@@ -90,8 +90,8 @@ class DayItem extends StatelessWidget {
     final dot = Container(
       height: 5,
       width: 5,
-      decoration: new BoxDecoration(
-        color: this.dotsColor ?? this.activeDayColor ?? Colors.white,
+      decoration: BoxDecoration(
+        color: dotsColor ?? activeDayColor ?? Colors.white,
         shape: BoxShape.circle,
       ),
     );

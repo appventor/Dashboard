@@ -2,6 +2,7 @@ import 'package:dashboard/services/services.dart';
 import 'package:flutter/material.dart';
 
 class UnknownPage extends StatelessWidget {
+  const UnknownPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,12 +12,12 @@ class UnknownPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Oops! This is a wrong page."),
+            const Text('Oops! This is a wrong page.'),
             ElevatedButton(
               onPressed: () {
-                context.router.push(HomeRoute());
+                context.router.push(const HomeRoute());
               },
-              child: Text("Go Home"),
+              child: const Text('Go Home'),
             )
           ],
         ),

@@ -5,8 +5,8 @@ class ProfileAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+    return const Padding(
+      padding: EdgeInsets.all(8.0),
       child: CircleAvatar(
         minRadius: 50,
         backgroundImage: NetworkImage('https://picsum.photos/200'),

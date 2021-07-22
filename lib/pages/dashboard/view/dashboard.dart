@@ -4,6 +4,7 @@ import 'widgets/recent_files.dart';
 import 'widgets/revenue_details.dart';
 
 class DashboardPage extends StatelessWidget {
+  const DashboardPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -18,20 +19,20 @@ class DashboardPage extends StatelessWidget {
                   flex: 5,
                   child: Column(
                     children: [
-                      TimeLine(),
-                      SizedBox(height: 16),
-                      RecentFiles(),
+                      const TimeLine(),
+                      const SizedBox(height: 16),
+                      const RecentFiles(),
                       if (Responsive.isMobile(context))
-                        SizedBox(height: defaultPadding),
-                      if (Responsive.isMobile(context)) RevenueDetails(),
+                        const SizedBox(height: defaultPadding),
+                      if (Responsive.isMobile(context)) const RevenueDetails(),
                     ],
                   ),
                 ),
                 if (!Responsive.isMobile(context))
-                  SizedBox(width: defaultPadding),
+                  const SizedBox(width: defaultPadding),
                 // On Mobile means if the screen is less than 850 we dont want to show it
                 if (!Responsive.isMobile(context))
-                  Expanded(
+                  const Expanded(
                     flex: 2,
                     child: RevenueDetails(),
                   ),

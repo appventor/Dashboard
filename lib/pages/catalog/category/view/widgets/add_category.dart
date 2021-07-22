@@ -1,6 +1,6 @@
 import '../../../../../export.dart';
 
-addCategoryDialog(BuildContext context) {
+Widget? addCategoryDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (context) {

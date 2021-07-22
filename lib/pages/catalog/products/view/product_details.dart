@@ -23,7 +23,7 @@ class _ProductDetailsState extends State<ProductDetails> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('Product Information'),
+        title: const Text('Product Information'),
         centerTitle: false,
         leading: BackButton(
           onPressed: () {
@@ -35,7 +35,6 @@ class _ProductDetailsState extends State<ProductDetails> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: ElevatedButton(
-              child: Text('      SAVE      '),
               onPressed: () async {
                 setState(() {
                   _loading = true;
@@ -44,14 +43,16 @@ class _ProductDetailsState extends State<ProductDetails> {
                   if (result) {
                     context.read(productProvider).state = Product.fromMap({});
                     context.refresh(productsProvider);
-                    scaffoldMessengerKey.currentState!.showSnackBar(SnackBar(
-                      content: Text("Saved"),
+                    scaffoldMessengerKey.currentState!
+                        .showSnackBar(const SnackBar(
+                      content: Text('Saved'),
                       backgroundColor: Colors.green,
                     ));
                     Navigator.of(context).pop();
                   } else {
-                    scaffoldMessengerKey.currentState!.showSnackBar(SnackBar(
-                      content: Text("Error, Please try again"),
+                    scaffoldMessengerKey.currentState!
+                        .showSnackBar(const SnackBar(
+                      content: Text('Error, Please try again'),
                       backgroundColor: Colors.red,
                     ));
                   }
@@ -60,6 +61,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   });
                 });
               },
+              child: const Text('      SAVE      '),
             ),
           ),
         ],
@@ -77,7 +79,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       Expanded(
                         flex: 5,
                         child: Column(
-                          children: [
+                          children: const [
                             GeneralInformation(),
                             ProductVariants(),
                           ],
@@ -88,12 +90,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                         child: Container(
                           margin: const EdgeInsets.symmetric(horizontal: 8),
                           padding: const EdgeInsets.all(defaultPadding),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: secondaryColor,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10)),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
-                          child: AssignAttributes(),
+                          child: const AssignAttributes(),
                         ),
                       ),
                     ],
@@ -108,7 +109,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 width: double.infinity,
                 height: double.infinity,
                 color: Colors.black54,
-                child: Center(child: CircularProgressIndicator()),
+                child: const Center(child: CircularProgressIndicator()),
               )),
         ],
       ),

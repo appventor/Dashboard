@@ -8,7 +8,7 @@ final deleteCategory = FutureProvider.family<dynamic, String>((ref, id) async {
       .then((value) async {
     return await ref
         .read(firebaseStorageProvider)
-        .ref("categories/$id.jpg")
+        .ref('categories/$id.jpg')
         .delete();
   });
 });

@@ -13,13 +13,14 @@ class OrdersPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(
-                "Orders",
+                'Orders',
                 style: Theme.of(context).textTheme.headline5,
               ),
-              Spacer(),
+              const Spacer(),
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: OutlinedButton(onPressed: () {}, child: Text("COLUMNS")),
+                child: OutlinedButton(
+                    onPressed: () {}, child: const Text('COLUMNS')),
               ),
             ],
           ),
@@ -32,7 +33,7 @@ class OrdersPage extends StatelessWidget {
                   showCheckboxColumn: true,
                   onSelectAll: (value) {},
                   showBottomBorder: true,
-                  columns: [
+                  columns: const [
                     DataColumn(label: Text('Order ID')),
                     DataColumn(label: Text('Date')),
                     DataColumn(label: Text('Order')),

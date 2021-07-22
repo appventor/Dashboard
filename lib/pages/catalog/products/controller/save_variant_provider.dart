@@ -41,21 +41,21 @@ class SaveVariant extends StateNotifier<Variant> {
   final FirebaseStorage storage;
 
   Future uploadImages() async {
-    try {} catch (e) {}
-    state.imagePaths.forEach((imagePath) async {
-      // TaskSnapshot task;
-      // if (!web.kIsWeb)
-      //   task = await storage
-      //       .ref('products/${state.id}.jpg')
-      //       .putFile(File(imagePath));
-      // else
-      //   task = await storage.ref('products/${state.id}.jpg').putData(
-      //         await PickedFile(imagePath).readAsBytes(),
-      //         SettableMetadata(contentType: 'image/jpeg'),
-      //       );
-      // String imageUrl = await task.ref.getDownloadURL();
-      // state.images.add(imageUrl);
-    });
+    // try {} catch (e) {}
+    // state.imagePaths.forEach((imagePath) async {
+    // TaskSnapshot task;
+    // if (!web.kIsWeb)
+    //   task = await storage
+    //       .ref('products/${state.id}.jpg')
+    //       .putFile(File(imagePath));
+    // else
+    //   task = await storage.ref('products/${state.id}.jpg').putData(
+    //         await PickedFile(imagePath).readAsBytes(),
+    //         SettableMetadata(contentType: 'image/jpeg'),
+    //       );
+    // String imageUrl = await task.ref.getDownloadURL();
+    // state.images.add(imageUrl);
+    // });
   }
 
   Future<bool> saveVariant() async {
@@ -64,9 +64,9 @@ class SaveVariant extends StateNotifier<Variant> {
     if (variants.contains(state)) {
       int index = variants.indexOf(state);
       variants.replaceRange(index, index + 1, [state]);
-    } else
+    } else {
       variants.add(state);
-    print(product.state.toMap());
+    }
     product.state = product.state.copyWith(variants: variants);
     state = Variant.fromMap({});
     return true;

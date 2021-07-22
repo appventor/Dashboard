@@ -6,6 +6,6 @@ class ProductsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProductsTable();
+    return const ProductsTable();
   }
 }

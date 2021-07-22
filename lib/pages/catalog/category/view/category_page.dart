@@ -16,7 +16,7 @@ class CategoryPage extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text("Categories", style: Theme.of(context).textTheme.headline5),
+              Text('Categories', style: Theme.of(context).textTheme.headline5),
               Expanded(
                   child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32.0),
@@ -28,18 +28,18 @@ class CategoryPage extends StatelessWidget {
                 ),
               )),
               Padding(
-                padding: EdgeInsets.only(right: 16),
+                padding: const EdgeInsets.only(right: 16),
                 child: IconButton(
                   onPressed: () => context.refresh(categoriesProvider),
-                  icon: Icon(Icons.refresh),
+                  icon: const Icon(Icons.refresh),
                 ),
               ),
               ElevatedButton(
                   onPressed: () => addCategoryDialog(context),
-                  child: Text("Add Category"))
+                  child: const Text('Add Category'))
             ],
           ),
-          CategoriesDataTable()
+          const CategoriesDataTable()
         ],
       ),
     ));

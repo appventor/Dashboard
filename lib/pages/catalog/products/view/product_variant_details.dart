@@ -15,7 +15,6 @@ class VariantDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(id);
     return SingleChildScrollView(
         child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -36,7 +35,7 @@ class VariantDetails extends StatelessWidget {
                       ),
                       Text('Variant Details',
                           style: Theme.of(context).textTheme.headline6),
-                      Spacer(),
+                      const Spacer(),
                       ElevatedButton(
                           onPressed: () async {
                             await context
@@ -46,10 +45,10 @@ class VariantDetails extends StatelessWidget {
                                 Variant.fromMap({});
                             context.popRoute();
                           },
-                          child: Text('SAVE'))
+                          child: const Text('SAVE'))
                     ],
                   ),
-                  Divider(),
+                  const Divider(),
                   Row(children: [
                     Expanded(
                         flex: 2,
@@ -107,8 +106,8 @@ class VariantDetails extends StatelessWidget {
                           })
                         ]))
                   ]),
-                  Divider(),
-                  InventoryDetails()
+                  const Divider(),
+                  const InventoryDetails()
                 ])));
   }
 }

@@ -28,27 +28,27 @@ class _ProductVariantsState extends State<ProductVariants> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 16),
       padding: const EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Text('Product Variants'),
-              Spacer(),
+              const Text('Product Variants'),
+              const Spacer(),
               OutlinedButton.icon(
-                icon: Icon(Icons.add),
-                label: Text("Add Variant"),
+                icon: const Icon(Icons.add),
+                label: const Text('Add Variant'),
                 onPressed: () {
                   showVariantDialog(context);
                 },
               ),
             ],
           ),
-          Divider(),
+          const Divider(),
           Consumer(builder: (context, watch, child) {
             Product product = watch(productProvider).state;
             Warehouse warehouse = watch(warehouseProvider).state;
@@ -61,13 +61,13 @@ class _ProductVariantsState extends State<ProductVariants> {
                         checkboxHorizontalMargin: 16,
                         onSelectAll: (value) {},
                         columns: [
-                          DataColumn(label: Text('Images')),
-                          DataColumn(label: Text('Value')),
-                          DataColumn(label: Text('Unit')),
-                          DataColumn(label: Text('Price')),
+                          const DataColumn(label: Text('Images')),
+                          const DataColumn(label: Text('Value')),
+                          const DataColumn(label: Text('Unit')),
+                          const DataColumn(label: Text('Price')),
                           DataColumn(
                               label: Text('Stock @\n${warehouse.title}')),
-                          DataColumn(label: Text('Options')),
+                          const DataColumn(label: Text('Options')),
                         ],
                         rows: product.variants.map((variant) {
                           Inventory inventory = variant.inventory.firstWhere(
@@ -81,9 +81,9 @@ class _ProductVariantsState extends State<ProductVariants> {
                               },
                               selected: variant.selected,
                               cells: [
-                                DataCell(
+                                const DataCell(
                                   Padding(
-                                    padding: const EdgeInsets.all(4.0),
+                                    padding: EdgeInsets.all(4.0),
                                     // child: StackedAvatars(images: images),
                                   ),
                                 ),
@@ -92,7 +92,7 @@ class _ProductVariantsState extends State<ProductVariants> {
                                 DataCell(Text(variant.price.toString())),
                                 DataCell(Text(inventory.stock.toString())),
                                 DataCell(PopupMenuButton(
-                                  icon: Icon(Icons.more_vert),
+                                  icon: const Icon(Icons.more_vert),
                                   onSelected: (value) {
                                     if (value == 0) {
                                       {
@@ -100,17 +100,18 @@ class _ProductVariantsState extends State<ProductVariants> {
                                             variant;
                                         showVariantDialog(context);
                                       }
-                                    } else if (value == 1)
+                                    } else if (value == 1) {
                                       context.read(deleteVariant(variant.id));
+                                    }
                                   },
-                                  itemBuilder: (context) => [
+                                  itemBuilder: (context) => const [
                                     PopupMenuItem(
-                                      child: Text('Edit'),
                                       value: 0,
+                                      child: Text('Edit'),
                                     ),
                                     PopupMenuItem(
-                                      child: Text('Delete'),
                                       value: 1,
+                                      child: Text('Delete'),
                                     ),
                                   ],
                                 )),

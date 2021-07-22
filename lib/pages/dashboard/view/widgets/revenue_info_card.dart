@@ -14,8 +14,8 @@ class RevenueInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: defaultPadding),
-      padding: EdgeInsets.all(defaultPadding),
+      margin: const EdgeInsets.only(top: defaultPadding),
+      padding: const EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
         border: Border.all(width: 2, color: primaryColor.withOpacity(0.15)),
         borderRadius: const BorderRadius.all(
@@ -24,7 +24,7 @@ class RevenueInfoCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
             width: 20,
             child: Icon(Icons.ac_unit),
@@ -41,7 +41,7 @@ class RevenueInfoCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    "$numOfFiles Files",
+                    '$numOfFiles Files',
                     style: Theme.of(context)
                         .textTheme
                         .caption!

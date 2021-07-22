@@ -11,7 +11,7 @@ class UserDetailsPage extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       color: Colors.green[900],
-      child: Text("$id"),
+      child: Text(id),
     );
   }
 }

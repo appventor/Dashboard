@@ -19,10 +19,10 @@ class LinkCategories extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(children: [
+        Row(children: const [
           Text('Link Categories'),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Tooltip(
                 message:
                     'You can add multiple sub-categories, to add create one first.',
@@ -34,14 +34,15 @@ class LinkCategories extends StatelessWidget {
           return MultiSelectChipField(
               headerColor: Colors.transparent,
               searchable: true,
-              title: Text('Select Categories'),
+              title: const Text('Select Categories'),
               initialValue: initialValue,
               onTap: (value) => onSelected(value),
               items: categoriesData.when(
                   data: (categories) {
                     List<Category> cat = List.from(categories);
-                    if (excludeID != null)
+                    if (excludeID != null) {
                       cat.removeWhere((element) => element.id == excludeID);
+                    }
                     return cat
                         .map(
                           (category) =>

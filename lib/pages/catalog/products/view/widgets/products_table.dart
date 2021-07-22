@@ -40,7 +40,7 @@ class ProductsTable extends StatelessWidget {
                     //  context.read(productsProvider.notifier).getProducts();
                     context.refresh(productsProvider.notifier).refresh();
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.refresh,
                   )),
               ElevatedButton(
@@ -48,11 +48,11 @@ class ProductsTable extends StatelessWidget {
                   context.navigateTo(ProductDetailsRoute(
                       id: context.read(productProvider).state.id));
                 },
-                child: Text("Add Product"),
+                child: const Text('Add Product'),
               ),
             ],
             rowsPerPage: 10,
-            columns: [
+            columns: const [
               DataColumn(label: Text('Image')),
               DataColumn(label: Text('Title')),
               DataColumn(label: Text('Price')),

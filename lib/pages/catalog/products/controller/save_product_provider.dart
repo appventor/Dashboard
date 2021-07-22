@@ -31,13 +31,13 @@ class SaveProduct extends StateNotifier<Product> {
   final ProductRepository productRepository;
   final FirebaseStorage storage;
 
-  validate() {
+  bool validate() {
     try {
       assert(state.id.isNotEmpty);
       assert(state.title.isNotEmpty);
       return true;
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return false;
     }
   }
@@ -49,29 +49,30 @@ class SaveProduct extends StateNotifier<Product> {
           .putFile(File(state.imagePath!));
       return task.ref.getDownloadURL();
     } catch (error) {
+      debugPrint(error.toString());
       return null;
     }
   }
 
   Future<bool> save() async {
     if (validate()) {
-      if (state.imagePath != null)
+      if (state.imagePath != null) {
         return uploadImage().then((imageUrl) async {
           if (imageUrl != null) {
             state = state.copyWith(image: imageUrl);
-            print(state.toMap());
             await productRepository.saveProduct(
                 id: state.id, data: state.toMap());
             return true;
-          } else
+          } else {
             return false;
+          }
         });
-      else {
-        print(state.toMap());
+      } else {
         await productRepository.saveProduct(id: state.id, data: state.toMap());
         return true;
       }
-    } else
+    } else {
       return false;
+    }
   }
 }

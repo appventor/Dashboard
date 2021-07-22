@@ -25,13 +25,13 @@ class Products {
   String toJson() => json.encode(toMap());
 
   factory Products.fromMap(Map<String, dynamic> json) => Products(
-        products: json["products"] == null
+        products: json['products'] == null
             ? []
             : List<Product>.from(
-                json["products"].map((x) => Product.fromMap(x))),
+                json['products'].map((x) => Product.fromMap(x))),
       );
 
   Map<String, dynamic> toMap() => {
-        "products": List<dynamic>.from(products.map((x) => x.toMap())),
+        'products': List<dynamic>.from(products.map((x) => x.toMap())),
       };
 }

@@ -22,29 +22,29 @@ class StackedAvatars extends StatelessWidget {
                       (index) => Positioned(
                           left: images.length > 3 ? (index * 12) : (index * 24),
                           child: CircleAvatar(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(color: Colors.white),
-                              ),
-                            ),
                             backgroundImage: images[index].url
                                 ? NetworkImage(images[index].path)
                                 : kIsWeb
                                     ? NetworkImage(images[index].path)
                                     : FileImage(File(images[index].path))
                                         as ImageProvider,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(color: Colors.white),
+                              ),
+                            ),
                           ))),
                 ),
               ),
               images.length > 3
                   ? Text(
-                      "+ ${images.length - 3}\nmore",
+                      '+ ${images.length - 3}\nmore',
                       textAlign: TextAlign.center,
                     )
-                  : SizedBox()
+                  : const SizedBox()
             ],
           )
-        : SizedBox();
+        : const SizedBox();
   }
 }

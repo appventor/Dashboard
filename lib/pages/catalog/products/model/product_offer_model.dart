@@ -28,13 +28,13 @@ class ProductOffer {
   String toJson() => json.encode(toMap());
 
   factory ProductOffer.fromMap(Map<String, dynamic> json) => ProductOffer(
-        id: json["id"] ?? '',
-        type: json["type"] ?? 'price',
-        value: json["value"] ?? 0.0,
+        id: json['id'] ?? '',
+        type: json['type'] ?? 'price',
+        value: json['value'] ?? 0.0,
       );
 
   Map<String, dynamic> toMap() => {
-        "type": type,
-        "value": value,
+        'type': type,
+        'value': value,
       };
 }

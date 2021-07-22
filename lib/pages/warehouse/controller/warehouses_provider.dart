@@ -3,7 +3,7 @@ import 'package:dashboard/pages/warehouse/models/warehouse_model.dart';
 
 final warehousesProvider = FutureProvider<List<Warehouse>>((ref) async {
   return Future.delayed(
-      Duration(seconds: 2),
+      const Duration(seconds: 2),
       () => List.from(
           warehouseData.map((warehouse) => Warehouse.fromMap(warehouse))));
 });

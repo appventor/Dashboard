@@ -43,7 +43,7 @@ class _ChooseImageState extends State<ChooseImage> {
     return file.path;
   }
 
-  loadImage() {
+  void loadImage() {
     if (imageUrl != null) {
       image =
           DecorationImage(fit: BoxFit.cover, image: NetworkImage(imageUrl!));
@@ -71,7 +71,6 @@ class _ChooseImageState extends State<ChooseImage> {
         } else {
           imagePath = await _openImageFile();
           if (imagePath != null) {
-            print("open image file: $imagePath");
             imageUrl = null;
             widget.onSelected(imagePath!);
             setState(() {});
@@ -79,7 +78,7 @@ class _ChooseImageState extends State<ChooseImage> {
         }
       },
       child: Container(
-          margin: EdgeInsets.all(8),
+          margin: const EdgeInsets.all(8),
           height: 250,
           width: 250,
           alignment: Alignment.center,
@@ -89,7 +88,7 @@ class _ChooseImageState extends State<ChooseImage> {
             image: image,
           ),
           child: imageUrl == null && imagePath == null
-              ? Text('Upload a Image')
+              ? const Text('Upload a Image')
               : null),
     );
   }

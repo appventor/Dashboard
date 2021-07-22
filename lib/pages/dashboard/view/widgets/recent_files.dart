@@ -1,4 +1,4 @@
-import 'package:dashboard/pages/dashboard/model/RecentFile.dart';
+import 'package:dashboard/pages/dashboard/model/recent_file.dart';
 import '../../../../export.dart';
 
 class RecentFiles extends StatelessWidget {
@@ -9,16 +9,16 @@ class RecentFiles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(defaultPadding),
+      decoration: const BoxDecoration(
         color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Recent Files",
+            'Recent Files',
             style: Theme.of(context).textTheme.subtitle1,
           ),
           SizedBox(
@@ -26,15 +26,15 @@ class RecentFiles extends StatelessWidget {
             child: DataTable(
               horizontalMargin: 0,
               columnSpacing: defaultPadding,
-              columns: [
+              columns: const [
                 DataColumn(
-                  label: Text("File Name"),
+                  label: Text('File Name'),
                 ),
                 DataColumn(
-                  label: Text("Date"),
+                  label: Text('Date'),
                 ),
                 DataColumn(
-                  label: Text("Size"),
+                  label: Text('Size'),
                 ),
               ],
               rows: List.generate(
@@ -55,7 +55,7 @@ DataRow recentFileDataRow(RecentFile fileInfo) {
       DataCell(
         Row(
           children: [
-            Icon(Icons.ac_unit, size: 30),
+            const Icon(Icons.ac_unit, size: 30),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
               child: Text(fileInfo.title!),

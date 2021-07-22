@@ -12,7 +12,7 @@ class GeneralInformation extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('General Information'),
+        const Text('General Information'),
         Row(
           children: [
             Consumer(

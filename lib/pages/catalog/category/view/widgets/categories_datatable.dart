@@ -20,9 +20,9 @@ class _CategoriesDataTableState extends State<CategoriesDataTable> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 16),
       padding: const EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Row(
         children: [
@@ -35,18 +35,18 @@ class _CategoriesDataTableState extends State<CategoriesDataTable> {
                     return DataTable(
                       showCheckboxColumn: true,
                       onSelectAll: (value) {
-                        categoriesData.data!.value.forEach((category) {
+                        for (Category category in categoriesData.data!.value) {
                           category.selected = value!;
-                        });
+                        }
                         setState(() {});
                       },
                       showBottomBorder: true,
-                      columns: [
-                        DataColumn(label: Text("Image")),
-                        DataColumn(label: Text("Title")),
-                        DataColumn(label: Text("Sub-Category")),
-                        DataColumn(label: Text("No of Products")),
-                        DataColumn(label: Text("Options")),
+                      columns: const [
+                        DataColumn(label: Text('Image')),
+                        DataColumn(label: Text('Title')),
+                        DataColumn(label: Text('Sub-Category')),
+                        DataColumn(label: Text('No of Products')),
+                        DataColumn(label: Text('Options')),
                       ],
                       rows: categories
                           .map((category) => DataRow(
@@ -55,7 +55,7 @@ class _CategoriesDataTableState extends State<CategoriesDataTable> {
                                   selected: category.selected,
                                   cells: [
                                     DataCell(Container(
-                                      margin: EdgeInsets.all(4),
+                                      margin: const EdgeInsets.all(4),
                                       width: 50,
                                       decoration: BoxDecoration(
                                           borderRadius:
@@ -64,7 +64,7 @@ class _CategoriesDataTableState extends State<CategoriesDataTable> {
                                             fit: BoxFit.cover,
                                             image: NetworkImage(category
                                                     .image ??
-                                                "https://picsum.photos/640"),
+                                                'https://picsum.photos/640'),
                                           )),
                                     )),
                                     DataCell(Text(category.title)),
@@ -73,7 +73,7 @@ class _CategoriesDataTableState extends State<CategoriesDataTable> {
                                     DataCell(Text(
                                         category.products.length.toString())),
                                     DataCell(PopupMenuButton(
-                                      icon: Icon(Icons.more_vert),
+                                      icon: const Icon(Icons.more_vert),
                                       onSelected: (value) {
                                         if (value == 0) {
                                           {
@@ -84,18 +84,19 @@ class _CategoriesDataTableState extends State<CategoriesDataTable> {
                                                 CategoryDetailsRoute(
                                                     id: category.id));
                                           }
-                                        } else if (value == 1)
+                                        } else if (value == 1) {
                                           context.read(
                                               deleteCategory(category.id));
+                                        }
                                       },
-                                      itemBuilder: (context) => [
+                                      itemBuilder: (context) => const [
                                         PopupMenuItem(
-                                          child: Text('Edit'),
                                           value: 0,
+                                          child: Text('Edit'),
                                         ),
                                         PopupMenuItem(
-                                          child: Text('Delete'),
                                           value: 1,
+                                          child: Text('Delete'),
                                         ),
                                       ],
                                     )),
@@ -103,9 +104,10 @@ class _CategoriesDataTableState extends State<CategoriesDataTable> {
                           .toList(),
                     );
                   },
-                  loading: () => Center(child: CircularProgressIndicator()),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
                   error: (error, stackTrace) =>
-                      Center(child: CircularProgressIndicator()));
+                      const Center(child: CircularProgressIndicator()));
             }),
           )
         ],

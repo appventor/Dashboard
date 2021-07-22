@@ -16,7 +16,7 @@ class ProductRepository {
       {required DocumentSnapshot? lastDocument}) async {
     QuerySnapshot<Map<String, dynamic>> documentList;
     Query<Map<String, dynamic>> query =
-        _firestore.collection("products").orderBy("title").limit(10);
+        _firestore.collection('products').orderBy('title').limit(10);
     if (lastDocument != null) {
       documentList = await query.startAfterDocument(lastDocument).get();
     } else {
@@ -25,29 +25,29 @@ class ProductRepository {
     return documentList;
   }
 
-  saveProductInCategory() {}
+  // saveProductInCategory() {}
 
-  removeProductInCategory() {}
+  // removeProductInCategory() {}
 
-  saveProductInCollection() {}
+  // saveProductInCollection() {}
 
-  removeProductInCollection() {}
+  // removeProductInCollection() {}
 
   Future<void> saveProduct(
       {required String id, required Map<String, dynamic> data}) async {
-    return await _firestore.collection("products").doc(id).set(data);
+    return await _firestore.collection('products').doc(id).set(data);
   }
 
   Future<void> updateProduct(
       {required String id, required Map<String, dynamic> data}) async {
-    return await _firestore.collection("products").doc(id).update(data);
+    return await _firestore.collection('products').doc(id).update(data);
   }
 
   Future<void> deleteProduct({required String id}) async {
-    return await _firestore.collection("products").doc(id).delete();
+    return await _firestore.collection('products').doc(id).delete();
   }
 
   Future<void> deleteVariant({required String id}) async {
-    return await _firestore.collection("products").doc(id).update({});
+    return await _firestore.collection('products').doc(id).update({});
   }
 }

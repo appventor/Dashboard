@@ -26,7 +26,7 @@ export 'pages/profile/view/widgets/profile_avatar.dart';
 export 'pages/settings/settings.dart';
 export 'pages/notifications/notifications.dart';
 export 'pages/users/view/users_page.dart';
-export 'pages/users/view/userDetails_page.dart';
+export 'pages/users/view/user_details_page.dart';
 export 'pages/unknown/unknown_page.dart';
 export 'pages/warehouse/view/warehouse_page.dart';
 export 'pages/warehouse/view/widgets/select_warehouse.dart';

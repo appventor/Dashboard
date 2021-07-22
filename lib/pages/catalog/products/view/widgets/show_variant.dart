@@ -3,7 +3,7 @@ import 'package:dashboard/pages/catalog/products/controller/save_variant_provide
 import '../../../../../export.dart';
 import '../product_variant_details.dart';
 
-showVariantDialog(BuildContext context) {
+Widget? showVariantDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (context) {

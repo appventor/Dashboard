@@ -10,16 +10,16 @@ class RevenueDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(defaultPadding),
+      decoration: const BoxDecoration(
         color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: const [
           Text(
-            "Revenue Details",
+            'Revenue Details',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -28,23 +28,23 @@ class RevenueDetails extends StatelessWidget {
           SizedBox(height: defaultPadding),
           Chart(),
           RevenueInfoCard(
-            title: "Total Orders",
-            amountOfFiles: "₹48Cr",
+            title: 'Total Orders',
+            amountOfFiles: '₹48Cr',
             numOfFiles: 1328,
           ),
           RevenueInfoCard(
-            title: "Media Files",
-            amountOfFiles: "15.3GB",
+            title: 'Media Files',
+            amountOfFiles: '15.3GB',
             numOfFiles: 1328,
           ),
           RevenueInfoCard(
-            title: "Other Files",
-            amountOfFiles: "1.3GB",
+            title: 'Other Files',
+            amountOfFiles: '1.3GB',
             numOfFiles: 1328,
           ),
           RevenueInfoCard(
-            title: "Unknown",
-            amountOfFiles: "1.3GB",
+            title: 'Unknown',
+            amountOfFiles: '1.3GB',
             numOfFiles: 140,
           ),
         ],

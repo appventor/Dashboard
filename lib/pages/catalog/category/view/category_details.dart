@@ -29,20 +29,20 @@ class _CategoryDetailsState extends State<CategoryDetails> {
               children: [
                 Row(
                   children: [
-                    BackButton(),
+                    const BackButton(),
                     Text('Category Details',
                         style: Theme.of(context).textTheme.headline6),
                   ],
                 ),
-                Divider(),
-                GeneralInformation(),
-                Divider(),
+                const Divider(),
+                const GeneralInformation(),
+                const Divider(),
                 LinkCategories(
                   excludeID: context.read(categoryProvider).state.id,
                   initialValue:
                       context.read(categoryProvider).state.subcategories,
                   onSelected: (var value) {
-                    print(value);
+                    debugPrint(value);
                     context.read(categoryProvider).state = context
                         .read(categoryProvider)
                         .state
@@ -52,18 +52,18 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                                 .toList());
                   },
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ButtonBar(
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: OutlinedButton(
-                        child: Text('Cancel'),
                         onPressed: () {
                           context.read(categoryProvider).state =
                               Category.fromMap({});
                           context.popRoute();
                         },
+                        child: const Text('Cancel'),
                       ),
                     ),
                     Padding(
@@ -82,23 +82,24 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                                   Category.fromMap({});
                               context.refresh(categoriesProvider);
                               scaffoldMessengerKey.currentState!
-                                  .showSnackBar(SnackBar(
-                                content: Text("Saved"),
+                                  .showSnackBar(const SnackBar(
+                                content: Text('Saved'),
                                 backgroundColor: Colors.green,
                               ));
                               context.popRoute();
-                            } else
+                            } else {
                               scaffoldMessengerKey.currentState!
-                                  .showSnackBar(SnackBar(
-                                content: Text("Error, Please try again"),
+                                  .showSnackBar(const SnackBar(
+                                content: Text('Error, Please try again'),
                                 backgroundColor: Colors.red,
                               ));
+                            }
                             setState(() {
                               _loading = false;
                             });
                           });
                         },
-                        child: Text('Save'),
+                        child: const Text('Save'),
                       ),
                     )
                   ],
@@ -113,7 +114,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
               width: double.infinity,
               height: double.infinity,
               color: Colors.black54,
-              child: Center(child: CircularProgressIndicator()),
+              child: const Center(child: CircularProgressIndicator()),
             )),
       ],
     );

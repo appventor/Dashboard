@@ -34,7 +34,7 @@ class ProductsDataSource extends DataTableSource {
       },
       cells: [
         DataCell(Container(
-          margin: EdgeInsets.all(4),
+          margin: const EdgeInsets.all(4),
           width: 50,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
@@ -49,7 +49,7 @@ class ProductsDataSource extends DataTableSource {
         DataCell(Text(stock.toString())),
         DataCell(Text(product.variants.length.toString())),
         DataCell(PopupMenuButton(
-          icon: Icon(Icons.more_vert),
+          icon: const Icon(Icons.more_vert),
           onSelected: (value) {
             if (value == 0) {
               {
@@ -58,14 +58,14 @@ class ProductsDataSource extends DataTableSource {
               }
             } else if (value == 1) context.read(deleteProduct(product.id));
           },
-          itemBuilder: (context) => [
+          itemBuilder: (context) => const [
             PopupMenuItem(
-              child: Text('Edit'),
               value: 0,
+              child: Text('Edit'),
             ),
             PopupMenuItem(
-              child: Text('Delete'),
               value: 1,
+              child: Text('Delete'),
             ),
           ],
         )),

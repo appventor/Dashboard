@@ -23,17 +23,17 @@ class Warehouse {
   String toJson() => json.encode(toMap());
 
   factory Warehouse.fromMap(Map<String, dynamic> json) => Warehouse(
-        id: json["id"] ?? '',
-        title: json["title"] ?? '',
-        location: json["location"] != null
-            ? Location.fromMap(json["location"])
+        id: json['id'] ?? '',
+        title: json['title'] ?? '',
+        location: json['location'] != null
+            ? Location.fromMap(json['location'])
             : Location.fromMap({}),
       );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "title": title,
-        "location": location.toMap(),
+        'id': id,
+        'title': title,
+        'location': location.toMap(),
       };
 }
 
@@ -57,40 +57,40 @@ class Location {
   String toJson() => json.encode(toMap());
 
   factory Location.fromMap(Map<String, dynamic> json) => Location(
-        latitude: json["lat"] ?? 0.0,
-        longitude: json["long"] ?? 0.0,
+        latitude: json['lat'] ?? 0.0,
+        longitude: json['long'] ?? 0.0,
       );
 
   Map<String, dynamic> toMap() => {
-        "lat": latitude,
-        "long": longitude,
+        'lat': latitude,
+        'long': longitude,
       };
 }
 
 List<Map<String, Object>> warehouseData = [
   {
-    "id": "adfwedffdfdwfewfwdfc",
-    "title": "Kavoor",
-    "location": {"lat": 123.123, "long": 123.23}
+    'id': 'adfwedffdfdwfewfwdfc',
+    'title': 'Kavoor',
+    'location': {'lat': 123.123, 'long': 123.23}
   },
   {
-    "id": "dsfdsfdsfdsfsvvdfdsf",
-    "title": "Attavar",
-    "location": {"lat": 123.123, "long": 123.23}
+    'id': 'dsfdsfdsfdsfsvvdfdsf',
+    'title': 'Attavar',
+    'location': {'lat': 123.123, 'long': 123.23}
   },
   {
-    "id": "zxvcxzcvwdfwfcxvdvsv",
-    "title": "Hampankatta",
-    "location": {"lat": 123.123, "long": 123.23}
+    'id': 'zxvcxzcvwdfwfcxvdvsv',
+    'title': 'Hampankatta',
+    'location': {'lat': 123.123, 'long': 123.23}
   },
   {
-    "id": "werwervcxzcvsdsdfwfv",
-    "title": "Kadri",
-    "location": {"lat": 123.123, "long": 123.23}
+    'id': 'werwervcxzcvsdsdfwfv',
+    'title': 'Kadri',
+    'location': {'lat': 123.123, 'long': 123.23}
   },
   {
-    "id": "sdvdsfsdfvdsxzcvwdfv",
-    "title": "Padil",
-    "location": {"lat": 123.123, "long": 123.23}
+    'id': 'sdvdsfsdfvdsxzcvwdfv',
+    'title': 'Padil',
+    'location': {'lat': 123.123, 'long': 123.23}
   }
 ];

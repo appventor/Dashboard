@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../export.dart';
 
 class SideBar extends StatefulWidget {
+  const SideBar({Key? key}) : super(key: key);
   @override
   _SideBarState createState() => _SideBarState();
 }
@@ -19,7 +20,7 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
   void initState() {
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 200),
     );
 
     _toggleAnimation =
@@ -28,11 +29,11 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
     super.initState();
   }
 
-  checkIfCollapsible() {
+  void checkIfCollapsible() {
     collapse = !Responsive.isDesktop(context) && !Responsive.isMobile(context);
   }
 
-  setCurrentIndex() {
+  void setCurrentIndex() {
     switch (context.router.topMost.current.path) {
       case 'dashboard':
         currentIndex = 0;
@@ -79,7 +80,7 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
                 color: Colors.black.withOpacity(0.5),
                 spreadRadius: 3,
                 blurRadius: 10,
-                offset: Offset(0, 3)),
+                offset: const Offset(0, 3)),
           ],
           // borderRadius: BorderRadius.only(
           //     topRight: const Radius.circular(10),
@@ -87,7 +88,7 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
           color: secondaryColor),
       child: ListView(
         children: [
-          if (Responsive.isMobile(context)) HeaderLogo(),
+          if (Responsive.isMobile(context)) const HeaderLogo(),
           Row(
             mainAxisAlignment:
                 collapse ? MainAxisAlignment.center : MainAxisAlignment.end,
@@ -103,10 +104,11 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
                   onPressed: () {
                     setState(() {
                       collapse = !collapse;
-                      if (collapse)
+                      if (collapse) {
                         _controller.forward();
-                      else
+                      } else {
                         _controller.reverse();
+                      }
                     });
                   },
                 ),
@@ -130,21 +132,21 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.shopping_bag_outlined),
+                const Icon(Icons.shopping_bag_outlined),
                 if (collapse)
-                  Text(
-                    "Catalog",
+                  const Text(
+                    'Catalog',
                     style: TextStyle(fontSize: 10),
                   )
               ],
             ),
             title: !collapse
-                ? Text(
+                ? const Text(
                     'Catalog',
                     maxLines: 1,
                     overflow: TextOverflow.fade,
                   )
-                : SizedBox.shrink(),
+                : const SizedBox.shrink(),
             children: [
               SideBarItem(
                   collapsed: collapse,
@@ -156,8 +158,8 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
                       currentIndex = 1;
                     });
                     if (Responsive.isMobile(context)) context.router.pop();
-                    context
-                        .navigateTo(CatalogRoute(children: [ProductsRoute()]));
+                    context.navigateTo(
+                        const CatalogRoute(children: [ProductsRoute()]));
                   }),
               SideBarItem(
                   collapsed: collapse,
@@ -169,8 +171,8 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
                       currentIndex = 2;
                     });
                     if (Responsive.isMobile(context)) context.router.pop();
-                    context
-                        .navigateTo(CatalogRoute(children: [CategoryRoute()]));
+                    context.navigateTo(
+                        const CatalogRoute(children: [CategoryRoute()]));
                   }),
               SideBarItem(
                   collapsed: collapse,
@@ -183,7 +185,7 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
                     });
                     if (Responsive.isMobile(context)) context.router.pop();
                     context.navigateTo(
-                        CatalogRoute(children: [CollectionsRoute()]));
+                        const CatalogRoute(children: [CollectionsRoute()]));
                   })
             ],
           ),
@@ -192,21 +194,21 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(FontAwesomeIcons.shoppingCart),
+                const Icon(FontAwesomeIcons.shoppingCart),
                 if (collapse)
-                  Text(
-                    "Orders",
+                  const Text(
+                    'Orders',
                     style: TextStyle(fontSize: 10),
                   )
               ],
             ),
             title: !collapse
-                ? Text(
+                ? const Text(
                     'Orders',
                     maxLines: 1,
                     overflow: TextOverflow.fade,
                   )
-                : SizedBox.shrink(),
+                : const SizedBox.shrink(),
             children: [
               SideBarItem(
                   collapsed: collapse,
@@ -218,7 +220,8 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
                       currentIndex = 4;
                     });
                     if (Responsive.isMobile(context)) context.router.pop();
-                    context.navigateTo(OrdersRoute(children: [AllOrders()]));
+                    context
+                        .navigateTo(const OrdersRoute(children: [AllOrders()]));
                   }),
               SideBarItem(
                   collapsed: collapse,
@@ -231,7 +234,7 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
                     });
                     if (Responsive.isMobile(context)) context.router.pop();
                     context.navigateTo(
-                        OrdersRoute(children: [ActiveOrdersRoute()]));
+                        const OrdersRoute(children: [ActiveOrdersRoute()]));
                   }),
               SideBarItem(
                   collapsed: collapse,
@@ -244,7 +247,7 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
                     });
                     if (Responsive.isMobile(context)) context.router.pop();
                     context.navigateTo(
-                        OrdersRoute(children: [PendingOrderRoute()]));
+                        const OrdersRoute(children: [PendingOrderRoute()]));
                   }),
               SideBarItem(
                 collapsed: collapse,
@@ -257,7 +260,7 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
                   });
                   if (Responsive.isMobile(context)) context.router.pop();
                   context.navigateTo(
-                      OrdersRoute(children: [FullfilledOrdersRoute()]));
+                      const OrdersRoute(children: [FullfilledOrdersRoute()]));
                 },
               )
             ],
@@ -272,7 +275,7 @@ class _SideBarState extends State<SideBar> with TickerProviderStateMixin {
                   currentIndex = 8;
                 });
                 if (Responsive.isMobile(context)) context.router.pop();
-                context.navigateTo(UsersRoute(children: [UsersList()]));
+                context.navigateTo(const UsersRoute(children: [UsersList()]));
               })
         ],
       ),
@@ -310,7 +313,7 @@ class SideBarItem extends StatelessWidget {
             if (collapsed)
               Text(
                 title,
-                style: TextStyle(fontSize: 10),
+                style: const TextStyle(fontSize: 10),
                 // textAlign: TextAlign.center,
                 overflow: TextOverflow.fade,
               )
@@ -322,7 +325,7 @@ class SideBarItem extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.fade,
               )
-            : SizedBox.shrink(),
+            : const SizedBox.shrink(),
         selected: selected,
         onTap: () => onTap(),
       ),

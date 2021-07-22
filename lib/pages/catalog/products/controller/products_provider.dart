@@ -1,12 +1,9 @@
-import 'dart:core';
-
+import '../../../../export.dart';
 import '../model/models.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../repository/product_repository.dart';
 
 final productsProvider =
     StateNotifierProvider<ProductsController, Products>((ref) {
-  print('refresh');
   final _productRepository = ref.read(productRepository);
   return ProductsController(_productRepository);
 });
@@ -27,7 +24,7 @@ class ProductsController extends StateNotifier<Products> {
           .toList();
       state = state.copyWith(products: [...state.products, ...products]);
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       // state = state.copyWith(errorMessage: e.toString());
     }
   }
@@ -41,18 +38,15 @@ class ProductsController extends StateNotifier<Products> {
           .toList();
       state = state.copyWith(products: products);
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       // state = state.copyWith(errorMessage: e.toString());
     }
   }
 
   void handleScrollWithIndex(int index) async {
-    print('handlScrollIndex: $index');
-    final itemPosition = index + 1;
-    final requestMoreData = itemPosition % 10 == 0 && itemPosition != 0;
-    final pageToRequest = itemPosition ~/ 10;
-    print(
-        'itemPosition: $itemPosition, requestMoreData: $requestMoreData, pageToRequest: $pageToRequest ');
+    // final itemPosition = index + 1;
+    // final requestMoreData = itemPosition % 10 == 0 && itemPosition != 0;
+    // final pageToRequest = itemPosition ~/ 10;
 
     // if (requestMoreData && pageToRequest + 1 >= state.lastProduct) {
     //   print('getting products');

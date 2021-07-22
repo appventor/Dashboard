@@ -50,7 +50,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         inputFormatters: [
           if (widget.digit)
             FilteringTextInputFormatter.allow(
-                RegExp(widget.decimal ? r"[0-9.]" : r"[0-9]"))
+                RegExp(widget.decimal ? r'[0-9.]' : r'[0-9]'))
         ],
         maxLines: widget.maxLines,
         decoration: InputDecoration(

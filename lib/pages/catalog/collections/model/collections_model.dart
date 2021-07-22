@@ -56,34 +56,34 @@ class Collections {
   String toJson() => json.encode(toMap());
 
   factory Collections.fromMap(Map<String, dynamic> json) => Collections(
-        id: json["id"],
-        title: json["title"] ?? '',
-        desc: json["desc"] ?? '',
-        image: json["image"] ?? 'http://picsum.photos',
-        featured: json["featured"] ?? false,
-        tags: json["tags"] != null
-            ? List<String>.from(json["tags"].map((x) => x))
+        id: json['id'],
+        title: json['title'] ?? '',
+        desc: json['desc'] ?? '',
+        image: json['image'] ?? 'http://picsum.photos',
+        featured: json['featured'] ?? false,
+        tags: json['tags'] != null
+            ? List<String>.from(json['tags'].map((x) => x))
             : [],
-        categories: json["categories"] != null
-            ? List<String>.from(json["categories"].map((x) => x))
+        categories: json['categories'] != null
+            ? List<String>.from(json['categories'].map((x) => x))
             : [],
-        subcategories: json["subcategories"] != null
-            ? List<String>.from(json["subcategories"].map((x) => x))
+        subcategories: json['subcategories'] != null
+            ? List<String>.from(json['subcategories'].map((x) => x))
             : [],
-        products: json["products"] != null
-            ? List<String>.from(json["products"].map((x) => x))
+        products: json['products'] != null
+            ? List<String>.from(json['products'].map((x) => x))
             : [],
       );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "title": title,
-        "desc": desc,
-        "image": image,
-        "featured": featured,
-        "tags": List<dynamic>.from(tags.map((x) => x)),
-        "categories": List<dynamic>.from(categories.map((x) => x)),
-        "subcategories": List<dynamic>.from(subcategories.map((x) => x)),
-        "products": List<dynamic>.from(products.map((x) => x)),
+        'id': id,
+        'title': title,
+        'desc': desc,
+        'image': image,
+        'featured': featured,
+        'tags': List<dynamic>.from(tags.map((x) => x)),
+        'categories': List<dynamic>.from(categories.map((x) => x)),
+        'subcategories': List<dynamic>.from(subcategories.map((x) => x)),
+        'products': List<dynamic>.from(products.map((x) => x)),
       };
 }

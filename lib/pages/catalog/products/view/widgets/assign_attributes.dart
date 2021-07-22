@@ -14,8 +14,8 @@ class AssignAttributes extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Assign Attributes'),
-        Divider(),
+        const Text('Assign Attributes'),
+        const Divider(),
         LinkCategories(
             initialValue: context.read(productProvider).state.categories,
             onSelected: (List<Object?> value) =>
@@ -25,26 +25,26 @@ class AssignAttributes extends StatelessWidget {
                     .copyWith(
                         categories:
                             value.map((items) => items.toString()).toList())),
-        Divider(),
+        const Divider(),
         ChooseAttribute(
-          title: "Add to Collection",
+          title: 'Add to Collection',
           onAdd: () {},
         ),
-        Divider(),
+        const Divider(),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Row(
             children: [
-              Text('Add Tags'),
-              Spacer(),
-              OutlinedButton(onPressed: () {}, child: Icon(Icons.add)),
+              const Text('Add Tags'),
+              const Spacer(),
+              OutlinedButton(onPressed: () {}, child: const Icon(Icons.add)),
             ],
           ),
         ),
         Wrap(
           runSpacing: 8,
           spacing: 8,
-          children: [
+          children: const [
             Chip(label: Text('Tags')),
             Chip(label: Text('Tags')),
             Chip(label: Text('Tags')),

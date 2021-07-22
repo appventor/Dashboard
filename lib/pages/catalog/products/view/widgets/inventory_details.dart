@@ -21,7 +21,7 @@ class InventoryDetails extends StatelessWidget {
             shrinkWrap: true,
             primary: false,
             itemCount: warehouses.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, mainAxisExtent: 80),
             itemBuilder: (context, index) {
               return Row(
@@ -32,7 +32,7 @@ class InventoryDetails extends StatelessWidget {
                   SizedBox(
                     width: 300,
                     child: TextFieldWidget(
-                      label: "Stock Value",
+                      label: 'Stock Value',
                       text: '',
                       digit: true,
                       onChanged: (value) {

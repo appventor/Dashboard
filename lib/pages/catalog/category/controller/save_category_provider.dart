@@ -34,7 +34,7 @@ class SaveCategory extends StateNotifier<Category> {
   final CategoryRepository categoryRepository;
   final FirebaseStorage storage;
 
-  validate() {
+  bool validate() {
     try {
       assert(state.id.isNotEmpty);
       assert(state.title.isNotEmpty);
@@ -47,44 +47,43 @@ class SaveCategory extends StateNotifier<Category> {
   Future<String?> uploadImage() async {
     try {
       TaskSnapshot task;
-      if (!web.kIsWeb)
+      if (!web.kIsWeb) {
         task = await storage
             .ref('categories/${state.id}.jpg')
             .putFile(File(state.imagePath!));
-      else
+      } else {
         task = await storage.ref('categories/${state.id}.jpg').putData(
               await PickedFile(state.imagePath!).readAsBytes(),
               SettableMetadata(contentType: 'image/jpeg'),
             );
+      }
       return task.ref.getDownloadURL();
     } catch (error) {
-      print(error);
+      debugPrint(error.toString());
       return null;
     }
   }
 
   Future<bool> save() async {
-    print(state.toMap());
-
     if (validate()) {
-      if (state.imagePath != null)
+      if (state.imagePath != null) {
         return uploadImage().then((imageUrl) async {
           if (imageUrl != null) {
             state = state.copyWith(image: imageUrl);
-            print(state.toMap());
             await categoryRepository.saveCategory(
                 id: state.id, data: state.toMap());
             return true;
-          } else
+          } else {
             return false;
+          }
         });
-      else {
-        print(state.toMap());
+      } else {
         await categoryRepository.saveCategory(
             id: state.id, data: state.toMap());
         return true;
       }
-    } else
+    } else {
       return false;
+    }
   }
 }

@@ -11,7 +11,9 @@ Future<void> main() async {
 }
 
 class RootApp extends StatelessWidget {
+  RootApp({Key? key}) : super(key: key);
   final appRouter = AppRouter(authGuard: AuthGuard());
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(

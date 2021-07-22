@@ -19,7 +19,7 @@ import '../export.dart';
             RedirectRoute(path: '', redirectTo: 'products'),
             AutoRoute(
               path: 'products',
-              name: "ProductsRoute",
+              name: 'ProductsRoute',
               page: ProductsPage,
             ),
             AutoRoute(
@@ -29,7 +29,7 @@ import '../export.dart';
             ),
             AutoRoute(
               path: 'category',
-              name: "CategoryRoute",
+              name: 'CategoryRoute',
               page: CategoryPage,
             ),
             AutoRoute(
@@ -39,7 +39,7 @@ import '../export.dart';
             ),
             AutoRoute(
               path: 'collections',
-              name: "CollectionsRoute",
+              name: 'CollectionsRoute',
               page: CollectionsPage,
             ),
             AutoRoute(
@@ -56,22 +56,22 @@ import '../export.dart';
           children: [
             AutoRoute(
               path: '',
-              name: "AllOrders",
+              name: 'AllOrders',
               page: OrdersPage,
             ),
             AutoRoute(
               path: 'active',
-              name: "ActiveOrdersRoute",
+              name: 'ActiveOrdersRoute',
               page: ActiveOrders,
             ),
             AutoRoute(
               path: 'pending',
-              name: "PendingOrderRoute",
+              name: 'PendingOrderRoute',
               page: PendingOrders,
             ),
             AutoRoute(
               path: 'fulfilled',
-              name: "FullfilledOrdersRoute",
+              name: 'FullfilledOrdersRoute',
               page: FulfilledOrders,
             ),
             AutoRoute(
@@ -89,7 +89,7 @@ import '../export.dart';
             RedirectRoute(path: '*', redirectTo: ''),
             AutoRoute(
               path: '',
-              name: "UsersList",
+              name: 'UsersList',
               page: UsersPage,
             ),
             AutoRoute(
@@ -106,7 +106,7 @@ import '../export.dart';
     AutoRoute(
       page: Login,
       name: 'LoginRoute',
-      path: "/login",
+      path: '/login',
       fullscreenDialog: false,
     ),
   ],

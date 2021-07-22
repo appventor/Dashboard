@@ -33,8 +33,8 @@ class _SelectWarehouseState extends State<SelectWarehouse> {
                   ),
                 );
               }).toList(),
-              hint: Text(
-                "Select a Warehouse",
+              hint: const Text(
+                'Select a Warehouse',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 14,
@@ -48,8 +48,8 @@ class _SelectWarehouseState extends State<SelectWarehouse> {
               },
             );
           },
-          loading: () => SizedBox.shrink(),
-          error: (_, __) => SizedBox.shrink());
+          loading: () => const SizedBox.shrink(),
+          error: (_, __) => const SizedBox.shrink());
     });
   }
 }
